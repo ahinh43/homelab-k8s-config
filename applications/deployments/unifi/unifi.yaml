@@ -1,0 +1,110 @@
+# Unifi controller
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app.kubernetes.io/instance: unifi
+    app.kubernetes.io/name: unifi
+  name: unifi
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress
+  namespace: unifi
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    # decryption of tls occurs in the backend service
+    # nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+    nginx.ingress.kubernetes.io/tls-acme: "false"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: unifi.adahinh.net
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: unifi
+                port:
+                  number: 8443
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: unifi
+  namespace: unifi
+  labels:
+    app: unifi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: unifi
+  template:
+    metadata:
+      labels:
+        app: unifi
+    spec:
+      containers:
+      - name: unifi
+        image: jacobalberty/unifi:v7.2.92
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 8080
+          - containerPort: 8443
+        # resources:
+        #   requests:
+        #     cpu: "128m"
+        #     memory: "256Mi"
+        #   limits:
+        #     cpu: "512m"
+        #     memory: "512Mi"
+        volumeMounts:
+           - mountPath: "/unifi"
+             name: unifi-persistent
+      volumes:
+      - name: unifi-persistent
+        persistentVolumeClaim:
+           claimName: unifi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: unifi
+  namespace: unifi
+  labels:
+    app: unifi
+spec:
+  storageClassName: openebs-hostpath
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+   name: unifi
+   namespace: unifi
+spec:
+   selector:
+      app: unifi
+   type: LoadBalancer
+   ports:
+      - name: command
+        protocol: TCP
+        port: 8080
+        targetPort: 8080
+      - name: webinterface
+        protocol: TCP
+        port: 8443
+        targetPort: 8443
+      - name: stun
+        protocol: UDP
+        port: 3478
+        targetPort: 3478
