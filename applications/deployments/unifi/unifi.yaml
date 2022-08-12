@@ -20,7 +20,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: unifi.adahinh.net
+    - host: controller.unifi.adahinh.net
       http:
         paths:
           - path: /
