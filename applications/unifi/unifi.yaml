@@ -66,13 +66,13 @@ spec:
             protocol: UDP
           - containerPort: 5514
             protocol: UDP
-        # resources:
-        #   requests:
-        #     cpu: "128m"
-        #     memory: "256Mi"
-        #   limits:
-        #     cpu: "512m"
-        #     memory: "512Mi"
+        resources:
+          requests:
+            cpu: "128m"
+            memory: "256Mi"
+          limits:
+            cpu: "1024m"
+            memory: "1024Mi"
         volumeMounts:
            - mountPath: "/unifi"
              name: unifi-persistent
