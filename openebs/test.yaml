@@ -1,0 +1,35 @@
+# Sample yaml file that tests the cstor operator to make sure it can do its thing
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: cstor-pvc
+spec:
+  storageClassName: cstor-csi-disk
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox
+  namespace: default
+spec:
+  containers:
+  - command:
+       - sh
+       - -c
+       - 'date >> /mnt/openebs-csi/date.txt; hostname >> /mnt/openebs-csi/hostname.txt; sync; sleep 5; sync; tail -f /dev/null;'
+    image: busybox
+    imagePullPolicy: Always
+    name: busybox
+    volumeMounts:
+    - mountPath: /mnt/openebs-csi
+      name: demo-vol
+  volumes:
+  - name: demo-vol
+    persistentVolumeClaim:
+      claimName: cstor-pvc

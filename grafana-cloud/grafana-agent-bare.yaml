@@ -109,7 +109,7 @@ spec:
       name: agent-wal
       namespace: default
     spec:
-      storageClassName: openebs-hostpath
+      storageClassName: cstor-csi-disk
       accessModes:
       - ReadWriteOnce
       resources:
