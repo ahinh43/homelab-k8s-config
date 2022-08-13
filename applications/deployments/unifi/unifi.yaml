@@ -79,7 +79,7 @@ metadata:
   labels:
     app: unifi
 spec:
-  storageClassName: openebs-hostpath
+  storageClassName: cstor-csi-disk
   accessModes:
   - ReadWriteOnce
   resources:
