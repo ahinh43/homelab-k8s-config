@@ -1,0 +1,12 @@
+apiVersion: v2
+name: sealed-secrets
+version: 1.0.0
+description: Operator to create "safe to commit to VC" secrets to use with other objects
+type: application
+home: https://platform.adahinh.net
+sources:
+  - https://github.com/ahinh43/homelab-k8s-config
+dependencies:
+  - name: sealed-secrets
+    version: 2.6.0
+    repository: https://bitnami-labs.github.io/sealed-secrets
