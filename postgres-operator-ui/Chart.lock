@@ -1,0 +1,6 @@
+dependencies:
+- name: postgres-operator-ui
+  repository: https://opensource.zalando.com/postgres-operator/charts/postgres-operator-ui
+  version: 1.8.0
+digest: sha256:df6baacbae2e18c51443cb4486b8ef84d65a0fca1bc2fe78a5dd4840282a8cb3
+generated: "2022-08-20T17:42:15.0646741-05:00"
