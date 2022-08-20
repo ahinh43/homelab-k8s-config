@@ -1,0 +1,7 @@
+sealed-secrets:
+  ingress:
+    enabled: true
+    hostname: sealed-secrets.adahinh.net
+    tls: true
+    # It's all local so I can't get a valid signed cert anyway
+    selfSigned: true
