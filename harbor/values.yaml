@@ -1,0 +1,8 @@
+harbor:
+  expose:
+    type: ingress
+    ingress:
+      hosts:
+        core: harbor.adahinh.net
+        notary: notary.adahinh.net
+  externalURL: https://harbor.adahinh.net

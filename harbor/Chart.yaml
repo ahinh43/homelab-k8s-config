@@ -1,0 +1,12 @@
+apiVersion: v2
+name: GoHarbor
+version: 1.0.0
+description: Harbor ingress chart
+type: application
+home: https://harbor.adahinh.net
+sources:
+  - https://github.com/ahinh43/homelab-k8s-config
+dependencies:
+  - name: harbor
+    version: 1.9.3
+    repository: https://helm.goharbor.io
