@@ -16,6 +16,8 @@
 # To deploy Jiva CSI:
 # kubectl apply -f https://openebs.github.io/charts/jiva-operator.yaml
 #
+# OpenEBS manifests were pulled from: https://openebs.github.io/charts/openebs-operator.yaml
+# and modified locally before applying the manifests 
 
 # Create the OpenEBS namespace
 apiVersion: v1

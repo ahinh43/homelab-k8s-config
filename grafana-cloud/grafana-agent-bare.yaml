@@ -1,3 +1,4 @@
+# Generated from Grafana Cloud
 apiVersion: v1
 kind: ServiceAccount
 metadata:
