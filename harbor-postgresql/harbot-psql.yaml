@@ -12,9 +12,8 @@ spec:
   numberOfInstances: 2
   users:
     postgres:  # database owner
-    - superuser
-    - createdb
-    foo_user: []  # role for application foo
+      - superuser
+      - createdb
   databases:
     harbor: postgres  # dbname: owner
   postgresql:
