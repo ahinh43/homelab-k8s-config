@@ -18,3 +18,5 @@ spec:
     backstage: postgres  # dbname: owner
   postgresql:
     version: "14"
+tls:
+  secretName: postgres-ca

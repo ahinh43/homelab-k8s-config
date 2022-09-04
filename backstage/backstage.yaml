@@ -17,11 +17,18 @@ spec:
         - name: gcr-json-key
       containers:
         - name: backstage
-          image: gcr.io/ahinh-homelab/backstage:latest
+          image: gcr.io/ahinh-homelab/backstage:v1.0.1
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
               containerPort: 7007
+          env:
+            - name: POSTGRES_SERVICE_HOST
+              value: backstage-postgresql.backstage.svc.cluster.local
+            - name: POSTGRES_SERVICE_PORT
+              value: "5432"
+            - name: PGSSLMODE
+              value: "require"
           envFrom:
             - secretRef:
                 name: github-token

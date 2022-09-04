@@ -1,0 +1,7 @@
+*.crt
+*.key
+*.srl
+*.csr
+*.json
+# Any sealed secrets that are safe to commit end with -sealedsecrets.json. Those can be and should be committed
+!*-sealedsecrets.json
