@@ -3,7 +3,7 @@
 apiVersion: "acid.zalan.do/v1"
 kind: postgresql
 metadata:
-  name: backstage-postgresql
+  name: backstage-postgresql-03
   namespace: backstage
 spec:
   teamId: "backstage"
@@ -18,5 +18,7 @@ spec:
     backstage: postgres  # dbname: owner
   postgresql:
     version: "14"
-tls:
-  secretName: postgres-ca
+  spiloFSGroup: 103
+  tls:
+    caSecretName: postgres-ca
+    secretName: postgres-tls

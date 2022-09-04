@@ -17,22 +17,41 @@ spec:
         - name: gcr-json-key
       containers:
         - name: backstage
-          image: gcr.io/ahinh-homelab/backstage:v1.0.1
+          image: gcr.io/ahinh-homelab/backstage:v1.0.3
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
               containerPort: 7007
           env:
             - name: POSTGRES_SERVICE_HOST
-              value: backstage-postgresql.backstage.svc.cluster.local
+              value: backstage-postgresql-03.backstage.svc.cluster.local
             - name: POSTGRES_SERVICE_PORT
               value: "5432"
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres.backstage-postgresql-03.credentials.postgresql.acid.zalan.do
+                  key: username
+                  optional: false
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres.backstage-postgresql-03.credentials.postgresql.acid.zalan.do
+                  key: password
+                  optional: false
             - name: PGSSLMODE
               value: "require"
           envFrom:
             - secretRef:
                 name: github-token
             - secretRef:
-                name: postgres-secrets
-            - secretRef:
                 name: backstage-secrets
+          volumeMounts:
+            - name: postgres-ca-cert
+              mountPath: "/var/ssl/ca"
+              readOnly: true
+      volumes:
+        - name: postgres-ca-cert
+          secret:
+            secretName: postgres-ca
+            optional: false
