@@ -13,9 +13,11 @@ spec:
       labels:
         app: backstage
     spec:
+      imagePullSecrets:
+        - name: gcr-json-key
       containers:
         - name: backstage
-          image: harbor.adahinh.net/backstage/backstage:latest
+          image: gcr.io/ahinh-homelab/backstage:latest
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
