@@ -1,0 +1,20 @@
+# Harbor PostgresQL database
+
+apiVersion: "acid.zalan.do/v1"
+kind: postgresql
+metadata:
+  name: backstage-postgresql
+  namespace: backstage
+spec:
+  teamId: "backstage"
+  volume:
+    size: 5Gi
+  numberOfInstances: 2
+  users:
+    postgres:  # database owner
+      - superuser
+      - createdb
+  databases:
+    backstage: postgres  # dbname: owner
+  postgresql:
+    version: "14"
