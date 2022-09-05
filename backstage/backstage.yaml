@@ -28,10 +28,10 @@ spec:
   ports:
     - name: http
       port: 80
-      targetPort: http
+      targetPort: backstage-http
     - name: api
       port: 7007
-      targetPort: api
+      targetPort: backstage-http
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -54,7 +54,7 @@ spec:
         - name: gcr-json-key
       containers:
         - name: backstage
-          image: gcr.io/ahinh-homelab/backstage:v1.0.6
+          image: gcr.io/ahinh-homelab/backstage:v1.0.16
           imagePullPolicy: IfNotPresent
           ports:
             - name: backstage-http
