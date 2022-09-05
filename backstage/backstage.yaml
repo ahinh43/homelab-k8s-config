@@ -1,6 +1,25 @@
 apiVersion: v1
 kind: Service
 metadata:
+  name: backstage-nginx
+  namespace: backstage
+spec:
+  selector:
+    app: backstage-nginx
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+    - name: https
+      port: 443
+      targetPort: https
+    - name: api
+      port: 7007
+      targetPort: api
+---
+apiVersion: v1
+kind: Service
+metadata:
   name: backstage
   namespace: backstage
 spec:
@@ -12,7 +31,7 @@ spec:
       targetPort: http
     - name: api
       port: 7007
-      targetPort: http
+      targetPort: api
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -29,14 +48,16 @@ spec:
       labels:
         app: backstage
     spec:
+      hostname: backstage
+      subdomain: pod
       imagePullSecrets:
         - name: gcr-json-key
       containers:
         - name: backstage
-          image: gcr.io/ahinh-homelab/backstage:v1.0.3
+          image: gcr.io/ahinh-homelab/backstage:v1.0.6
           imagePullPolicy: IfNotPresent
           ports:
-            - name: http
+            - name: backstage-http
               containerPort: 7007
           env:
             - name: POSTGRES_SERVICE_HOST
@@ -70,4 +91,49 @@ spec:
         - name: postgres-ca-cert
           secret:
             secretName: postgres-ca
+            optional: false
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backstage-nginx
+  namespace: backstage
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backstage-nginx
+  template:
+    metadata:
+      labels:
+        app: backstage-nginx
+    spec:
+      imagePullSecrets:
+        - name: gcr-json-key
+      containers:
+        - name: nginx
+          image: gcr.io/ahinh-homelab/backstage-nginx:v1.0.4
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 80
+            - name: https
+              containerPort: 443
+            - name: api
+              containerPort: 7007
+          volumeMounts:
+            - name: nginx-tls-cert
+              mountPath: "/var/ssl/tls"
+              readOnly: true
+            - name: nginx-tls-dhparams-cert
+              mountPath: "/var/ssl/dhparams"
+              readOnly: true
+      volumes:
+        - name: nginx-tls-cert
+          secret:
+            secretName: backstage-nginx-tls
+            optional: false
+        - name: nginx-tls-dhparams-cert
+          secret:
+            secretName: backstage-nginx-tls-dhparam
             optional: false
