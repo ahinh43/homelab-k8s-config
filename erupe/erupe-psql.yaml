@@ -1,0 +1,21 @@
+# Erupe PostgresQL database
+
+apiVersion: "acid.zalan.do/v1"
+kind: postgresql
+metadata:
+  name: erupe-postgresql
+  namespace: erupe
+spec:
+  teamId: "erupe"
+  volume:
+    size: 5Gi
+  numberOfInstances: 2
+  users:
+    postgres:  # database owner
+      - superuser
+      - createdb
+  databases:
+    erupe: postgres  # dbname: owner
+  postgresql:
+    version: "14"
+  spiloFSGroup: 103
