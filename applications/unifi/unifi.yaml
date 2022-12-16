@@ -89,7 +89,7 @@ metadata:
   labels:
     app: unifi
 spec:
-  storageClassName: cstor-csi-disk
+  storageClassName: longhorn
   accessModes:
   - ReadWriteOnce
   resources:
