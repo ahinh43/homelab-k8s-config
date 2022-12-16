@@ -110,7 +110,7 @@ spec:
       name: agent-wal
       namespace: default
     spec:
-      storageClassName: cstor-csi-disk
+      storageClassName: longhorn
       accessModes:
       - ReadWriteOnce
       resources:
