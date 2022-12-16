@@ -10,6 +10,9 @@ spec:
   volume:
     size: 5Gi
   numberOfInstances: 2
+  env:
+    - name: ALLOW_NOSSL
+      value: "1"
   users:
     postgres:  # database owner
       - superuser
@@ -19,3 +22,4 @@ spec:
   postgresql:
     version: "14"
   spiloFSGroup: 103
+  
