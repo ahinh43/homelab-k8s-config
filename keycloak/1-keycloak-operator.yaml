@@ -1,14 +1,9 @@
 # Requires OLM to be installed (see operator lifecycle manager directory)
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: keycloak-operator
----
 apiVersion: operators.coreos.com/v1
 kind: OperatorGroup
 metadata:
   name: operatorgroup
-  namespace: keycloak-operator
+  namespace: keycloak
 spec:
   targetNamespaces:
   - keycloak-operator
@@ -17,7 +12,7 @@ apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
 metadata:
   name: keycloak-operator
-  namespace: keycloak-operator
+  namespace: keycloak
 spec:
   channel: fast
   name: keycloak-operator

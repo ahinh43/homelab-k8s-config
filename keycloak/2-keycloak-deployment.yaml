@@ -4,7 +4,7 @@ apiVersion: k8s.keycloak.org/v2alpha1
 kind: Keycloak
 metadata:
   name: keycloak
-  namespace: keycloak-operator
+  namespace: keycloak
   labels:
     app: sso
 spec:
@@ -17,12 +17,16 @@ spec:
       name: postgres.keycloak-postgresql.credentials.postgresql.acid.zalan.do
       key: password
     host: keycloak-postgresql.keycloak.svc.cluster.local
-    database: keycloak
+    database: postgres
     port: 5432
   instances: 1
   hostname: 
-    hostname: keycloak.adahinh.net
     strict: false
     strictBackchannel: false
+  features:
+    enabled:
+      - docker
+      - authorization
+      - admin
   http:
     httpEnabled: true

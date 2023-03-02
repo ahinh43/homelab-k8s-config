@@ -4,7 +4,7 @@ apiVersion: "acid.zalan.do/v1"
 kind: postgresql
 metadata:
   name: keycloak-postgresql
-  namespace: keycloak-operator
+  namespace: keycloak
 spec:
   teamId: "keycloak"
   volume:
