@@ -21,7 +21,7 @@ spec:
     port: 5432
   instances: 1
   hostname: 
-    strict: false
+    hostname: keycloak.adahinh.net
     strictBackchannel: false
   features:
     enabled:
