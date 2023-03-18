@@ -16,10 +16,10 @@ spec:
       labels:
         app: flatcar-linux-update-agent
     spec:
-      serviceAccountName: flatcar-linux-update-operator-sa
+      serviceAccountName: flatcar-linux-update-agent
       containers:
       - name: update-agent
-        image: ghcr.io/flatcar-linux/flatcar-linux-update-operator:v${VERSION}
+        image: ghcr.io/flatcar/flatcar-linux-update-operator:v${VERSION}
         command:
         - "/bin/update-agent"
         volumeMounts:
@@ -52,6 +52,9 @@ spec:
           runAsUser: 0
       tolerations:
       - key: node-role.kubernetes.io/master
+        operator: Exists
+        effect: NoSchedule
+      - key: node-role.kubernetes.io/control-plane
         operator: Exists
         effect: NoSchedule
       volumes:
