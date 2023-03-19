@@ -1,5 +1,7 @@
 sealed-secrets:
   ingress:
     enabled: true
-    hostname: ss.labs.ahinh.me
+    hostname: ss.platform.labs.ahinh.me
     tls: true
+    annotations:
+      cert-manager.io/cluster-issuer: "letsencrypt"
