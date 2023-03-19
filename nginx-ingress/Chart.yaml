@@ -3,7 +3,7 @@ name: ingress-nginx
 version: 1.0.0
 description: ingress-nginx helm chart
 type: application
-home: https://longhorn.labs.ahinh.me
+home: https://platform.labs.ahinh.me
 sources:
   - https://github.com/ahinh43/homelab-k8s-config
 dependencies:
