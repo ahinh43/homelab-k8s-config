@@ -8,10 +8,15 @@ metadata:
     # decryption of tls occurs in the backend service
     # nginx.ingress.kubernetes.io/ssl-passthrough: "true"
     nginx.ingress.kubernetes.io/tls-acme: "false"
+    cert-manager.io/cluster-issuer: "letsencrypt"
 spec:
+  tls:
+    - hosts:
+        - longhorn.platform.labs.ahinh.me
+      secretName: longhorn-cert-tls
   ingressClassName: nginx
   rules:
-    - host: longhorn.adahinh.net
+    - host: longhorn.platform.labs.ahinh.me
       http:
         paths:
           - path: /
