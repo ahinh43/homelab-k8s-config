@@ -1,0 +1,12 @@
+apiVersion: v2
+name: oauth2-proxy
+version: 1.0.0
+description: OAuth2-proxy to provide authentication at the Ingress nginx layer
+type: application
+home: https://platform.adahinh.net
+sources:
+  - https://github.com/ahinh43/homelab-k8s-config
+dependencies:
+  - name: oauth2-proxy
+    version: 6.10.1
+    repository: https://oauth2-proxy.github.io/manifests
