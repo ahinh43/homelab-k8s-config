@@ -19,7 +19,7 @@ spec:
     host: keycloak-postgresql.keycloak.svc.cluster.local
     database: postgres
     port: 5432
-  instances: 2
+  instances: 1
   hostname: 
     hostname: keycloak.platform.labs.ahinh.me
     strictBackchannel: false
@@ -28,5 +28,5 @@ spec:
       - docker
       - authorization
       - admin
-  # http:
-  #   httpEnabled: true
+  http:
+    httpEnabled: true
