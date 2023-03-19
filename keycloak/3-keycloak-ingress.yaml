@@ -4,14 +4,16 @@ metadata:
   name: ingress
   namespace: keycloak
   annotations:
-    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
-    # decryption of tls occurs in the backend service
-    # nginx.ingress.kubernetes.io/ssl-passthrough: "true"
-    nginx.ingress.kubernetes.io/tls-acme: "false"
+    cert-manager.io/cluster-issuer: "letsencrypt"
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
 spec:
+  tls:
+    - hosts:
+        - keycloak.platform.labs.ahinh.me
+      secretName: keycloak-cert-tls
   ingressClassName: nginx
   rules:
-    - host: keycloak.adahinh.net
+    - host: keycloak.platform.labs.ahinh.me
       http:
         paths:
           - path: /
