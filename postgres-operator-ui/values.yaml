@@ -1,0 +1,14 @@
+postgres-operator-ui:
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    hosts:
+      - host: pgui.platform.labs.ahinh.me
+        paths: [""]
+    annotations:
+      cert-manager.io/cluster-issuer: "letsencrypt"
+      nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    tls:
+      - hosts:
+          - pgui.platform.labs.ahinh.me
+        secretName: postgres-ui-cert-tls
