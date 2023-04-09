@@ -14,13 +14,15 @@ metadata:
   namespace: unifi
   annotations:
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
-    # decryption of tls occurs in the backend service
-    # nginx.ingress.kubernetes.io/ssl-passthrough: "true"
-    nginx.ingress.kubernetes.io/tls-acme: "false"
+    cert-manager.io/cluster-issuer: "letsencrypt"
 spec:
+  tls:
+    - hosts:
+        - unifi.platform.labs.ahinh.me
+      secretName: unifi-cert-tls
   ingressClassName: nginx
   rules:
-    - host: controller.unifi.adahinh.net
+    - host: unifi.platform.labs.ahinh.me
       http:
         paths:
           - path: /
@@ -51,7 +53,7 @@ spec:
     spec:
       containers:
       - name: unifi
-        image: jacobalberty/unifi:v7.2.92
+        image: jacobalberty/unifi:v7.3.83
         imagePullPolicy: Always
         ports:
           - containerPort: 8080
