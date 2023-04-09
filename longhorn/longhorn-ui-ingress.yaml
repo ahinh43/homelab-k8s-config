@@ -5,9 +5,6 @@ metadata:
   namespace: longhorn-system
   annotations:
     nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
-    # decryption of tls occurs in the backend service
-    # nginx.ingress.kubernetes.io/ssl-passthrough: "true"
-    nginx.ingress.kubernetes.io/tls-acme: "false"
     cert-manager.io/cluster-issuer: "letsencrypt"
     nginx.ingress.kubernetes.io/auth-url: "https://oauth.platform.labs.ahinh.me/oauth2/auth"
     nginx.ingress.kubernetes.io/auth-signin: "https://oauth.platform.labs.ahinh.me/oauth2/start?rd=$scheme://$best_http_host$request_uri"
