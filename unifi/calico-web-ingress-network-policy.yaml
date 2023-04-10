@@ -7,7 +7,7 @@ metadata:
   name: allow-nginx-ingress
   namespace: unifi
 spec:
-  selector: app.kubernetes.io/instance == 'unifi'
+  selector: app == 'unifi'
   types:
     - Ingress
     - Egress

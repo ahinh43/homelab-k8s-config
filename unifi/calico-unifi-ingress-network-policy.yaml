@@ -1,28 +1,39 @@
 apiVersion: projectcalico.org/v3
 kind: NetworkPolicy
 metadata:
-  name: allow-nginx-ingress
+  name: allow-unifi-non-web-ingress
   namespace: unifi
 spec:
-  selector: app.kubernetes.io/instance == 'unifi'
+  selector: app == 'unifi'
   types:
     - Ingress
-    - Egress
   ingress:
     - action: Allow
       metadata:
         annotations:
-          from: ingress-nginx
+          from: ingress-nginx-tcp
           to: unifi
       protocol: TCP
       source:
-        namespaceSelector:
-          projectcalico.org/name == 'ingress-nginx'
+        nets:
+          - 10.0.0.0/8
       destination:
         ports:
-          - 80
           - 8080
-          - 443
-          - 8443
-  egress:
+          - 8880
     - action: Allow
+      metadata:
+        annotations:
+          from: ingress-nginx-udp
+          to: unifi
+      protocol: UDP
+      source:
+        nets:
+          - 10.0.0.0/8
+      destination:
+        ports:
+          - 3478
+          - 5514
+          - 5656
+          - 10001
+          - 1900
