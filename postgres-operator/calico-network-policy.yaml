@@ -6,7 +6,7 @@ metadata:
   name: postgres-operator-ingress
   namespace: postgres-operator
 spec:
-  selector: app.kubernetes.io/instance contains 'postgres-operator'
+  selector: app.kubernetes.io/instance == 'postgres-operator'
   types:
     - Ingress
     - Egress
@@ -16,19 +16,33 @@ spec:
       metadata:
         annotations:
           from: all-namespaces
-          to: unifi
+          to: postgres-operator
       protocol: TCP
       source:
         namespaceSelector: has(projectcalico.org/name)
       destination:
         ports:
           - 8080
+  egress:
+    - action: Allow
+---
+apiVersion: projectcalico.org/v3
+kind: NetworkPolicy
+metadata:
+  name: postgres-operator-ui-ingress
+  namespace: postgres-operator
+spec:
+  selector: app.kubernetes.io/instance == 'postgres-operator-ui'
+  types:
+    - Ingress
+    - Egress
+  ingress:
     # Allow UI traffic coming in from the Nginx ingress controller
     - action: Allow
       metadata:
         annotations:
           from: ingress-nginx
-          to: unifi
+          to: postgres-operator-ui
       protocol: TCP
       source:
         namespaceSelector: projectcalico.org/name == 'ingress-nginx'
@@ -36,5 +50,6 @@ spec:
         ports:
           - 80
           - 443
+          - 8081
   egress:
     - action: Allow
