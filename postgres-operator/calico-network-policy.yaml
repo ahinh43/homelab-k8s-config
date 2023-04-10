@@ -31,7 +31,7 @@ spec:
           to: unifi
       protocol: TCP
       source:
-        namespaceSelector: app.kubernetes.io/instance == 'ingress-nginx'
+        namespaceSelector: projectcalico.org/name == 'ingress-nginx'
       destination:
         ports:
           - 80
