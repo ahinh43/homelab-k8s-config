@@ -1,17 +1,29 @@
-# Allows web traffic coming in through the Ingress controller to the web ports
-# Also permits egress traffic for the pods
+# Allows HTTP traffic to communicate with the operator within the local cluster network
 
 apiVersion: projectcalico.org/v3
 kind: NetworkPolicy
 metadata:
-  name: allow-nginx-ingress
-  namespace: unifi
+  name: postgres-operator-ingress
+  namespace: postgres-operator
 spec:
-  selector: app == 'unifi'
+  selector: app.kubernetes.io/instance contains 'postgres-operator'
   types:
     - Ingress
     - Egress
   ingress:
+    # Allow all cluster namespaces to communciate with the operator to create/get resources (needed for the main postgres-operator service)
+    - action: Allow
+      metadata:
+        annotations:
+          from: all-namespaces
+          to: unifi
+      protocol: TCP
+      source:
+        namespaceSelector: has(projectcalico.org/name)
+      destination:
+        ports:
+          - 8080
+    # Allow UI traffic coming in from the Nginx ingress controller
     - action: Allow
       metadata:
         annotations:
@@ -19,12 +31,10 @@ spec:
           to: unifi
       protocol: TCP
       source:
-        namespaceSelector: projectcalico.org/name == 'ingress-nginx'
+        namespaceSelector: app.kubernetes.io/instance == 'ingress-nginx'
       destination:
         ports:
           - 80
-          - 8080
           - 443
-          - 8443
   egress:
     - action: Allow
