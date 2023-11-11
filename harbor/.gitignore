@@ -1,6 +1,0 @@
-# Ignoring because right now the values file contains the password to the database - a very bad practice
-# A PR is up to allow Kubernetes secret resources to be used instead of plaintext passwords
-# When merged in, will use secrets and ungitignore the file
-# https://github.com/goharbor/harbor-helm/pull/1179
-
-values.yaml
