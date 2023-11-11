@@ -3,10 +3,10 @@ name: ArgoCD
 version: 1.0.0
 description: ArgoCD to manage resource deployments with GitOps
 type: application
-home: https://platform.adahinh.net
+home: https://platform.labs.ahinh.me.net
 sources:
   - https://github.com/ahinh43/homelab-k8s-config
 dependencies:
   - name: argo-cd
-    version: 5.27.1
+    version: 5.51.1
     repository: https://argoproj.github.io/argo-helm
