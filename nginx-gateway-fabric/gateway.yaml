@@ -26,5 +26,5 @@ spec:
       mode: Terminate
       certificateRefs:
       - kind: Secret
-        group: core
+        group: ""
         name: k8s-labs-tls
