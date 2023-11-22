@@ -1,0 +1,12 @@
+apiVersion: v2
+name: Ceph-CSI
+version: 1.0.0
+description: Ceph CSI
+type: application
+home: https://ceph.k8s.labs.ahinh.me
+sources:
+  - https://github.com/ahinh43/homelab-k8s-config
+dependencies:
+  - name: ceph-csi-rbd
+    version: 3.9.0
+    repository: https://ceph.github.io/csi-charts
