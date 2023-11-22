@@ -1,0 +1,34 @@
+{{- if and .Values.sealedsecrets.createController .Values.sealedsecrets.httproute.enabled }}
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: {{ include "sealed-secrets.fullname" .Subcharts.sealedsecrets }}
+  namespace: {{ include "sealed-secrets.namespace" .Subcharts.sealedsecrets }}
+  labels: {{- include "sealed-secrets.labels" .Subcharts.sealedsecrets | nindent 4 }}
+  {{- if .Values.sealedsecrets.httproute.annotations }}
+  annotations:
+    {{- if .Values.sealedsecrets.httproute.annotations }}
+    {{- include "sealed-secrets.render" ( dict "value" .Values.sealedsecrets.httproute.annotations "context" $) .Subcharts.sealedsecrets | nindent 4 }}
+    {{- end }}
+  {{- end }}
+spec:
+  parentRefs:
+    - name: {{ .Values.sealedsecrets.httproute.parentRefs.gatewayName }}
+      sectionName: {{ .Values.sealedsecrets.httproute.parentRefs.sectionName }}
+      namespace: {{ .Values.sealedsecrets.httproute.parentRefs.namespace}}
+  {{- if .Values.sealedsecrets.httproute.hostname }}
+  hostnames:
+    - {{ .Values.sealedsecrets.httproute.hostname }}
+  {{- end }}
+  rules:
+    - matches:
+      {{- if .Values.sealedsecrets.httproute.extraPaths }}
+      {{- toYaml .Values.sealedsecrets.httproute.extraPaths | nindent 10 }}
+      {{- end }}
+      - path:
+          type: {{ .Values.sealedsecrets.httproute.pathType }}
+          value: {{ .Values.sealedsecrets.httproute.path }}
+      backendRefs: 
+        - name: {{ include "sealed-secrets.fullname" .Subcharts.sealedsecrets }}
+          port: {{ .Values.sealedsecrets.service.port }}
+{{- end }}

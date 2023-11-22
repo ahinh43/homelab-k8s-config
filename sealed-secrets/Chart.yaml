@@ -3,10 +3,11 @@ name: sealed-secrets
 version: 1.0.0
 description: Operator to create "safe to commit to VC" secrets to use with other objects
 type: application
-home: https://platform.adahinh.net
+home: https://sealedsecrets.k8s.labs.ahinh.me
 sources:
   - https://github.com/ahinh43/homelab-k8s-config
 dependencies:
   - name: sealed-secrets
     version: 2.13.3
     repository: https://bitnami-labs.github.io/sealed-secrets
+    alias: sealedsecrets

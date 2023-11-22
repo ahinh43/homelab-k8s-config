@@ -1,7 +1,11 @@
-sealed-secrets:
-  ingress:
+sealedsecrets:
+  createController: true
+  httproute:
     enabled: true
-    hostname: ss.platform.labs.ahinh.me
-    tls: true
-    annotations:
-      cert-manager.io/cluster-issuer: "letsencrypt"
+    hostname: sealedsecrets.k8s.labs.ahinh.me
+    parentRefs:
+      gatewayName: k8s-labs
+      sectionName: https
+      namespace: nginx-gateway
+    pathType: PathPrefix
+    path: /
