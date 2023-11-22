@@ -1,0 +1,23 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: k8s-labs
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt"
+spec:
+  gatewayClassName: nginx
+  listeners:
+  - hostname: "*.k8s.labs.ahinh.me"
+    name: http
+    protocol: HTTP
+    port: 80
+  - hostname: "*.k8s.labs.ahinh.me"
+    name: https
+    protocol: HTTPS
+    port: 443
+    tls:
+      mode: Terminate
+      certificateRefs:
+      - kind: Secret
+        group: core
+        name: k8s-labs-tls

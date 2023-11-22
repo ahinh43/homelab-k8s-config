@@ -3,10 +3,10 @@ name: cert-manager
 version: 1.0.0
 description: cert-manager
 type: application
-home: https://longhorn.labs.ahinh.me
+home: https://certmanager.k8s.labs.ahinh.me
 sources:
   - https://github.com/ahinh43/homelab-k8s-config
 dependencies:
   - name: cert-manager
-    version: 1.11.0
+    version: 1.13.2
     repository: https://charts.jetstack.io
