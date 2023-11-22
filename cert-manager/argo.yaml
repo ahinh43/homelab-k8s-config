@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: cert-manager
+  namespace: argocd
+spec:
+  generators:
+  - list:
+      elements:
+      - cluster: kube1
+        url: https://kubernetes.default.svc
+      - cluster: kube2
+        url: https://kube2.labs.ahinh.me:6443
+  template:
+    metadata:
+      name: 'cert-manager-{{cluster}}'
+      labels:
+        app: cert-manager
+    spec:
+      project: default
+      source:
+        repoURL: git@github.com:ahinh43/homelab-k8s-config.git
+        targetRevision: HEAD
+        path: cert-manager
+      destination:
+        server: '{{url}}'
+        namespace: cert-manager
+      syncPolicy:
+        automated:
+          prune: false
+          selfHeal: true
+          allowEmpty: false
+        syncOptions:
+          - CreateNamespace=true
+        managedNamespaceMetadata:
+          labels:
+            app: cert-manager
