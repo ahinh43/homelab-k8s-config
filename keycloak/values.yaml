@@ -1,0 +1,22 @@
+keycloak:
+  postgresql:
+    enabled: false
+  externalDatabase:
+    port: 5432
+    database: postgres
+    existingSecretUserKey: username
+    existingSecretPasswordKey: password
+
+postgresOperator:
+  size: "4Gi"
+  numberOfInstances: 2
+
+httproute:
+  enabled: true
+  hostname: keycloak.k8s.labs.ahinh.me
+  parentRefs:
+    gatewayName: k8s-labs
+    sectionName: https
+    namespace: nginx-gateway
+  pathType: PathPrefix
+  path: /
