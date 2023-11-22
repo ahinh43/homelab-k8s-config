@@ -6,6 +6,7 @@ spec:
   parentRefs:
   - name: k8s-labs
     sectionName: http
+    namespace: nginx-gateway
   hostnames:
   - "argo.k8s.labs.ahinh.me"
   rules:
@@ -23,6 +24,7 @@ spec:
   parentRefs:
   - name: k8s-labs
     sectionName: https
+    namespace: nginx-gateway
   hostnames:
   - "argo.k8s.labs.ahinh.me"
   rules:
