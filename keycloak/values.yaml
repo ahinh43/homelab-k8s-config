@@ -8,6 +8,8 @@ keycloak:
     existingSecretPasswordKey: password
 
 postgresOperator:
+  createDatabase: true
+  createService: false
   size: "4Gi"
   numberOfInstances: 2
 

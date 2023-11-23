@@ -1,5 +1,5 @@
 # Keycloak PostgresQL database
-
+{{- if .Values.postgresOperator.createDatabase }}
 apiVersion: "acid.zalan.do/v1"
 kind: postgresql
 metadata:
@@ -7,11 +7,14 @@ metadata:
   namespace: {{ include "common.names.namespace" .Subcharts.keycloak }}
   labels: {{ include "common.labels.standard" .Subcharts.keycloak | nindent 4 }}
     app.kubernetes.io/component: keycloak
+    app.kubernetes.io/keycloak-component: db
 spec:
   teamId: "keycloak"
   volume:
     size: {{ .Values.postgresOperator.size }}
   numberOfInstances: {{ .Values.postgresOperator.numberOfInstances }}
+  serviceAnnotations:
+    service.cilium.io/global: "true"
   users:
     postgres:  # database owner
       - superuser
@@ -20,3 +23,4 @@ spec:
     keycloak: postgres  # dbname: owner
   postgresql:
     version: "15"
+{{- end }}

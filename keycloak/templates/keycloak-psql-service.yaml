@@ -1,0 +1,21 @@
+# Keycloak PostgresQL service
+{{- if .Values.postgresOperator.createService }}
+apiVersion: v1
+kind: service
+metadata:
+  name: {{ include "common.names.fullname" .Subcharts.keycloak }}-postgresql
+  namespace: {{ include "common.names.namespace" .Subcharts.keycloak }}
+  labels: {{ include "common.labels.standard" .Subcharts.keycloak | nindent 4 }}
+    app.kubernetes.io/component: keycloak
+  annotations:
+    service.cilium.io/global: "true"
+spec:
+  type: ClusterIP
+  ports:
+    - name: psql
+      port: 5432
+      protocol: TCP
+      targetPort: 5432
+  selector:
+    app.kubernetes.io/keycloak-component: db
+{{- end }}
