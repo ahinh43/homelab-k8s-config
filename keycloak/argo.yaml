@@ -13,7 +13,7 @@ spec:
         url: https://kube2.labs.ahinh.me:6443
   template:
     metadata:
-      name: 'keycloak-{{cluster}}'
+      name: keycloak-{{cluster}}
       labels:
         app: keycloak
     spec:
@@ -26,6 +26,7 @@ spec:
           valueFiles:
             - values.yaml
             - '{{cluster}}/values.yaml'
+          releaseName: keycloak
       destination:
         server: '{{url}}'
         namespace: keycloak

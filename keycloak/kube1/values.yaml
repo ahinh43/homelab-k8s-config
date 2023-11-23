@@ -1,4 +1,4 @@
 keycloak:
   externalDatabase:
-    host: keycloak-kube1-postgresql.keycloak.svc.cluster.local
-    existingSecret: postgres.keycloak-kube1-postgresql.credentials.postgresql.acid.zalan.do
+    host: keycloak-postgresql.keycloak.svc.cluster.local
+    existingSecret: postgres.keycloak-postgresql.credentials.postgresql.acid.zalan.do
