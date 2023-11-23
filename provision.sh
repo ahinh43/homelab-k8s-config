@@ -46,3 +46,6 @@ kubectl --namespace nginx-gateway rollout restart deployment nginx-gateway-fabri
 helm install -f argocd/values.yaml --namespace argocd --create-namespace argocd-kube1 argocd/
 kubectl apply -f argocd/http-route.yaml --namespace argocd
 
+
+kubectl create namespace ceph-csi-rbd --context kube
+kubectl create namespace ceph-csi-rbd --context kube2
