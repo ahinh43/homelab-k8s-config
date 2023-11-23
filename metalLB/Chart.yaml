@@ -1,0 +1,12 @@
+apiVersion: v2
+name: MetalLB
+version: 1.0.0
+description: MetalLB helm chart
+type: application
+home: https://k8s.labs.ahinh.me
+sources:
+  - https://github.com/ahinh43/homelab-k8s-config
+dependencies:
+  - name: metallb
+    version: 0.13.12
+    repository: https://metallb.github.io/metallb
