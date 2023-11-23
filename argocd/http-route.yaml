@@ -1,22 +1,22 @@
-apiVersion: gateway.networking.k8s.io/v1beta1
-kind: HTTPRoute
-metadata:
-  name: argo-tls-redirect
-  namespace: argocd
-spec:
-  parentRefs:
-  - name: k8s-labs
-    sectionName: http
-    namespace: nginx-gateway
-  hostnames:
-  - "argo.k8s.labs.ahinh.me"
-  rules:
-  - filters:
-    - type: RequestRedirect
-      requestRedirect:
-        scheme: https
-        port: 443
----
+# apiVersion: gateway.networking.k8s.io/v1beta1
+# kind: HTTPRoute
+# metadata:
+#   name: argo-tls-redirect
+#   namespace: argocd
+# spec:
+#   parentRefs:
+#   - name: k8s-labs
+#     sectionName: http
+#     namespace: nginx-gateway
+#   hostnames:
+#   - "argo.k8s.labs.ahinh.me"
+#   rules:
+#   - filters:
+#     - type: RequestRedirect
+#       requestRedirect:
+#         scheme: https
+#         port: 443
+# ---
 apiVersion: gateway.networking.k8s.io/v1beta1
 kind: HTTPRoute
 metadata:
@@ -35,4 +35,4 @@ spec:
         value: /
     backendRefs:
     - name: argocd-kube1-server
-      port: 443
+      port: 80

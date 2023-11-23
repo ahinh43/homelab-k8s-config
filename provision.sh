@@ -44,5 +44,5 @@ kubectl --namespace nginx-gateway rollout restart deployment nginx-gateway-fabri
 kubectl --namespace nginx-gateway rollout restart deployment nginx-gateway-fabric-kube2 --context kube2
 
 helm install -f argocd/values.yaml --namespace argocd --create-namespace argocd-kube1 argocd/
-kubectl apply -f argocd/http-route.yaml
+kubectl apply -f argocd/http-route.yaml --namespace argocd
 
