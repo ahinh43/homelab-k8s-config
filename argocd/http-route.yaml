@@ -34,5 +34,5 @@ spec:
         type: PathPrefix
         value: /
     backendRefs:
-    - name: argocd-server
+    - name: argocd-kube1-server
       port: 443

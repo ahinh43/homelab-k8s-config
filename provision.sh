@@ -40,6 +40,8 @@ helm install --kube-context kube2 --namespace nginx-gateway --create-namespace n
 kubectl apply -f nginx-gateway-fabric/gateway.yaml --context kube
 kubectl apply -f nginx-gateway-fabric/gateway.yaml --context kube2
 
+kubectl --namespace nginx-gateway rollout restart deployment nginx-gateway-fabric-kube1 --context kube
+kubectl --namespace nginx-gateway rollout restart deployment nginx-gateway-fabric-kube2 --context kube2
 
 helm install -f argocd/values.yaml --namespace argocd --create-namespace argocd-kube1 argocd/
 kubectl apply -f argocd/http-route.yaml
