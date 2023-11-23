@@ -2,6 +2,8 @@
 
 # Hacky script that provisions the cluster with the basics, before letting argoCD take the rest of the job
 
+set -exo pipefail
+
 CERTMANAGERCRDVERSION="v1.13.2"
 
 echo "installing CRDs"
@@ -18,6 +20,30 @@ kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/downloa
 
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/${CERTMANAGERCRDVERSION}/cert-manager.crds.yaml --context kube
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/${CERTMANAGERCRDVERSION}/cert-manager.crds.yaml --context kube2
+
+helm install --kube-context kube --namespace metallb-system --create-namespace metallb metalLB/
+helm install --kube-context kube2 --namespace metallb-system --create-namespace metallb metalLB/
+
+sleep 240
+
+kubectl apply -f metalLB/kube1 --context kube
+kubectl apply -f metalLB/kube2 --context kube2
+
+kubectl delete secret cilium-ca --namespace kube-system --context kube2
+kubectl --context=kube get secret -n kube-system cilium-ca -o yaml | kubectl --context kube2 create -f -
+
+cilium clustermesh enable --context kube --service-type LoadBalancer
+cilium clustermesh enable --context kube2 --service-type LoadBalancer
+
+cilium clustermesh status --wait --context kube
+cilium clustermesh status --wait --context kube2
+
+cilium clustermesh connect --context kube --destination-context kube2
+
+cilium clustermesh status --wait --context kube
+cilium clustermesh status --wait --context kube2
+
+cilium connectivity test --context kube --multi-cluster kube2
 
 echo "Deploying the necessary services to get the cluster rolling..."
 
