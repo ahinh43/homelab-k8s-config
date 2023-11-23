@@ -26,6 +26,13 @@ kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/
 echo "Deploying the necessary services to get the cluster rolling..."
 
 helm install -f cert-manager/values.yaml --namespace cert-manager --create-namespace cert-manager-kube1 cert-manager/
+
+kubectl apply -f cert-manager/le-prod-clusterissuer.yaml --context kube
+kubectl apply -f cert-manager/le-prod-clusterissuer.yaml --context kube2
+
+kubectl apply -f cert-manager/le-staging-clusterissuer.yaml --context kube
+kubectl apply -f cert-manager/le-staging-clusterissuer.yaml --context kube2
+
 helm install --namespace nginx-gateway --create-namespace nginx-gateway-fabric-kube1 nginx-gateway-fabric/
 kubectl apply -f nginx-gateway-fabric/gateway.yaml
 
