@@ -1,4 +1,6 @@
 vault:
+  global:
+    tlsDisable: false
   server:
     volumes:
       - name: rootca
