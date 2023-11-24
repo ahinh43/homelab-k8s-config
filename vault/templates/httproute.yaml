@@ -1,0 +1,33 @@
+{{- if .Values.vault.ui.httproute.enabled }}
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: {{ template "vault.fullname" .Subcharts.vault }}-ui
+  namespace: {{ include "vault.namespace" .Subcharts.vault }}
+  labels:
+    helm.sh/chart: {{ include "vault.chart" .Subcharts.vault }}
+    app.kubernetes.io/name: {{ include "vault.name" .Subcharts.vault }}-ui
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+  {{- template "vault.ui.annotations" .Subcharts.vault }}
+spec:
+  parentRefs:
+    - name: {{ .Values.vault.ui.httproute.parentRefs.gatewayName }}
+      sectionName: {{ .Values.vault.ui.httproute.parentRefs.sectionName }}
+      namespace: {{ .Values.vault.ui.httproute.parentRefs.namespace}}
+  {{- if .Values.vault.ui.httproute.hostname }}
+  hostnames:
+    - {{ .Values.vault.ui.httproute.hostname }}
+  {{- end }}
+  rules:
+    - matches:
+      {{- if .Values.vault.ui.httproute.extraPaths }}
+      {{- toYaml .Values.vault.ui.httproute.extraPaths | nindent 10 }}
+      {{- end }}
+      - path:
+          type: {{ .Values.vault.ui.httproute.pathType }}
+          value: {{ .Values.vault.ui.httproute.path }}
+      backendRefs: 
+        - name: {{ template "vault.fullname" .Subcharts.vault }}-ui
+          port: {{ .Values.vault.ui.externalPort }}
+{{- end }}
