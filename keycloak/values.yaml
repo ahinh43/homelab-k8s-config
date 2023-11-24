@@ -1,4 +1,6 @@
 keycloak:
+  production: true
+  proxy: edge
   postgresql:
     enabled: false
   service:
