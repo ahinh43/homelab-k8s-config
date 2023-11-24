@@ -5,7 +5,7 @@ vault:
         annotations:
           service.cilium.io/global: "true"
     ha:
-      enabled: true
+      enabled: false
       raft:
         enabled: true
     
