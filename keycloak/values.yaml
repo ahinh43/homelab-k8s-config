@@ -6,7 +6,7 @@ keycloak:
     database: postgres
     existingSecretUserKey: username
     existingSecretPasswordKey: password
-  replicaCount: 2
+  replicaCount: 1
 
 postgresOperator:
   createDatabase: true
