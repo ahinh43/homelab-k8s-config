@@ -1,3 +1,6 @@
 service:
   ui:
     type: LoadBalancer
+
+defaultSettings:
+  createDefaultDiskLabeledNodes: true
