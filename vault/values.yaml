@@ -34,26 +34,30 @@ vault:
           tls_key_file = "/vault/userconfig/tls-server/tls.key"
           tls_ca_cert_file = "/vault/userconfig/rootCA/rootCACert.pem"
         }
+
         storage "raft" {
           path = "/vault/data"
           retry_join {
-            leader_api_addr = "http://vault-0.vault-internal.vault.svc.cluster.local:8200";
+            leader_api_addr = "http://vault-0.vault-internal.vault.svc.cluster.local:8200&quot;
             leader_ca_cert_file = "/vault/userconfig/rootCA/rootCACert.pem"
             leader_client_cert_file = "/vault/userconfig/tls-server/tls.crt"
             leader_client_key_file = "/vault/userconfig/tls-server/tls.key"
           }
+
           retry_join {
-            leader_api_addr = "http://vault-1.vault-internal.vault.svc.cluster.local:8200";
+            leader_api_addr = "http://vault-1.vault-internal.vault.svc.cluster.local:8200&quot;
             leader_ca_cert_file = "/vault/userconfig/rootCA/rootCACert.pem"
             leader_client_cert_file = "/vault/userconfig/tls-server/tls.crt"
             leader_client_key_file = "/vault/userconfig/tls-server/tls.key"
           }
+
           retry_join {
-            leader_api_addr = "http://vault-2.vault-internal.vault.svc.cluster.local:8200";
+            leader_api_addr = "http://vault-2.vault-internal.vault.svc.cluster.local:8200&quot;
             leader_ca_cert_file = "/vault/userconfig/rootCA/rootCACert.pem"
             leader_client_cert_file = "/vault/userconfig/tls-server/tls.crt"
             leader_client_key_file = "/vault/userconfig/tls-server/tls.key"
           }
+
           autopilot {
             cleanup_dead_servers = "true"
             last_contact_threshold = "200ms"
@@ -63,6 +67,7 @@ vault:
             server_stabilization_time = "10s"
           }
         }
+        
         service_registration "kubernetes" {}
 
     
