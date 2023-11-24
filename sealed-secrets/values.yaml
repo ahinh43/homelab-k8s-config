@@ -1,5 +1,8 @@
 sealedsecrets:
   createController: true
+  service:
+    annotations:
+      service.cilium.io/global: "true"
   httproute:
     enabled: true
     hostname: sealedsecrets.k8s.labs.ahinh.me
@@ -9,3 +12,5 @@ sealedsecrets:
       namespace: nginx-gateway
     pathType: PathPrefix
     path: /
+
+createReplicaService: false

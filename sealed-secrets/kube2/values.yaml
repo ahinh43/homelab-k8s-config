@@ -1,0 +1,6 @@
+sealedsecrets:
+  createController: false
+  httproute:
+    enabled: false
+
+createReplicaService: true
