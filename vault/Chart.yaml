@@ -1,0 +1,12 @@
+apiVersion: v2
+name: vault
+version: 1.0.0
+description: Hashicorp vault
+type: application
+home: https://vault.k8s.labs.ahinh.me
+sources:
+  - https://github.com/ahinh43/homelab-k8s-config
+dependencies:
+  - name: vault
+    version: 0.27.0
+    repository: https://helm.releases.hashicorp.com
