@@ -23,6 +23,8 @@ vault:
         service.cilium.io/global: "true"
     ha:
       enabled: true
+      apiAddr: https://127.0.0.1:8200
+      clusterAddr: "https://$(HOSTNAME).vault-internal.vault.svc.cluster.local:8201"
       raft:
         enabled: true
         config: |
