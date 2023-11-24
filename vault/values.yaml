@@ -1,5 +1,12 @@
 vault:
   server:
+    volumes:
+      - name: rootca
+        secret:
+          secretName: rootca
+      - name: tls-server
+        secret:
+          secretName: tls-server 
     volumeMounts:
       - mountPath: /vault/userconfig/rootCA
         name: rootca
