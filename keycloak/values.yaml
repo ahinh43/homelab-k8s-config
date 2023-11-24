@@ -1,12 +1,37 @@
 keycloak:
   postgresql:
     enabled: false
+  service:
+    type: LoadBalancer
   externalDatabase:
     port: 5432
     database: postgres
     existingSecretUserKey: username
     existingSecretPasswordKey: password
   replicaCount: 1
+  extraEnvVars:
+    # Enable DNS_PING to find other Pods
+    - name: JGROUPS_DISCOVERY_PROTOCOL
+      value: dns.DNS_PING
+    # Set DNS Name to keycloak-headless service
+    - name: JGROUPS_DISCOVERY_PROPERTIES
+      value: "dns_query=keycloak-headless.keycloak.svc.cluster.local"
+    - name: CACHE_OWNERS_COUNT
+      value: '2'
+    - name: CACHE_OWNERS_AUTH_SESSIONS_COUNT
+      value: '2'
+    # Allows use of a LoadBalancer
+    - name:  PROXY_ADDRESS_FORWARDING
+      value: "true"
+  extraVolumes:
+    - name: startup
+      configMap:
+        name: keycloak-startup
+        defaultMode: 0555
+  extraVolumeMounts:
+    - name: startup
+      mountPath: "/opt/jboss/startup-scripts"
+      readOnly: true
 
 postgresOperator:
   createDatabase: true

@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "common.names.fullname" .Subcharts.keycloak }}
+  namespace: {{ include "common.names.namespace" .Subcharts.keycloak }}
+  labels: {{- include "common.labels.standard" .Subcharts.keycloak | nindent 4 }}
+data:
+  keycloak-startup.cli: |
+    embed-server --server-config=standalone-ha.xml --std-out=echo
+    batch
+
+    echo * Setting CACHE_OWNERS to "${env.CACHE_OWNERS}" in all cache-containers
+
+    /subsystem=infinispan/cache-container=keycloak/distributed-cache=sessions:write-attribute(name=owners, value=${env.CACHE_OWNERS:1})
+    /subsystem=infinispan/cache-container=keycloak/distributed-cache=authenticationSessions:write-attribute(name=owners, value=${env.CACHE_OWNERS:1})
+    /subsystem=infinispan/cache-container=keycloak/distributed-cache=actionTokens:write-attribute(name=owners, value=${env.CACHE_OWNERS:1})
+    /subsystem=infinispan/cache-container=keycloak/distributed-cache=offlineSessions:write-attribute(name=owners, value=${env.CACHE_OWNERS:1})
+    /subsystem=infinispan/cache-container=keycloak/distributed-cache=clientSessions:write-attribute(name=owners, value=${env.CACHE_OWNERS:1})
+    /subsystem=infinispan/cache-container=keycloak/distributed-cache=offlineClientSessions:write-attribute(name=owners, value=${env.CACHE_OWNERS:1})
+    /subsystem=infinispan/cache-container=keycloak/distributed-cache=loginFailures:write-attribute(name=owners, value=${env.CACHE_OWNERS:1})
+
+    run-batch
+    stop-embedded-server
