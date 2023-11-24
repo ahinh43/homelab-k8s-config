@@ -19,9 +19,8 @@ vault:
     standalone:
       enabled: false
     service:
-      active:
-        annotations:
-          service.cilium.io/global: "true"
+      annotations:
+        service.cilium.io/global: "true"
     ha:
       enabled: true
       raft:
