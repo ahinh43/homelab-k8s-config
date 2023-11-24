@@ -1,10 +1,10 @@
 vault:
   server:
     volumeMounts:
-      - mountPath: /vault/userconfig
+      - mountPath: /vault/userconfig/rootCA
         name: rootca
         readOnly: true
-      - mountPath: /vault/userconfig
+      - mountPath: /vault/userconfig/tls-server
         name: tls-server
         readOnly: true
     extraEnvironmentVars:
