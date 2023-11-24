@@ -1,5 +1,5 @@
 keycloak:
-  production: true
+  production: false
   proxy: edge
   postgresql:
     enabled: false
