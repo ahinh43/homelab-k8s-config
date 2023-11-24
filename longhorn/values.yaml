@@ -7,7 +7,7 @@ longhorn:
     hostname: longhorn.k8s.labs.ahinh.me
     parentRefs:
       gatewayName: k8s-labs
-      sectionName: https
+      sectionName: http
       namespace: nginx-gateway
     pathType: PathPrefix
     path: /

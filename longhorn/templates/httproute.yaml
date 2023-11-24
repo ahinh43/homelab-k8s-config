@@ -27,6 +27,6 @@ spec:
           type: {{ .Values.longhorn.httproute.pathType }}
           value: {{ .Values.longhorn.httproute.path }}
       backendRefs: 
-        - name: longhorn-ui
+        - name: longhorn-frontend
           port: 80
 {{- end }}
