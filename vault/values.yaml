@@ -1,10 +1,12 @@
 vault:
   server:
-    extraVolumes:
-    - type: secret
-      name: tls-server
-    - type: secret
-      name: rootca
+    volumeMounts:
+      - mountPath: /vault/userconfig
+        name: rootca
+        readOnly: true
+      - mountPath: /vault/userconfig
+        name: tls-server
+        readOnly: true
     extraEnvironmentVars:
       VAULT_CACERT: /vault/userconfig/rootCA/rootCACert.pem
     standalone:
