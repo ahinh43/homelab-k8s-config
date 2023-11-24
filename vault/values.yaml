@@ -4,7 +4,7 @@ vault:
     - type: secret
       name: tls-server
     - type: secret
-      name: rootCA
+      name: rootca
     extraEnvironmentVars:
       VAULT_CACERT: /vault/userconfig/rootCA/rootCACert.pem
     standalone:
