@@ -3,6 +3,11 @@ keycloak:
     enabled: false
   service:
     type: LoadBalancer
+    annotations:
+      service.cilium.io/global: "true"
+    headless:
+      annotations:
+        service.cilium.io/global: "true"
   externalDatabase:
     port: 5432
     database: postgres
