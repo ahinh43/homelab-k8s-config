@@ -36,7 +36,7 @@ vault:
         }
         storage "raft" {
           path = "/vault/data"
-            retry_join {
+          retry_join {
             leader_api_addr = "http://vault-0.vault-internal.vault.svc.cluster.local:8200";
             leader_ca_cert_file = "/vault/userconfig/rootCA/rootCACert.pem"
             leader_client_cert_file = "/vault/userconfig/tls-server/tls.crt"
