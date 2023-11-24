@@ -12,5 +12,3 @@ sealedsecrets:
       namespace: nginx-gateway
     pathType: PathPrefix
     path: /
-
-createReplicaService: false

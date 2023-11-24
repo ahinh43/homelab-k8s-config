@@ -1,6 +1,4 @@
 sealedsecrets:
-  createController: false
+  createController: true
   httproute:
     enabled: false
-
-createReplicaService: true
