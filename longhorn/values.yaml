@@ -2,6 +2,7 @@ longhorn:
   service:
     ui:
       type: LoadBalancer
+      nodePort: 31841 # The helm chart explicitly renders this as "null" if nothing is provided, even on a LoadBalancer type service
   defaultSettings:
     createDefaultDiskLabeledNodes: true
   ingress:
