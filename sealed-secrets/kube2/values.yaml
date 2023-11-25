@@ -1,4 +1,2 @@
 sealedsecrets:
   createController: true
-  httproute:
-    enabled: false
