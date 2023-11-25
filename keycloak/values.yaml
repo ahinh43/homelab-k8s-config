@@ -33,8 +33,10 @@ keycloak:
     - name: CACHE_OWNERS_AUTH_SESSIONS_COUNT
       value: '2'
     # Allows use of a LoadBalancer
-    - name:  PROXY_ADDRESS_FORWARDING
+    - name: PROXY_ADDRESS_FORWARDING
       value: "true"
+    - name: KC_HOSTNAME
+      value: "keycloak.k8s.labs.ahinh.me"
   extraVolumes:
     - name: startup
       configMap:
