@@ -1,7 +1,18 @@
 argo-cd:
   server:
-    extraArgs:
-      - --insecure
+    ingress:
+      https: true
+      enabled: true
+      ingressClassName: nginx
+      hosts:
+        - argo.k8s.labs.ahinh.me
+      annotations:
+        cert-manager.io/cluster-issuer: "letsencrypt"
+        nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+      tls:
+        - hosts:
+            - argo.k8s.labs.ahinh.me
+          secretName: argocd-cert-tls
   configs:
     params:
       server.insecure: true
