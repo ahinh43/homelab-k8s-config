@@ -56,8 +56,6 @@ keycloak:
       nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
       external-dns.alpha.kubernetes.io/hostname: keycloak.k8s.labs.ahinh.me
     tls: true
-    secrets: 
-      - keycloak-cert-tls
     ingressClassName: nginx
 
 postgresOperator:
