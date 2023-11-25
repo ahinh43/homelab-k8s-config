@@ -1,5 +1,7 @@
 argo-cd:
   server:
+    extraArgs:
+      - --insecure
     ingress:
       https: true
       enabled: true
