@@ -22,14 +22,6 @@ spec:
       - path:
           type: {{ .Values.httproute.pathType }}
           value: {{ .Values.httproute.path }}
-      filters:
-        - type: RequestHeaderModifier
-          requestHeaderModifier:
-            add:
-              - name: X-Forwarded-For
-                value: "$remote_addr"
-              - name: X-Forwarded-Proto
-                value: "$scheme"
       backendRefs: 
         - name: {{ include "common.names.fullname" .Subcharts.keycloak }}
           port: {{ .Values.keycloak.tls.enabled | ternary .Values.keycloak.service.ports.https .Values.keycloak.service.ports.http }}
