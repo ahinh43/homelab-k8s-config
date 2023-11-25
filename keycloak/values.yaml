@@ -48,6 +48,17 @@ keycloak:
     - name: startup
       mountPath: "/opt/jboss/startup-scripts"
       readOnly: true
+  ingress:
+    enabled: true
+    hostname: keycloak.k8s.labs.ahinh.me
+    annotations:
+      cert-manager.io/cluster-issuer: "letsencrypt"
+      nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+      external-dns.alpha.kubernetes.io/hostname: keycloak.k8s.labs.ahinh.me
+    tls: true
+    secrets: 
+      - keycloak-cert-tls
+    ingressClassName: nginx
 
 postgresOperator:
   createDatabase: true
