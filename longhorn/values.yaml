@@ -13,6 +13,7 @@ longhorn:
       external-dns.alpha.kubernetes.io/hostname: longhorn.k8s.labs.ahinh.me
     tls: true
     tlsSecret: longhorn-cert-tls
+    ingressClassName: nginx
 
   helmPreUpgradeCheckerJob:
     enabled: false # Breaks ArgoCD
