@@ -35,6 +35,8 @@ keycloak:
     # Allows use of a LoadBalancer
     - name: PROXY_ADDRESS_FORWARDING
       value: "true"
+    - name: KEYCLOAK_FRONTEND_URL
+      value: https://keycloak.k8s.labs.ahinh.me
   extraVolumes:
     - name: startup
       configMap:
