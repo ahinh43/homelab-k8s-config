@@ -51,6 +51,7 @@ keycloak:
       cert-manager.io/cluster-issuer: "letsencrypt"
       nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
       external-dns.alpha.kubernetes.io/hostname: keycloak.k8s.labs.ahinh.me
+      nginx.ingress.kubernetes.io/service-upstream: "true"
     tls: true
     ingressClassName: nginx
     servicePort: https
