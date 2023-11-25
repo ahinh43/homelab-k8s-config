@@ -54,6 +54,8 @@ keycloak:
     tls: true
     ingressClassName: nginx
     servicePort: https
+  auth:
+    adminUser: admin
 
 postgresOperator:
   createDatabase: true
