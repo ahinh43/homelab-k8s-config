@@ -37,6 +37,8 @@ keycloak:
       value: "true"
     - name: KEYCLOAK_FRONTEND_URL
       value: https://keycloak.k8s.labs.ahinh.me
+    - name: KEYCLOAK_EXTRA_ARGS
+      value: "-Dkeycloak.frontendUrl=https://keycloak.k8s.labs.ahinh.me"
   extraVolumes:
     - name: startup
       configMap:
