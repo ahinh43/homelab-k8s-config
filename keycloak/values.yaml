@@ -53,6 +53,7 @@ keycloak:
       external-dns.alpha.kubernetes.io/hostname: keycloak.k8s.labs.ahinh.me
     tls: true
     ingressClassName: nginx
+    servicePort: https
 
 postgresOperator:
   createDatabase: true
