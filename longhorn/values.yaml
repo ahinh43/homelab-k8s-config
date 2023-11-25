@@ -4,6 +4,15 @@ longhorn:
       type: LoadBalancer
   defaultSettings:
     createDefaultDiskLabeledNodes: true
+  ingress:
+    enabled: true
+    host: longhorn.k8s.labs.ahinh.me
+    annotations:
+      cert-manager.io/cluster-issuer: "letsencrypt"
+      nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+      external-dns.alpha.kubernetes.io/hostname: longhorn.k8s.labs.ahinh.me
+    tls: true
+    tlsSecret: longhorn-cert-tls
 
   helmPreUpgradeCheckerJob:
     enabled: false # Breaks ArgoCD
