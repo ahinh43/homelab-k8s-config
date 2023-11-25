@@ -1,0 +1,12 @@
+apiVersion: v2
+name: ExternalDNS
+version: 1.0.0
+description: ExternalDNS service to auto configure DNS records for services
+type: application
+home: https://k8s.labs.ahinh.me
+sources:
+  - https://github.com/ahinh43/homelab-k8s-config
+dependencies:
+  - name: external-dns
+    version: 6.28.5
+    repository: oci://registry-1.docker.io/bitnamicharts
