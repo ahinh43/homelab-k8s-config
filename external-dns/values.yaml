@@ -1,0 +1,9 @@
+external-dns:
+  sources:
+    - service
+    - ingress
+  domainFilter: labs.ahinh.me
+  provider: cloudflare
+  cloudflare:
+    secretName: cloudflare-api-token
+    proxied: false # using internal IPs with little to no intention on making them public, so no need to proxy them behind CF

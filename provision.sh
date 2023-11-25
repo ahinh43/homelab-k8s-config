@@ -50,9 +50,14 @@ echo "Deploying the necessary services to get the cluster rolling..."
 helm install -f cert-manager/values.yaml --kube-context kube --namespace cert-manager --create-namespace cert-manager-kube1 cert-manager/
 helm install -f cert-manager/values.yaml --kube-context kube2 --namespace cert-manager --create-namespace cert-manager-kube2 cert-manager/
 
+helm install -f external-dns/values.yaml --kube-context kube --namespace external-dns --create-namespace external-dns external-dns/
+helm install -f external-dns/values.yaml --kube-context kube2 --namespace external-dns --create-namespace external-dns external-dns/
+
 # Cloudflare API token secret needed for cert-manager to auto complete the domain verification
-kubectl create secret generic cloudflare-api-token --namespace cert-manager --from-literal=api_token=$(op item get "Cloudflare API Token" --vault Homelab --fields credential) --context kube
-kubectl create secret generic cloudflare-api-token --namespace cert-manager --from-literal=api_token=$(op item get "Cloudflare API Token" --vault Homelab --fields credential) --context kube2
+kubectl create secret generic cloudflare-api-token --namespace cert-manager --from-literal=cloudflare_api_token=$(op item get "Cloudflare API Token" --vault Homelab --fields credential) --context kube
+kubectl create secret generic cloudflare-api-token --namespace cert-manager --from-literal=cloudflare_api_token=$(op item get "Cloudflare API Token" --vault Homelab --fields credential) --context kube2
+kubectl create secret generic cloudflare-api-token --namespace external-dns --from-literal=cloudflare_api_token=$(op item get "Cloudflare API Token" --vault Homelab --fields credential) --context kube
+kubectl create secret generic cloudflare-api-token --namespace external-dns --from-literal=cloudflare_api_token=$(op item get "Cloudflare API Token" --vault Homelab --fields credential) --context kube2
 
 
 kubectl apply -f cert-manager/le-prod-clusterissuer.yaml --context kube
