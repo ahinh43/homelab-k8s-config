@@ -2,16 +2,6 @@ longhorn:
   service:
     ui:
       type: LoadBalancer
-  httproute:
-    enabled: true
-    hostname: longhorn.k8s.labs.ahinh.me
-    parentRefs:
-      gatewayName: k8s-labs
-      sectionName: https
-      namespace: nginx-gateway
-    pathType: PathPrefix
-    path: /
-
   defaultSettings:
     createDefaultDiskLabeledNodes: true
 

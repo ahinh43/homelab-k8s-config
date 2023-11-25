@@ -81,12 +81,3 @@ vault:
   ui:
     enabled: true
     serviceType: LoadBalancer
-    httproute:
-      enabled: true
-      hostname: vault.k8s.labs.ahinh.me
-      parentRefs:
-        gatewayName: k8s-labs
-        sectionName: https
-        namespace: nginx-gateway
-      pathType: PathPrefix
-      path: /

@@ -3,12 +3,3 @@ sealedsecrets:
   service:
     annotations:
       service.cilium.io/global: "true"
-  httproute:
-    enabled: true
-    hostname: sealedsecrets.k8s.labs.ahinh.me
-    parentRefs:
-      gatewayName: k8s-labs
-      sectionName: https
-      namespace: nginx-gateway
-    pathType: PathPrefix
-    path: /

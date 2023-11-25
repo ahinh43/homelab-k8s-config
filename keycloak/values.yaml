@@ -54,13 +54,3 @@ postgresOperator:
   createService: false
   size: "4Gi"
   numberOfInstances: 2
-
-httproute:
-  enabled: true
-  hostname: keycloak.k8s.labs.ahinh.me
-  parentRefs:
-    gatewayName: k8s-labs
-    sectionName: https
-    namespace: nginx-gateway
-  pathType: PathPrefix
-  path: /
