@@ -56,7 +56,7 @@ httproute:
   hostname: keycloak.k8s.labs.ahinh.me
   parentRefs:
     gatewayName: k8s-labs
-    sectionName: http
+    sectionName: https
     namespace: nginx-gateway
   pathType: PathPrefix
   path: /
