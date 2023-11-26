@@ -1,0 +1,51 @@
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  labels:
+    kubevirt.io/vm: debian2
+  name: debian2
+spec:
+  running: false
+  template:
+    metadata:
+      labels:
+        kubevirt.io/vm: debian2
+    spec:
+      domain:
+        devices:
+          disks:
+          - disk:
+              bus: virtio
+            name: disk0
+          - disk:
+              bus: virtio
+            name: cloudinitdisk
+        resources:
+          requests:
+            memory: 1024M
+      volumes:
+      - dataVolume:
+          name: debian2-dv
+        name: disk0
+      - cloudInitNoCloud:
+          userData: |
+            #cloud-config 
+            user: debian 
+            password: bananas
+            hostname: debian1
+            ssh_pwauth: True 
+            disable_root: false
+        name: cloudinitdisk
+  dataVolumeTemplates:
+  - metadata:
+      name: debian2-dv
+    spec:
+      pvc:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 4Gi
+      source:
+        http:
+          url: https://cloud.debian.org/images/cloud/bookworm/20231013-1532/debian-12-genericcloud-amd64-20231013-1532.qcow2
