@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: kubevirt-debian-12-image
+  name: kubevirt-fedora-39-image
   namespace: argocd
 spec:
   generators:
@@ -11,15 +11,15 @@ spec:
         url: https://kubernetes.default.svc
   template:
     metadata:
-      name: 'kubevirt-debian-12-image-{{cluster}}'
+      name: 'kubevirt-fedora-39-image-{{cluster}}'
       labels:
-        app: kubevirt-debian-12-image
+        app: kubevirt-fedora-39-image
     spec:
       project: default
       source:
         repoURL: git@github.com:ahinh43/homelab-k8s-config.git
         targetRevision: HEAD
-        path: kubevirt/images/debian
+        path: kubevirt/images/fedora/39
       destination:
         server: '{{url}}'
         namespace: kubevirt
@@ -32,4 +32,4 @@ spec:
           - CreateNamespace=true
         managedNamespaceMetadata:
           labels:
-            app: kubevirt-debian-12-image
+            app: kubevirt-fedora-39-image
