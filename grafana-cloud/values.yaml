@@ -10,6 +10,7 @@ k8s-monitoring:
       secret:
         create: false
         name: grafana-cloud-agent
+        namespace: grafana-cloud
     loki:
       host: https://logs-prod3.grafana.net
       basicAuth:
@@ -18,6 +19,7 @@ k8s-monitoring:
       secret:
         create: false
         name: grafana-cloud-agent
+        namespace: grafana-cloud
   metrics:
     cost:
       enabled: false
