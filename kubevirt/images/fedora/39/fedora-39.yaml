@@ -1,7 +1,7 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: fedora-iso
+  name: fedora-39-image
   labels:
     app: containerized-data-importer
   annotations:
