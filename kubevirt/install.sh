@@ -12,5 +12,23 @@ export RELEASE=$(curl https://storage.googleapis.com/kubevirt-prow/release/kubev
 kubectl apply -f https://github.com/kubevirt/kubevirt/releases/download/${RELEASE}/kubevirt-operator.yaml --context kube
 # Create the KubeVirt CR (instance deployment request) which triggers the actual installation
 kubectl apply -f https://github.com/kubevirt/kubevirt/releases/download/${RELEASE}/kubevirt-cr.yaml --context kube
+
+# Extra time needed for waiting
+sleep 15
+
 # wait until all KubeVirt components are up
 kubectl -n kubevirt wait kv kubevirt --for condition=Available --context kube
+
+# Enables Live migration
+
+kubectl apply -f - <<EOF
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kubevirt-config
+  namespace: kubevirt
+  labels:
+    kubevirt.io: ""
+data:
+  feature-gates: "LiveMigration"
+EOF
