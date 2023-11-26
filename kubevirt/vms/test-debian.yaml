@@ -1,0 +1,41 @@
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  labels:
+    kubevirt.io/os: linux
+  name: debian1
+spec:
+  running: true
+  template:
+    metadata:
+      labels:
+        kubevirt.io/domain: debian1
+    spec:
+      domain:
+        cpu:
+          cores: 2
+        devices:
+          disks:
+          - disk:
+              bus: virtio
+            name: disk0
+          - cdrom:
+              bus: sata
+              readonly: true
+            name: cloudinitdisk
+        resources:
+          requests:
+            memory: 1024M
+      volumes:
+      - name: disk0
+        persistentVolumeClaim:
+          claimName: debian-12-image
+      - cloudInitNoCloud:
+          userData: |
+            #cloud-config 
+            user: centos 
+            password: bananas
+            hostname: debian1
+            ssh_pwauth: True 
+            disable_root: false
+        name: cloudinitdisk

@@ -1,7 +1,6 @@
 apiVersion: kubevirt.io/v1
 kind: VirtualMachine
 metadata:
-  generation: 1
   labels:
     kubevirt.io/os: linux
   name: fedora1
@@ -9,13 +8,12 @@ spec:
   running: true
   template:
     metadata:
-      creationTimestamp: null
       labels:
         kubevirt.io/domain: fedora1
     spec:
       domain:
         cpu:
-          cores: 1
+          cores: 2
         devices:
           disks:
           - disk:
@@ -27,11 +25,11 @@ spec:
             name: cloudinitdisk
         resources:
           requests:
-            memory: 128M
+            memory: 1024M
       volumes:
       - name: disk0
         persistentVolumeClaim:
-          claimName: fedora-iso
+          claimName: fedora-39-image
       - cloudInitNoCloud:
           userData: |
             #cloud-config 
