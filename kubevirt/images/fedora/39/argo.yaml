@@ -22,7 +22,7 @@ spec:
         path: kubevirt/images/fedora/39
       destination:
         server: '{{url}}'
-        namespace: kubevirt
+        namespace: kubevirt-vms
       syncPolicy:
         automated:
           prune: false

@@ -22,7 +22,7 @@ spec:
         path: kubevirt/images/debian/12-bookworm
       destination:
         server: '{{url}}'
-        namespace: kubevirt
+        namespace: kubevirt-vms
       syncPolicy:
         automated:
           prune: false
