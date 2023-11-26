@@ -5,7 +5,7 @@ metadata:
     kubevirt.io/vm: debian2
   name: debian2
 spec:
-  running: false
+  running: true
   template:
     metadata:
       labels:
