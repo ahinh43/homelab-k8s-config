@@ -19,9 +19,8 @@ spec:
           - disk:
               bus: virtio
             name: disk0
-          - cdrom:
-              bus: sata
-              readonly: true
+          - disk:
+              bus: virtio
             name: cloudinitdisk
         resources:
           requests:
@@ -33,7 +32,7 @@ spec:
       - cloudInitNoCloud:
           userData: |
             #cloud-config 
-            user: centos 
+            user: debian 
             password: bananas
             hostname: debian1
             ssh_pwauth: True 
