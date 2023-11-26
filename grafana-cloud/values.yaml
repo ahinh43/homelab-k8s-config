@@ -1,0 +1,46 @@
+k8s-monitoring:
+  cluster:
+    name: kube
+  externalServices:
+    prometheus:
+      host: https://prometheus-prod-10-prod-us-central-0.grafana.net
+      basicAuth:
+        usernameKey: PROMETHEUS_USER_NAME
+        passwordKey: GRAFANA_API_TOKEN
+      secret:
+        create: false
+        name: grafana-cloud-agent
+    loki:
+      host: https://logs-prod3.grafana.net
+      basicAuth:
+        usernameKey: LOKI_USER_NAME
+        passwordKey: GRAFANA_API_TOKEN
+      secret:
+        create: false
+        name: grafana-cloud-agent
+    tempo:
+      host: https://tempo-us-central1.grafana.net:443
+      basicAuth:
+        usernameKey: TEMPO_USER_NAME
+        passwordKey: GRAFANA_API_TOKEN
+      secret:
+        create: false
+        name: grafana-cloud-agent
+  metrics:
+    cost:
+      enabled: false
+  opencost:
+    enabled: false
+  traces:
+    enabled: true
+  grafana-agent:
+    agent:
+      extraPorts:
+        - name: otlp-grpc
+          port: 4317
+          targetPort: 4317
+          protocol: TCP
+        - name: otlp-http
+          port: 4318
+          targetPort: 4318
+          protocol: TCP
