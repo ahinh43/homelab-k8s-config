@@ -1,0 +1,3 @@
+istiod:
+  istio_cni:
+    enabled: true
