@@ -21,7 +21,7 @@ spec:
       source:
         repoURL: git@github.com:ahinh43/homelab-k8s-config.git
         targetRevision: HEAD
-        path: istio-base
+        path: istio/base
         helm:
           valueFiles:
             - values.yaml
