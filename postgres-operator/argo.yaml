@@ -22,6 +22,10 @@ spec:
         repoURL: git@github.com:ahinh43/homelab-k8s-config.git
         targetRevision: HEAD
         path: postgres-operator
+        helm:
+          valueFiles:
+            - values.yaml
+          releaseName: postgres-operator
       destination:
         server: '{{url}}'
         namespace: postgres-operator
