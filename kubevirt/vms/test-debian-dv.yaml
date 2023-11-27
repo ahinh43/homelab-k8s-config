@@ -42,7 +42,12 @@ spec:
       networks:
         - name: default
           pod: {}
+      dnsPolicy: None
       dnsConfig:
+        nameservers:
+          - "1.1.1.1"
+          - "8.8.8.8"
+          - "10.96.0.10"
         searches:
           - kubevirt-vms.svc.cluster.local
           - svc.cluster.local
