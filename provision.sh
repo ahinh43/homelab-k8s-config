@@ -139,3 +139,10 @@ fi
 if ! kubectl get namespace --context kube2 | grep -q "ceph-csi-rbd"; then
   kubectl create namespace ceph-csi-rbd --context kube2
 fi
+
+# Sets up ArgoCD
+
+argocd login argo.k8s.labs.ahinh.me --insecure --username admin --password $(kubectl get secret -n argocd argocd-initial-admin-secret -o jsonpath='{.data.password}' | base64 --decode)
+argocd account update-password --current-password $(kubectl get secret -n argocd argocd-initial-admin-secret -o jsonpath='{.data.password}' | base64 --decode) --new-password $(op item get "argocd" --vault Homelab --fields password)
+argocd cluster add kube2 --yes
+argocd repo add git@github.com:ahinh43/homelab-k8s-config.git --ssh-private-key-path ~/.ssh/id_rsa
