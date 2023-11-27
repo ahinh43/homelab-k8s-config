@@ -29,21 +29,21 @@ sleep 240
 kubectl apply -f metalLB/kube1 --context kube
 kubectl apply -f metalLB/kube2 --context kube2
 
-kubectl delete secret cilium-ca --namespace kube-system --context kube2
-kubectl --context=kube get secret -n kube-system cilium-ca -o yaml | kubectl --context kube2 create -f -
+# kubectl delete secret cilium-ca --namespace kube-system --context kube2
+# kubectl --context=kube get secret -n kube-system cilium-ca -o yaml | kubectl --context kube2 create -f -
 
-cilium clustermesh enable --context kube --service-type LoadBalancer
-cilium clustermesh enable --context kube2 --service-type LoadBalancer
+# cilium clustermesh enable --context kube --service-type LoadBalancer
+# cilium clustermesh enable --context kube2 --service-type LoadBalancer
 
-cilium clustermesh status --wait --context kube
-cilium clustermesh status --wait --context kube2
+# cilium clustermesh status --wait --context kube
+# cilium clustermesh status --wait --context kube2
 
-cilium clustermesh connect --context kube --destination-context kube2
+# cilium clustermesh connect --context kube --destination-context kube2
 
-cilium clustermesh status --wait --context kube
-cilium clustermesh status --wait --context kube2
+# cilium clustermesh status --wait --context kube
+# cilium clustermesh status --wait --context kube2
 
-cilium connectivity test --context kube --multi-cluster kube2
+# cilium connectivity test --context kube --multi-cluster kube2
 
 echo "Deploying the necessary services to get the cluster rolling..."
 
