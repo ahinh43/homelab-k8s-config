@@ -13,6 +13,9 @@ spec:
     spec:
       domain:
         devices:
+          interfaces:
+            - name: default
+              masquerade: {}
           disks:
           - disk:
               bus: virtio
@@ -22,7 +25,7 @@ spec:
             name: cloudinitdisk
         resources:
           requests:
-            memory: 1024M
+            memory: 2048M
       volumes:
       - dataVolume:
           name: debian2-dv
@@ -32,17 +35,20 @@ spec:
             #cloud-config 
             user: debian 
             password: bananas
-            hostname: debian1
+            hostname: debian2.kubevirt-vms.svc.cluster.local
             ssh_pwauth: True 
             disable_root: false
         name: cloudinitdisk
+      networks:
+        - name: default
+          pod: {}
   dataVolumeTemplates:
   - metadata:
       name: debian2-dv
     spec:
       pvc:
         accessModes:
-        - ReadWriteOnce
+        - ReadWriteMany
         resources:
           requests:
             storage: 4Gi
