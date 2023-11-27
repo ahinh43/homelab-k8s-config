@@ -27,14 +27,14 @@ kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/
 
 
 if grep -q "metallb" <<< "$installedChartsKube1"; then
-  exho "MetalLB chart already installed. Moving on.."
+  echo "MetalLB chart already installed. Moving on.."
 else
   helm install --kube-context kube --namespace metallb-system --create-namespace metallb metalLB/
   metallbinstalled="yes"
 fi
 
 if grep -q "metallb" <<< "$installedChartsKube2"; then
-  exho "MetalLB chart already installed. Moving on.."
+  echo "MetalLB chart already installed. Moving on.."
 else
   helm install --kube-context kube2 --namespace metallb-system --create-namespace metallb metalLB/
   metallbinstalled="yes"
@@ -57,13 +57,13 @@ echo "Deploying the necessary services to get the cluster rolling..."
 
 
 if grep -q "cert-manager" <<< "$installedChartsKube1"; then
-  exho "cert-manager chart already installed. Moving on.."
+  echo "cert-manager chart already installed. Moving on.."
 else
   helm install -f cert-manager/values.yaml --kube-context kube --namespace cert-manager --create-namespace cert-manager-kube1 cert-manager/
 fi
 
 if grep -q "cert-manager" <<< "$installedChartsKube2"; then
-  exho "cert-manager chart already installed. Moving on.."
+  echo "cert-manager chart already installed. Moving on.."
 else
   helm install -f cert-manager/values.yaml --kube-context kube2 --namespace cert-manager --create-namespace cert-manager-kube2 cert-manager/
 fi
@@ -71,23 +71,35 @@ fi
 
 
 if grep -q "external-dns" <<< "$installedChartsKube1"; then
-  exho "external-dns chart already installed. Moving on.."
+  echo "external-dns chart already installed. Moving on.."
 else
   helm install -f external-dns/values.yaml --kube-context kube --namespace external-dns --create-namespace external-dns external-dns/
 fi
 
 if grep -q "external-dns" <<< "$installedChartsKube2"; then
-  exho "cert-manager chart already installed. Moving on.."
+  echo "cert-manager chart already installed. Moving on.."
 else
   helm install -f external-dns/values.yaml --kube-context kube2 --namespace external-dns --create-namespace external-dns external-dns/
 fi
 
-# Cloudflare API token secret needed for cert-manager to auto complete the domain verification
-kubectl create secret generic cloudflare-api-token --namespace cert-manager --from-literal=cloudflare_api_token=$(op item get "Cloudflare API Token" --vault Homelab --fields credential) --context kube
-kubectl create secret generic cloudflare-api-token --namespace cert-manager --from-literal=cloudflare_api_token=$(op item get "Cloudflare API Token" --vault Homelab --fields credential) --context kube2
-kubectl create secret generic cloudflare-api-token --namespace external-dns --from-literal=cloudflare_api_token=$(op item get "Cloudflare API Token" --vault Homelab --fields credential) --context kube
-kubectl create secret generic cloudflare-api-token --namespace external-dns --from-literal=cloudflare_api_token=$(op item get "Cloudflare API Token" --vault Homelab --fields credential) --context kube2
 
+# Cloudflare API token secret needed for cert-manager to auto complete the domain verification
+
+if ! kubectl get secret --context kube --namespace cert-manager | grep -q "cloudflare-api-token"; then
+  kubectl create secret generic cloudflare-api-token --namespace cert-manager --from-literal=cloudflare_api_token=$(op item get "Cloudflare API Token" --vault Homelab --fields credential) --context kube
+fi
+
+if ! kubectl get secret --context kube2 --namespace cert-manager | grep -q "cloudflare-api-token"; then
+  kubectl create secret generic cloudflare-api-token --namespace cert-manager --from-literal=cloudflare_api_token=$(op item get "Cloudflare API Token" --vault Homelab --fields credential) --context kube2
+fi
+
+if ! kubectl get secret --context kube --namespace external-dns | grep -q "cloudflare-api-token"; then
+  kubectl create secret generic cloudflare-api-token --namespace external-dns --from-literal=cloudflare_api_token=$(op item get "Cloudflare API Token" --vault Homelab --fields credential) --context kube
+fi
+
+if ! kubectl get secret --context kube --namespace external-dns | grep -q "cloudflare-api-token"; then
+  kubectl create secret generic cloudflare-api-token --namespace external-dns --from-literal=cloudflare_api_token=$(op item get "Cloudflare API Token" --vault Homelab --fields credential) --context kube2
+fi
 
 kubectl apply -f cert-manager/le-prod-clusterissuer.yaml --context kube
 kubectl apply -f cert-manager/le-prod-clusterissuer.yaml --context kube2
@@ -96,20 +108,26 @@ kubectl apply -f cert-manager/le-staging-clusterissuer.yaml --context kube
 kubectl apply -f cert-manager/le-staging-clusterissuer.yaml --context kube2
 
 if grep -q "ingress-nginx" <<< "$installedChartsKube1"; then
-  exho "ingress-nginx chart already installed. Moving on.."
+  echo "ingress-nginx chart already installed. Moving on.."
 else
   helm install --kube-context kube --namespace ingress-nginx --create-namespace ingress-nginx-kube1 nginx-ingress/
+  ingressnginxinstalled="yes"
 fi
 
 if grep -q "ingress-nginx" <<< "$installedChartsKube2"; then
-  exho "cert-manager chart already installed. Moving on.."
+  echo "cert-manager chart already installed. Moving on.."
 else
   helm install --kube-context kube2 --namespace ingress-nginx --create-namespace ingress-nginx-kube2 nginx-ingress/
+  ingressnginxinstalled="yes"
 fi
 
+# Need to sleep 30 seconds to let the ingress controllers start up
+if [[ $ingressnginxinstalled = "yes" ]]; then
+  sleep 30
+fi
 
-if grep -q "argocd" <<< "$installedChartsKube2"; then
-  exho "argocd chart already installed. Moving on.."
+if grep -q "argocd" <<< "$installedChartsKube1"; then
+  echo "argocd chart already installed. Moving on.."
 else
   helm install --kube-context kube -f argocd/values.yaml --namespace argocd --create-namespace argocd argocd/
 fi
