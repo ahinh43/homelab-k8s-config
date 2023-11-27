@@ -1,12 +1,12 @@
 apiVersion: v2
-name: Istiod
+name: Istio CNI
 version: 1.0.0
-description: istiod helm chart
+description: istio CNI helm chart
 type: application
 home: https://k8s.labs.ahinh.me
 sources:
   - https://github.com/ahinh43/homelab-k8s-config
 dependencies:
-  - name: istiod
+  - name: cni
     version: 1.20.0
     repository: https://istio-release.storage.googleapis.com/charts
