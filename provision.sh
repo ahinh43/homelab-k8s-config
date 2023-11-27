@@ -146,3 +146,10 @@ argocd login argo.k8s.labs.ahinh.me --insecure --username admin --password $(kub
 argocd account update-password --current-password $(kubectl get secret -n argocd argocd-initial-admin-secret -o jsonpath='{.data.password}' | base64 --decode) --new-password $(op item get "argocd" --vault Homelab --fields password)
 argocd cluster add kube2 --yes
 argocd repo add git@github.com:ahinh43/homelab-k8s-config.git --ssh-private-key-path ~/.ssh/id_rsa
+
+# Imports the existing services we have into Argo
+
+kubectl apply -f cert-manager/argo.yaml
+kubectl apply -f metalLB/argo.yaml
+kubectl apply -f external-dns/argo.yaml
+kubectl apply -f nginx-ingress/argo.yaml
