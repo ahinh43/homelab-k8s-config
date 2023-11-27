@@ -15,43 +15,71 @@ else
   exit $?
 fi
 
+installedChartsKube1=$(helm list --all-namespaces)
+installedChartsKube2=$(helm list --kube-context kube2 --all-namespaces)
+
 kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.0.0/standard-install.yaml --context kube
 kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.0.0/standard-install.yaml --context kube2
 
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/${CERTMANAGERCRDVERSION}/cert-manager.crds.yaml --context kube
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/${CERTMANAGERCRDVERSION}/cert-manager.crds.yaml --context kube2
 
-helm install --kube-context kube --namespace metallb-system --create-namespace metallb metalLB/
-helm install --kube-context kube2 --namespace metallb-system --create-namespace metallb metalLB/
 
-sleep 240
+if ! grep -q "metallb" <<< "$installedChartsKube1"; then
+  exho "MetalLB chart already installed. Moving on.."
+else
+  helm install --kube-context kube --namespace metallb-system --create-namespace metallb metalLB/
+  metallbinstalled="yes"
+fi
 
-kubectl apply -f metalLB/kube1 --context kube
-kubectl apply -f metalLB/kube2 --context kube2
+if ! grep -q "metallb" <<< "$installedChartsKube2"; then
+  exho "MetalLB chart already installed. Moving on.."
+else
+  helm install --kube-context kube2 --namespace metallb-system --create-namespace metallb metalLB/
+  metallbinstalled="yes"
+fi
 
-# kubectl delete secret cilium-ca --namespace kube-system --context kube2
-# kubectl --context=kube get secret -n kube-system cilium-ca -o yaml | kubectl --context kube2 create -f -
+if [[ $metallbinstalled = "yes" ]]; then
+  sleep 180
+fi
 
-# cilium clustermesh enable --context kube --service-type LoadBalancer
-# cilium clustermesh enable --context kube2 --service-type LoadBalancer
+if ! kubectl get ipaddresspools.metallb.io --context kube --all-namespaces | grep -q "default-pool"; then
+  kubectl apply -f metalLB/kube1 --context kube
+fi
 
-# cilium clustermesh status --wait --context kube
-# cilium clustermesh status --wait --context kube2
+if ! kubectl get ipaddresspools.metallb.io --context kube2 --all-namespaces | grep -q "default-pool"; then
+  kubectl apply -f metalLB/kube2 --context kube2
+fi
 
-# cilium clustermesh connect --context kube --destination-context kube2
-
-# cilium clustermesh status --wait --context kube
-# cilium clustermesh status --wait --context kube2
-
-# cilium connectivity test --context kube --multi-cluster kube2
 
 echo "Deploying the necessary services to get the cluster rolling..."
 
-helm install -f cert-manager/values.yaml --kube-context kube --namespace cert-manager --create-namespace cert-manager-kube1 cert-manager/
-helm install -f cert-manager/values.yaml --kube-context kube2 --namespace cert-manager --create-namespace cert-manager-kube2 cert-manager/
 
-helm install -f external-dns/values.yaml --kube-context kube --namespace external-dns --create-namespace external-dns external-dns/
-helm install -f external-dns/values.yaml --kube-context kube2 --namespace external-dns --create-namespace external-dns external-dns/
+if ! grep -q "cert-manager" <<< "$installedChartsKube1"; then
+  exho "cert-manager chart already installed. Moving on.."
+else
+  helm install -f cert-manager/values.yaml --kube-context kube --namespace cert-manager --create-namespace cert-manager-kube1 cert-manager/
+fi
+
+if ! grep -q "cert-manager" <<< "$installedChartsKube2"; then
+  exho "cert-manager chart already installed. Moving on.."
+else
+  helm install -f cert-manager/values.yaml --kube-context kube2 --namespace cert-manager --create-namespace cert-manager-kube2 cert-manager/
+fi
+
+
+
+if ! grep -q "external-dns" <<< "$installedChartsKube1"; then
+  exho "external-dns chart already installed. Moving on.."
+else
+  helm install -f external-dns/values.yaml --kube-context kube --namespace external-dns --create-namespace external-dns external-dns/
+fi
+
+if ! grep -q "external-dns" <<< "$installedChartsKube2"; then
+  exho "cert-manager chart already installed. Moving on.."
+else
+  helm install -f external-dns/values.yaml --kube-context kube2 --namespace external-dns --create-namespace external-dns external-dns/
+fi
 
 # Cloudflare API token secret needed for cert-manager to auto complete the domain verification
 kubectl create secret generic cloudflare-api-token --namespace cert-manager --from-literal=cloudflare_api_token=$(op item get "Cloudflare API Token" --vault Homelab --fields credential) --context kube
@@ -66,17 +94,24 @@ kubectl apply -f cert-manager/le-prod-clusterissuer.yaml --context kube2
 kubectl apply -f cert-manager/le-staging-clusterissuer.yaml --context kube
 kubectl apply -f cert-manager/le-staging-clusterissuer.yaml --context kube2
 
-helm install --kube-context kube --namespace nginx-gateway --create-namespace nginx-gateway-fabric-kube1 nginx-gateway-fabric/
-helm install --kube-context kube2 --namespace nginx-gateway --create-namespace nginx-gateway-fabric-kube2 nginx-gateway-fabric/
-kubectl apply -f nginx-gateway-fabric/gateway.yaml --context kube
-kubectl apply -f nginx-gateway-fabric/gateway.yaml --context kube2
+if ! grep -q "ingress-nginx" <<< "$installedChartsKube1"; then
+  exho "ingress-nginx chart already installed. Moving on.."
+else
+  helm install --kube-context kube --namespace ingress-nginx --create-namespace ingress-nginx-kube1 nginx-ingress/
+fi
 
-kubectl --namespace nginx-gateway rollout restart deployment nginx-gateway-fabric-kube1 --context kube
-kubectl --namespace nginx-gateway rollout restart deployment nginx-gateway-fabric-kube2 --context kube2
+if ! grep -q "ingress-nginx" <<< "$installedChartsKube2"; then
+  exho "cert-manager chart already installed. Moving on.."
+else
+  helm install --kube-context kube2 --namespace ingress-nginx --create-namespace ingress-nginx-kube2 nginx-ingress/
+fi
 
-helm install -f argocd/values.yaml --namespace argocd --create-namespace argocd-kube1 argocd/
-kubectl apply -f argocd/http-route.yaml --namespace argocd
 
+if ! grep -q "argocd" <<< "$installedChartsKube2"; then
+  exho "argocd chart already installed. Moving on.."
+else
+  helm install --kube-context kube -f argocd/values.yaml --namespace argocd --create-namespace argocd argocd/
+fi
 
 kubectl create namespace ceph-csi-rbd --context kube
 kubectl create namespace ceph-csi-rbd --context kube2
