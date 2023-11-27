@@ -2,14 +2,14 @@ apiVersion: kubevirt.io/v1
 kind: VirtualMachine
 metadata:
   labels:
-    kubevirt.io/vm: debian2
-  name: debian2
+    kubevirt.io/vm: fedora2
+  name: fedora2
 spec:
   running: true
   template:
     metadata:
       labels:
-        kubevirt.io/vm: debian2
+        kubevirt.io/vm: fedora2
     spec:
       domain:
         devices:
@@ -28,35 +28,30 @@ spec:
             memory: 2048M
       volumes:
       - dataVolume:
-          name: debian2-dv
+          name: fedora2-dv
         name: disk0
       - cloudInitNoCloud:
           userData: |
             #cloud-config 
-            user: debian 
+            user: fedora 
             password: bananas
-            hostname: debian2.kubevirt-vms.svc.cluster.local
+            hostname: fedora2.kubevirt-vms.svc.cluster.local
             ssh_pwauth: True 
             disable_root: false
         name: cloudinitdisk
       networks:
         - name: default
           pod: {}
-      dnsConfig:
-        searches:
-          - kubevirt-vms.svc.cluster.local
-          - svc.cluster.local
-          - cluster.local
   dataVolumeTemplates:
   - metadata:
-      name: debian2-dv
+      name: fedora2-dv
     spec:
       pvc:
         accessModes:
         - ReadWriteMany
         resources:
           requests:
-            storage: 4Gi
+            storage: 10Gi
       source:
         http:
-          url: https://cloud.debian.org/images/cloud/bookworm/20231013-1532/debian-12-genericcloud-amd64-20231013-1532.qcow2
+          url: https://download.fedoraproject.org/pub/fedora/linux/releases/39/Cloud/x86_64/images/Fedora-Cloud-Base-39-1.5.x86_64.raw.xz
