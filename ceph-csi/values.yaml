@@ -1,6 +1,6 @@
 ceph-csi-rbd:
   csiConfig:
-    - clusterID: "7ee1b4fa-1bef-4908-8848-9895fdfd3cf6"
+    - clusterID: "0a18b03d-b8a8-4f82-babd-7df7de66fb9b"
       monitors:
         - "10.1.1.3:3300"
         - "10.1.1.8:3300"
@@ -9,7 +9,7 @@ ceph-csi-rbd:
     create: true
     annotations:
       storageclass.kubernetes.io/is-default-class: "true"
-    clusterID: "7ee1b4fa-1bef-4908-8848-9895fdfd3cf6"
+    clusterID: "0a18b03d-b8a8-4f82-babd-7df7de66fb9b"
     pool: kubernetes
     mountOptions:
       - discard

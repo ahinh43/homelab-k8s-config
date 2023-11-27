@@ -22,6 +22,10 @@ spec:
         repoURL: git@github.com:ahinh43/homelab-k8s-config.git
         targetRevision: HEAD
         path: cert-manager
+        helm:
+          valueFiles:
+            - values.yaml
+          releaseName: cert-manager
       destination:
         server: '{{url}}'
         namespace: cert-manager

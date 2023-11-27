@@ -23,8 +23,8 @@ spec:
         targetRevision: HEAD
         path: nginx-ingress
         helm:
-          # valueFiles:
-          #   - values.yaml
+          valueFiles:
+            - values.yaml
           releaseName: ingress-nginx
       destination:
         server: '{{url}}'
