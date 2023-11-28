@@ -154,7 +154,6 @@ argocd repo add git@github.com:ahinh43/homelab-k8s-config.git --ssh-private-key-
 # Imports the existing services we have into Argo
 
 kubectl apply -f cert-manager/argo.yaml
-kubectl apply -f metalLB/argo.yaml
 kubectl apply -f external-dns/argo.yaml
 kubectl apply -f nginx-ingress/argo.yaml
 kubectl apply -f flatcar-updater/argo.yaml
