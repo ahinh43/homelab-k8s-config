@@ -25,32 +25,21 @@ installedChartsKube2=$(helm list --kube-context kube2 --all-namespaces)
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/${CERTMANAGERCRDVERSION}/cert-manager.crds.yaml --context kube
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/${CERTMANAGERCRDVERSION}/cert-manager.crds.yaml --context kube2
 
+# Set up BGP peering w/ Cilium
+kubectl apply -f cilium/bgp-peering.yaml --context kube
+kubectl apply -f cilium/bgp-peering-kube2.yaml --context kube2
+kubectl apply -f cilium/ip-pool-kube1.yaml --context kube
+kubectl apply -f cilium/ip-pool-kube2.yaml --context kube2
 
-if grep -q "metallb" <<< "$installedChartsKube1"; then
-  echo "MetalLB chart already installed. Moving on.."
-else
-  helm install --kube-context kube --namespace metallb-system --create-namespace metallb metalLB/
-  metallbinstalled="yes"
-fi
+# Label every node with their respective bgp policy
 
-if grep -q "metallb" <<< "$installedChartsKube2"; then
-  echo "MetalLB chart already installed. Moving on.."
-else
-  helm install --kube-context kube2 --namespace metallb-system --create-namespace metallb metalLB/
-  metallbinstalled="yes"
-fi
+for node in `kubectl get nodes -o json | jq -r '.items[].metadata.name'`; do
+  kubectl label node $node bgp-policy=kube
+done
 
-if [[ $metallbinstalled = "yes" ]]; then
-  sleep 60
-fi
-
-if ! kubectl get ipaddresspools.metallb.io --context kube --all-namespaces | grep -q "default-pool"; then
-  kubectl apply -f metalLB/kube1 --context kube
-fi
-
-if ! kubectl get ipaddresspools.metallb.io --context kube2 --all-namespaces | grep -q "default-pool"; then
-  kubectl apply -f metalLB/kube2 --context kube2
-fi
+for node in `kubectl get nodes --context kube2 -o json | jq -r '.items[].metadata.name'`; do
+  kubectl label node $node bgp-policy=kube2 --context kube2
+done
 
 kubectl delete secret cilium-ca --namespace kube-system --context kube2
 kubectl --context=kube get secret -n kube-system cilium-ca -o yaml | kubectl --context kube2 create -f -
