@@ -2,7 +2,7 @@ ingress-nginx:
   controller:
   admissionWebhooks:
     patch:
-      annotations:
+      podAnnotations:
         sidecar.istio.io/inject: "false"
     annotations:
       traffic.sidecar.istio.io/includeInboundPorts: ""
