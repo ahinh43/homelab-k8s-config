@@ -41,7 +41,7 @@ else
 fi
 
 if [[ $metallbinstalled = "yes" ]]; then
-  sleep 180
+  sleep 60
 fi
 
 if ! kubectl get ipaddresspools.metallb.io --context kube --all-namespaces | grep -q "default-pool"; then
