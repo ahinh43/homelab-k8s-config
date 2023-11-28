@@ -1,11 +1,13 @@
 ingress-nginx:
   controller:
-  admissionWebhooks:
-    patch:
-      podAnnotations:
+    admissionWebhooks:
+      annotations:
         sidecar.istio.io/inject: "false"
-    annotations:
-      traffic.sidecar.istio.io/includeInboundPorts: ""
-      traffic.sidecar.istio.io/excludeInboundPorts: "80,443"
-      # traffic.sidecar.istio.io/excludeOutboundIPRanges: "10.96.0.0/16,10.246.0.0/16"
-      sidecar.istio.io/inject: 'true'
+      patch:
+        podAnnotations:
+          sidecar.istio.io/inject: "false"
+  annotations:
+    traffic.sidecar.istio.io/includeInboundPorts: ""
+    traffic.sidecar.istio.io/excludeInboundPorts: "80,443"
+    # traffic.sidecar.istio.io/excludeOutboundIPRanges: "10.96.0.0/16,10.246.0.0/16"
+    sidecar.istio.io/inject: 'true'
