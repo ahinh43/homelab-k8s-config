@@ -55,9 +55,10 @@ keycloak:
       nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
       external-dns.alpha.kubernetes.io/hostname: keycloak.k8s.labs.ahinh.me
       nginx.ingress.kubernetes.io/service-upstream: "true"
-    tls: true
+    tls: false
     extraTls:
       - hosts:
+          - keycloak.k8s.labs.ahinh.me
           - keycloak.local.k8s.labs.ahinh.me
         secretName: keycloak.k8s.labs.ahinh.me-tls
     ingressClassName: nginx
