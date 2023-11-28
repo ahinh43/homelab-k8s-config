@@ -47,12 +47,19 @@ keycloak:
   ingress:
     enabled: true
     hostname: keycloak.k8s.labs.ahinh.me
+    extraHosts:
+      - name: keycloak.local.k8s.labs.ahinh.me
+        path: /
     annotations:
       cert-manager.io/cluster-issuer: "letsencrypt"
       nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
       external-dns.alpha.kubernetes.io/hostname: keycloak.k8s.labs.ahinh.me
       nginx.ingress.kubernetes.io/service-upstream: "true"
     tls: true
+    extraTls:
+      - hosts:
+          - keycloak.local.k8s.labs.ahinh.me
+        secretName: keycloak.k8s.labs.ahinh.me-tls
     ingressClassName: nginx
     servicePort: https
   auth:
