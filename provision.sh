@@ -156,4 +156,39 @@ argocd repo add git@github.com:ahinh43/homelab-k8s-config.git --ssh-private-key-
 kubectl apply -f cert-manager/argo.yaml
 kubectl apply -f external-dns/argo.yaml
 kubectl apply -f nginx-ingress/argo.yaml
+
+
+# And set up the other 'core' services that the cluster will run
 kubectl apply -f flatcar-updater/argo.yaml
+kubectl apply -f sealed-secrets/argo.yaml
+kubectl apply -f postgres-operator/argo.yaml
+
+# Prepare the ceph CSI for install
+cat <<EOF > ceph-csi/csi-rbd-secret.yaml
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: csi-rbd-secret
+  namespace: ceph-csi-rbd
+stringData:
+  userID: kubernetes
+  userKey: $(ssh root@shizuru.labs.ahinh.me 'ceph auth get-key client.kubernetes')
+EOF
+
+# Extra buffer time to let sealed secrets start properly
+sleep 20
+
+
+# Update the sealed secrets with the new value (after being encrypted with the new controller)
+cat ceph-csi/csi-rbd-secret.yaml | kubeseal --controller-namespace sealed-secrets --controller-name sealed-secrets-sealedsecrets --context kube --format yaml > ceph-csi/csi-rbd-sealedsecrets.yaml
+cat ceph-csi/csi-rbd-secret.yaml | kubeseal --controller-namespace sealed-secrets --controller-name sealed-secrets-sealedsecrets --context kube2 --format yaml > ceph-csi/csi-rbd-sealedsecrets-k2.yaml
+
+# Apply the sealed secrets object
+kubectl apply -f ceph-csi/csi-rbd-sealedsecrets.yaml --context kube
+kubectl apply -f ceph-csi/csi-rbd-sealedsecrets-k2.yaml --context kube2
+
+# Remove the actual secret file
+rm -rf ceph-csi/csi-rbd-secret.yaml
+
+kubectl apply -f ceph-csi/argo.yaml
