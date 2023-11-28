@@ -157,3 +157,4 @@ kubectl apply -f cert-manager/argo.yaml
 kubectl apply -f metalLB/argo.yaml
 kubectl apply -f external-dns/argo.yaml
 kubectl apply -f nginx-ingress/argo.yaml
+kubectl apply -f flatcar-updater/argo.yaml
