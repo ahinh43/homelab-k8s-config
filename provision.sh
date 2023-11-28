@@ -133,8 +133,7 @@ fi
 if grep -q "argocd" <<< "$installedChartsKube1"; then
   echo "argocd chart already installed. Moving on.."
 else
-  helm install --kube-context kube -f argocd/values.yaml --namespace argocd --create-namespace argocd argocd/
-  sleep 30
+  helm install --kube-context kube -f argocd/values.yaml --wait --namespace argocd --create-namespace argocd argocd/
 fi
 
 if ! kubectl get namespace --context kube | grep -q "ceph-csi-rbd"; then
