@@ -8,6 +8,7 @@ argo-cd:
       ingressClassName: nginx
       hosts:
         - argo.k8s.labs.ahinh.me
+        - argo.local.k8s.labs.ahinh.me
       annotations:
         cert-manager.io/cluster-issuer: "letsencrypt"
         nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
