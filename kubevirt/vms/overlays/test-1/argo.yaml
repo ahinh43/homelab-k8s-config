@@ -28,8 +28,3 @@ spec:
           prune: false
           selfHeal: true
           allowEmpty: false
-        syncOptions:
-          - CreateNamespace=true
-        managedNamespaceMetadata:
-          labels:
-            app: test-vm-1
