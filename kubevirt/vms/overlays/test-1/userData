@@ -7,6 +7,11 @@ users:
     ssh-authorized-keys:
       - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCknK37QKXdA4PYpZMIuHMraGjqDOXaNtMmIZI4FBhd2Z0GmtVvIpYwwNm3lR/eEZ4/6mV1OcOgt/eV7wccCBXEFxQNA2j7amh5JBH11SpLxFRw2YOiRpPK9/w1ontGgI0MXrhuxxnkIhx7V8NvpcqX3FVP2wHhq5REXa6USuT8thgEuhC+aP26a5Upx7qR2k+WsOEmfW/XoMXEqac156eBP79EuR6xxBitKNfgQqI1VFq1uutg26zWdwbUBjTqg0mZ308suCbMfMDnJ0wzVuJrm7kzoEJWWcwUNBVXa/Kwc9yHPxGIszjZeLl16klxp5KBjmJsN4fTny++EDeYylDL ahinh43@github/33781835
       - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC2PhL297eW7+AEBekvgcXu0ikumqbu2eIr+TfOj++92hTNo7rFTX4hYjr9n31+j1vTkHYQxqg7XMFEdF3HNFB1Bg9dLJBOVgDHC/WDF94HbN4DuKwfmZN8YZ6Ev8XRidBZvfbfxbHk9gVbEFhl6vB3NlTLG8X6XPF+zycXOffQGNyf731Fh89eLl0yobusTD72F+4T0BUhgRrCrvy08EWaAovDuOcyHh2jfITK+jlPzn6QibSxFCy1JDztAtzZS5YcBhOhayxkWoQb4kw033wciI2KSP841ZCQM1uEFm1/9i2VgRGA4ry8gNdFwr7l6Z09NG6Q7wbg6DXhcjYPGWeJlkLkGa6txeM9dH9IbhlfIPAnNHxGCG+iwvavNjgPAv0q23qIb3K13zPhd8nzYWf1X/BIUtrGrn7LIxgxkw6B3kHn5mzaEBaZk2k3jAAGZkwM7/7ThQAEJ94lVyHyNzoS6kJqk6bW3pGxxpXTnQGhNWeCrFj+RmG93gKbW6a5Yr0= ahinh43@github/84668115
+  - name: minecraft
+    shell: /bin/bash
+    ssh-authorized-keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCknK37QKXdA4PYpZMIuHMraGjqDOXaNtMmIZI4FBhd2Z0GmtVvIpYwwNm3lR/eEZ4/6mV1OcOgt/eV7wccCBXEFxQNA2j7amh5JBH11SpLxFRw2YOiRpPK9/w1ontGgI0MXrhuxxnkIhx7V8NvpcqX3FVP2wHhq5REXa6USuT8thgEuhC+aP26a5Upx7qR2k+WsOEmfW/XoMXEqac156eBP79EuR6xxBitKNfgQqI1VFq1uutg26zWdwbUBjTqg0mZ308suCbMfMDnJ0wzVuJrm7kzoEJWWcwUNBVXa/Kwc9yHPxGIszjZeLl16klxp5KBjmJsN4fTny++EDeYylDL ahinh43@github/33781835
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC2PhL297eW7+AEBekvgcXu0ikumqbu2eIr+TfOj++92hTNo7rFTX4hYjr9n31+j1vTkHYQxqg7XMFEdF3HNFB1Bg9dLJBOVgDHC/WDF94HbN4DuKwfmZN8YZ6Ev8XRidBZvfbfxbHk9gVbEFhl6vB3NlTLG8X6XPF+zycXOffQGNyf731Fh89eLl0yobusTD72F+4T0BUhgRrCrvy08EWaAovDuOcyHh2jfITK+jlPzn6QibSxFCy1JDztAtzZS5YcBhOhayxkWoQb4kw033wciI2KSP841ZCQM1uEFm1/9i2VgRGA4ry8gNdFwr7l6Z09NG6Q7wbg6DXhcjYPGWeJlkLkGa6txeM9dH9IbhlfIPAnNHxGCG+iwvavNjgPAv0q23qIb3K13zPhd8nzYWf1X/BIUtrGrn7LIxgxkw6B3kHn5mzaEBaZk2k3jAAGZkwM7/7ThQAEJ94lVyHyNzoS6kJqk6bW3pGxxpXTnQGhNWeCrFj+RmG93gKbW6a5Yr0= ahinh43@github/84668115
 hostname: test-1.kubevirt-vms.svc.cluster.local
 ssh_pwauth: False
 disable_root: false
@@ -16,3 +21,41 @@ packages:
   - dnsutils
   - htop
   - jq
+  - openjdk-17-jre-headless
+  - tmux
+write_files:
+  - path: /minecraft/ops.json
+    owner: minecraft:minecraft
+    permissions: '0644'
+    encoding: b64
+    content: WwogIHsKICAgICJ1dWlkIjogImFmNDE4Y2U3LTUzZDQtNDI1Mi1hNGIzLWM4NWJjMzQxZjAxNCIsCiAgICAibmFtZSI6ICJLRkNDb2xvbmVsIiwKICAgICJsZXZlbCI6IDQsCiAgICAiYnlwYXNzZXNQbGF5ZXJMaW1pdCI6IGZhbHNlCiAgfSwKICB7CiAgICAidXVpZCI6ICI0ZWJjN2NmYi0wNmM2LTQ1YmMtYThhNi1hM2JlNTY5MDcwNDYiLAogICAgIm5hbWUiOiAiRFJvc2UxIiwKICAgICJsZXZlbCI6IDQsCiAgICAiYnlwYXNzZXNQbGF5ZXJMaW1pdCI6IGZhbHNlCiAgfQpd
+  - path: /minecraft/whitelist.json
+    owner: minecraft:minecraft
+    permissions: '0644'
+    encoding: b64
+    content: WwogIHsKICAgICJ1dWlkIjogImFmNDE4Y2U3LTUzZDQtNDI1Mi1hNGIzLWM4NWJjMzQxZjAxNCIsCiAgICAibmFtZSI6ICJLRkNDb2xvbmVsIgogIH0KXQo=
+  - path: /minecraft/whitelist.json
+    owner: minecraft:minecraft
+    permissions: '0644'
+    encoding: b64
+    content: WwogIHsKICAgICJ1dWlkIjogImFmNDE4Y2U3LTUzZDQtNDI1Mi1hNGIzLWM4NWJjMzQxZjAxNCIsCiAgICAibmFtZSI6ICJLRkNDb2xvbmVsIgogIH0KXQo=
+  - path: /minecraft/start-server.sh
+    owner: minecraft:minecraft
+    permissions: '0755'
+    encoding: b64
+    content: IyEvdXNyL2Jpbi9lbnYgYmFzaAovdXNyL2Jpbi9qYXZhIC1YWDorVXNlRzFHQyAtWFg6K1BhcmFsbGVsUmVmUHJvY0VuYWJsZWQgLVhYOk1heEdDUGF1c2VNaWxsaXM9MjAwIC1YWDorVW5sb2NrRXhwZXJpbWVudGFsVk1PcHRpb25zIC1YWDorRGlzYWJsZUV4cGxpY2l0R0MgLVhYOitBbHdheXNQcmVUb3VjaCAtWFg6RzFOZXdTaXplUGVyY2VudD0zMCAtWFg6RzFNYXhOZXdTaXplUGVyY2VudD00MCAtWFg6RzFIZWFwUmVnaW9uU2l6ZT04TSAtWFg6RzFSZXNlcnZlUGVyY2VudD0yMCAtWFg6RzFIZWFwV2FzdGVQZXJjZW50PTUgLVhYOkcxTWl4ZWRHQ0NvdW50VGFyZ2V0PTQgLVhYOkluaXRpYXRpbmdIZWFwT2NjdXBhbmN5UGVyY2VudD0xNSAtWFg6RzFNaXhlZEdDTGl2ZVRocmVzaG9sZFBlcmNlbnQ9OTAgLVhYOkcxUlNldFVwZGF0aW5nUGF1c2VUaW1lUGVyY2VudD01IC1YWDpTdXJ2aXZvclJhdGlvPTMyIC1YWDorUGVyZkRpc2FibGVTaGFyZWRNZW0gLVhYOk1heFRlbnVyaW5nVGhyZXNob2xkPTEgLUR1c2luZy5haWthcnMuZmxhZ3M9aHR0cHM6Ly9tY2ZsYWdzLmVtYy5ncyAtRGFpa2Fycy5uZXcuZmxhZ3M9dHJ1ZSAtRGZtbC5yZWFkVGltZW91dD0xODAgLURmbWwucXVlcnlSZXN1bHQ9Y29uZmlybSAtWG14M0cgLVhtczFHIC1qYXIgcGFwZXIuamFyCg==
+  - path: /minecraft/eula.txt
+    owner: minecraft:minecraft
+    permissions: '0755'
+    encoding: b64
+    content: I0J5IGNoYW5naW5nIHRoZSBzZXR0aW5nIGJlbG93IHRvIFRSVUUgeW91IGFyZSBpbmRpY2F0aW5nIHlvdXIgYWdyZWVtZW50IHRvIG91ciBFVUxBIChodHRwczovL2FrYS5tcy9NaW5lY3JhZnRFVUxBKS4KI1NhdCBKdWwgMDggMjE6NDc6NDcgVVRDIDIwMjMKZXVsYT10cnVlCg==
+  - path: /etc/systemd/system/minecraft.service
+    owner: root:root
+    permissions: '0644'
+    encoding: b64
+    content: W1VuaXRdCkRlc2NyaXB0aW9uPU1pbmVjcmFmdCBTZXJ2ZXIKCltTZXJ2aWNlXQpXb3JraW5nRGlyZWN0b3J5PS9taW5lY3JhZnQKVXNlcj1taW5lY3JhZnQKVHlwZT1mb3JraW5nClJlc3RhcnQ9YWx3YXlzCgpFeGVjU3RhcnQ9L3Vzci9iaW4vdG11eCBuZXctc2Vzc2lvbiAtcyBtYy0laSAtZCAnL21pbmVjcmFmdC9zdGFydC1zZXJ2ZXIuc2gnCkV4ZWNTdG9wPS91c3IvYmluL3RtdXggc2VuZC1rZXlzIC10IG1jLSVpOjAuMCAnc2F5IFNFUlZFUiBTSFVUVElORyBET1dOLiBTYXZpbmcgbWFwLi4uJyBDLW0gJ3NhdmUtYWxsJyBDLW0gJ3N0b3AnIEMtbQpFeGVjU3RvcD0vYmluL3NsZWVwIDIKCltJbnN0YWxsXQpXYW50ZWRCeT1tdWx0aS11c2VyLnRhcmdldAo=
+runcmd:
+  - [ curl, -Lo, /minecraft/paper.jar, "https://api.papermc.io/v2/projects/paper/versions/1.20.2/builds/309/downloads/paper-1.20.2-309.jar" ]
+  - systemctl daemon-reload
+  - systemctl enable minecraft.service
+  - systemctl start minecraft.service
