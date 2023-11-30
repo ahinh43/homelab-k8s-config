@@ -1,0 +1,20 @@
+# VM PVC templates that can be cloned to datavolumes for use with VMs
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: fedora-39-template
+  labels:
+    k8s.labs.ahinh.me/app: containerized-data-importer
+    k8s.labs.ahinh.me/component: vm-image-template
+    k8s.labs.ahinh.me/os: linux
+    k8s.labs.ahinh.me/distro: fedora
+    k8s.labs.ahinh.me/version: "39"
+  annotations:
+    cdi.kubevirt.io/storage.import.endpoint: "https://download.fedoraproject.org/pub/fedora/linux/releases/39/Cloud/x86_64/images/Fedora-Cloud-Base-39-1.5.x86_64.raw.xz"
+spec:
+  volumeMode: Block
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 4Gi

@@ -1,10 +1,14 @@
+# VM PVC templates that can be cloned to datavolumes for use with VMs
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: debian-12
+  name: debian-12-template
   labels:
-    app: containerized-data-importer
-    component: vm-image-template
+    k8s.labs.ahinh.me/app: containerized-data-importer
+    k8s.labs.ahinh.me/component: vm-image-template
+    k8s.labs.ahinh.me/os: linux
+    k8s.labs.ahinh.me/distro: debian
+    k8s.labs.ahinh.me/version: "12"
   annotations:
     cdi.kubevirt.io/storage.import.endpoint: "https://cloud.debian.org/images/cloud/bookworm/20231013-1532/debian-12-genericcloud-amd64-20231013-1532.qcow2"
 spec:

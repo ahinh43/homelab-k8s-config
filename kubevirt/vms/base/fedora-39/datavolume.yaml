@@ -1,0 +1,16 @@
+apiVersion: cdi.kubevirt.io/v1beta1
+kind: DataVolume
+metadata:
+  name: "fedora-39-vm-dv"
+spec:
+  source:
+      pvc:
+        name: fedora-39-template
+        namespace: kubevirt-vms
+  pvc:
+    volumeMode: Block
+    accessModes:
+      - ReadWriteMany
+    resources:
+      requests:
+        storage: "4Gi"
