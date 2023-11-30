@@ -1,9 +1,11 @@
 #cloud-config
-user: debian
-password: bananas
-ssh-authorized-keys:
-  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCknK37QKXdA4PYpZMIuHMraGjqDOXaNtMmIZI4FBhd2Z0GmtVvIpYwwNm3lR/eEZ4/6mV1OcOgt/eV7wccCBXEFxQNA2j7amh5JBH11SpLxFRw2YOiRpPK9/w1ontGgI0MXrhuxxnkIhx7V8NvpcqX3FVP2wHhq5REXa6USuT8thgEuhC+aP26a5Upx7qR2k+WsOEmfW/XoMXEqac156eBP79EuR6xxBitKNfgQqI1VFq1uutg26zWdwbUBjTqg0mZ308suCbMfMDnJ0wzVuJrm7kzoEJWWcwUNBVXa/Kwc9yHPxGIszjZeLl16klxp5KBjmJsN4fTny++EDeYylDL ahinh_admin@ALEC-DSKTP
-hostname: debian2.kubevirt-vms.svc.cluster.local
+users:
+  - name: debian
+    primary_group: sudo
+    password: bananas
+    ssh-authorized-keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCknK37QKXdA4PYpZMIuHMraGjqDOXaNtMmIZI4FBhd2Z0GmtVvIpYwwNm3lR/eEZ4/6mV1OcOgt/eV7wccCBXEFxQNA2j7amh5JBH11SpLxFRw2YOiRpPK9/w1ontGgI0MXrhuxxnkIhx7V8NvpcqX3FVP2wHhq5REXa6USuT8thgEuhC+aP26a5Upx7qR2k+WsOEmfW/XoMXEqac156eBP79EuR6xxBitKNfgQqI1VFq1uutg26zWdwbUBjTqg0mZ308suCbMfMDnJ0wzVuJrm7kzoEJWWcwUNBVXa/Kwc9yHPxGIszjZeLl16klxp5KBjmJsN4fTny++EDeYylDL ahinh_admin@ALEC-DSKTP
+hostname: test-1.kubevirt-vms.svc.cluster.local
 ssh_pwauth: False
 disable_root: false
 package_update: true
