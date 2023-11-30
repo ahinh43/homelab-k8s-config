@@ -25,33 +25,37 @@ installedChartsKube2=$(helm list --kube-context kube2 --all-namespaces)
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/${CERTMANAGERCRDVERSION}/cert-manager.crds.yaml --context kube
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/${CERTMANAGERCRDVERSION}/cert-manager.crds.yaml --context kube2
 
+# Set up BGP peering w/ Cilium
+kubectl apply -f cilium/bgp-peering.yaml --context kube
+kubectl apply -f cilium/bgp-peering-kube2.yaml --context kube2
+kubectl apply -f cilium/ip-pool-kube1.yaml --context kube
+kubectl apply -f cilium/ip-pool-kube2.yaml --context kube2
 
-if grep -q "metallb" <<< "$installedChartsKube1"; then
-  echo "MetalLB chart already installed. Moving on.."
-else
-  helm install --kube-context kube --namespace metallb-system --create-namespace metallb metalLB/
-  metallbinstalled="yes"
-fi
+# Label every node with their respective bgp policy
 
-if grep -q "metallb" <<< "$installedChartsKube2"; then
-  echo "MetalLB chart already installed. Moving on.."
-else
-  helm install --kube-context kube2 --namespace metallb-system --create-namespace metallb metalLB/
-  metallbinstalled="yes"
-fi
+for node in `kubectl get nodes -o json | jq -r '.items[].metadata.name'`; do
+  kubectl label node $node bgp-policy=kube
+done
 
-if [[ $metallbinstalled = "yes" ]]; then
-  sleep 180
-fi
+for node in `kubectl get nodes --context kube2 -o json | jq -r '.items[].metadata.name'`; do
+  kubectl label node $node bgp-policy=kube2 --context kube2
+done
 
-if ! kubectl get ipaddresspools.metallb.io --context kube --all-namespaces | grep -q "default-pool"; then
-  kubectl apply -f metalLB/kube1 --context kube
-fi
+kubectl delete secret cilium-ca --namespace kube-system --context kube2
+kubectl --context=kube get secret -n kube-system cilium-ca -o yaml | kubectl --context kube2 create -f -
 
-if ! kubectl get ipaddresspools.metallb.io --context kube2 --all-namespaces | grep -q "default-pool"; then
-  kubectl apply -f metalLB/kube2 --context kube2
-fi
+cilium clustermesh enable --context kube --service-type LoadBalancer
+cilium clustermesh enable --context kube2 --service-type LoadBalancer
 
+cilium clustermesh status --wait --context kube
+cilium clustermesh status --wait --context kube2
+
+cilium clustermesh connect --context kube --destination-context kube2
+
+cilium clustermesh status --wait --context kube
+cilium clustermesh status --wait --context kube2
+
+cilium connectivity test --context kube --multi-cluster kube2
 
 echo "Deploying the necessary services to get the cluster rolling..."
 
@@ -129,7 +133,7 @@ fi
 if grep -q "argocd" <<< "$installedChartsKube1"; then
   echo "argocd chart already installed. Moving on.."
 else
-  helm install --kube-context kube -f argocd/values.yaml --namespace argocd --create-namespace argocd argocd/
+  helm install --kube-context kube -f argocd/values.yaml --wait --namespace argocd --create-namespace argocd argocd/
 fi
 
 if ! kubectl get namespace --context kube | grep -q "ceph-csi-rbd"; then
@@ -150,6 +154,41 @@ argocd repo add git@github.com:ahinh43/homelab-k8s-config.git --ssh-private-key-
 # Imports the existing services we have into Argo
 
 kubectl apply -f cert-manager/argo.yaml
-kubectl apply -f metalLB/argo.yaml
 kubectl apply -f external-dns/argo.yaml
 kubectl apply -f nginx-ingress/argo.yaml
+
+
+# And set up the other 'core' services that the cluster will run
+kubectl apply -f flatcar-updater/argo.yaml
+kubectl apply -f sealed-secrets/argo.yaml
+kubectl apply -f postgres-operator/argo.yaml
+
+# Prepare the ceph CSI for install
+cat <<EOF > ceph-csi/csi-rbd-secret.yaml
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: csi-rbd-secret
+  namespace: ceph-csi-rbd
+stringData:
+  userID: kubernetes
+  userKey: $(ssh root@shizuru.labs.ahinh.me 'ceph auth get-key client.kubernetes')
+EOF
+
+# Extra buffer time to let sealed secrets start properly
+sleep 20
+
+
+# Update the sealed secrets with the new value (after being encrypted with the new controller)
+cat ceph-csi/csi-rbd-secret.yaml | kubeseal --controller-namespace sealed-secrets --controller-name sealed-secrets-sealedsecrets --context kube --format yaml > ceph-csi/csi-rbd-sealedsecrets.yaml
+cat ceph-csi/csi-rbd-secret.yaml | kubeseal --controller-namespace sealed-secrets --controller-name sealed-secrets-sealedsecrets --context kube2 --format yaml > ceph-csi/csi-rbd-sealedsecrets-k2.yaml
+
+# Apply the sealed secrets object
+kubectl apply -f ceph-csi/csi-rbd-sealedsecrets.yaml --context kube
+kubectl apply -f ceph-csi/csi-rbd-sealedsecrets-k2.yaml --context kube2
+
+# Remove the actual secret file
+rm -rf ceph-csi/csi-rbd-secret.yaml
+
+kubectl apply -f ceph-csi/argo.yaml

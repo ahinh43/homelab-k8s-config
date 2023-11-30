@@ -1,0 +1,52 @@
+resources:
+- ../../base/debian-12
+patches:
+  - path: datavolume.yaml
+  - path: vm.yaml
+  - target:
+      kind: VirtualMachine
+      name: .*
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: test-1
+  - target:
+      kind: DataVolume
+      name: .*
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: test-1
+
+secretGenerator:
+  - name: test-1-cloudinit-userdata
+    files:
+      - userData
+    options:
+      disableNameSuffixHash: true
+  - name: test-1-cloudinit-networkdata
+    files:
+      - networkData
+    options:
+      disableNameSuffixHash: true
+
+transformers:
+  - |-
+    apiVersion: builtin
+    kind: LabelTransformer
+    metadata:
+      name: commonLabelsTransformer
+    labels:
+      kubevirt.io/vm: test-1
+      k8s.labs.ahinh.me/app: test-1
+      k8s.labs.ahinh.me/component: vm
+      k8s.labs.ahinh.me/os: linux
+      k8s.labs.ahinh.me/distro: debian
+      k8s.labs.ahinh.me/version: "12"
+
+    fieldSpecs:
+    - path: metadata/labels
+      create: true
+    - path: spec/template/metadata/labels
+      create: true
+      kind: VirtualMachine

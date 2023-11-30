@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: keycloak
+  name: debian-12-volume-template
   namespace: argocd
 spec:
   generators:
@@ -9,27 +9,20 @@ spec:
       elements:
       - cluster: kube1
         url: https://kubernetes.default.svc
-      - cluster: kube2
-        url: https://kube2.labs.ahinh.me:6443
   template:
     metadata:
-      name: keycloak-{{cluster}}
+      name: 'debian-12-volume-template-{{cluster}}'
       labels:
-        app: keycloak
+        app: debian-12-volume-template
     spec:
       project: default
       source:
         repoURL: git@github.com:ahinh43/homelab-k8s-config.git
         targetRevision: HEAD
-        path: keycloak
-        helm:
-          valueFiles:
-            - values.yaml
-            - '{{cluster}}/values.yaml'
-          releaseName: keycloak
+        path: kubevirt/vms/template/debian-12
       destination:
         server: '{{url}}'
-        namespace: keycloak
+        namespace: kubevirt-vms
       syncPolicy:
         automated:
           prune: false
@@ -39,4 +32,4 @@ spec:
           - CreateNamespace=true
         managedNamespaceMetadata:
           labels:
-            app: keycloak
+            app: debian-12-volume-template

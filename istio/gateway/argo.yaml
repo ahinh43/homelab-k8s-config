@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: keycloak
+  name: istio-gateway
   namespace: argocd
 spec:
   generators:
@@ -13,23 +13,22 @@ spec:
         url: https://kube2.labs.ahinh.me:6443
   template:
     metadata:
-      name: keycloak-{{cluster}}
+      name: 'istio-gateway-{{cluster}}'
       labels:
-        app: keycloak
+        app: istio-gateway
     spec:
       project: default
       source:
         repoURL: git@github.com:ahinh43/homelab-k8s-config.git
         targetRevision: HEAD
-        path: keycloak
+        path: istio/gateway
         helm:
           valueFiles:
             - values.yaml
-            - '{{cluster}}/values.yaml'
-          releaseName: keycloak
+          releaseName: istio-gateway
       destination:
         server: '{{url}}'
-        namespace: keycloak
+        namespace: istio-ingress
       syncPolicy:
         automated:
           prune: false
@@ -39,4 +38,4 @@ spec:
           - CreateNamespace=true
         managedNamespaceMetadata:
           labels:
-            app: keycloak
+            app: istio-gateway

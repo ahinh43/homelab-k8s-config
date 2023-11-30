@@ -1,0 +1,28 @@
+
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  name: debian-12-vm-template
+spec:
+  running: true
+  template:
+    spec:
+      domain:
+        devices:
+          disks:
+          - disk:
+              bus: virtio
+            name: disk0
+          - disk:
+              bus: virtio
+            name: cloudinitdisk
+      volumes:
+        - dataVolume:
+            name: test-1
+          name: disk0
+        - name: cloudinitdisk
+          cloudInitNoCloud:
+            secretRef:
+              name: test-1-cloudinit-userdata
+            networkDataSecretRef:
+              name: test-1-cloudinit-networkdata

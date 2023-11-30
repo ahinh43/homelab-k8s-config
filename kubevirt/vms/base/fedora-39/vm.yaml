@@ -1,0 +1,57 @@
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  labels:
+    kubevirt.io/vm: fedora-39-vm-template
+    k8s.labs.ahinh.me/app: fedora-39-vm-template
+    k8s.labs.ahinh.me/component: vm
+    k8s.labs.ahinh.me/os: linux
+    k8s.labs.ahinh.me/distro: fedora
+    k8s.labs.ahinh.me/version: "39"
+  name: fedora-39-vm-template
+spec:
+  running: true
+  template:
+    metadata:
+      labels:
+        kubevirt.io/vm: fedora-39-vm-template
+    spec:
+      domain:
+        devices:
+          interfaces:
+            - name: default
+              masquerade: {}
+          disks:
+          - disk:
+              bus: virtio
+            name: disk0
+          - disk:
+              bus: virtio
+            name: cloudinitdisk
+        resources:
+          requests:
+            memory: 2048M
+      networks:
+        - name: default
+          pod: {}
+      volumes:
+      - dataVolume:
+          name: fedora-test-dv
+        name: disk0
+      - cloudInitNoCloud:
+          userData: |
+            #cloud-config
+            users:
+              - name: fedora
+                password: bananas
+                groups: sudo
+                shell: /bin/bash
+                sudo: ['ALL=(ALL) NOPASSWD:ALL']
+                ssh-authorized-keys:
+                  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCknK37QKXdA4PYpZMIuHMraGjqDOXaNtMmIZI4FBhd2Z0GmtVvIpYwwNm3lR/eEZ4/6mV1OcOgt/eV7wccCBXEFxQNA2j7amh5JBH11SpLxFRw2YOiRpPK9/w1ontGgI0MXrhuxxnkIhx7V8NvpcqX3FVP2wHhq5REXa6USuT8thgEuhC+aP26a5Upx7qR2k+WsOEmfW/XoMXEqac156eBP79EuR6xxBitKNfgQqI1VFq1uutg26zWdwbUBjTqg0mZ308suCbMfMDnJ0wzVuJrm7kzoEJWWcwUNBVXa/Kwc9yHPxGIszjZeLl16klxp5KBjmJsN4fTny++EDeYylDL ahinh_admin@ALEC-DSKTP
+            hostname: fedora-39-vm-template.kubevirt-vms.svc.cluster.local
+            ssh_pwauth: False
+            disable_root: false
+            package_update: true
+            package_upgrade: true
+        name: cloudinitdisk

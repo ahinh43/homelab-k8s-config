@@ -17,6 +17,11 @@ spec:
       labels:
         app: istio-base
     spec:
+      ignoreDifferences:
+        - group: admissionregistration.k8s.io
+          kind: ValidatingWebhookConfiguration
+          jqPathExpressions:
+            - .webhooks[]?.failurePolicy
       project: default
       source:
         repoURL: git@github.com:ahinh43/homelab-k8s-config.git
@@ -36,6 +41,7 @@ spec:
           allowEmpty: false
         syncOptions:
           - CreateNamespace=true
+          - RespectIgnoreDifferences=true
         managedNamespaceMetadata:
           labels:
             app: istio-base

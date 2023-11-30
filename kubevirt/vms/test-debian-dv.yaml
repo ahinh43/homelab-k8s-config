@@ -1,3 +1,20 @@
+apiVersion: cdi.kubevirt.io/v1beta1
+kind: DataVolume
+metadata:
+  name: "debian-test-dv"
+spec:
+  source:
+      pvc:
+        name: debian2
+        namespace: kubevirt-vms
+  pvc:
+    volumeMode: Block
+    accessModes:
+      - ReadWriteMany
+    resources:
+      requests:
+        storage: "10Gi"
+---
 apiVersion: kubevirt.io/v1
 kind: VirtualMachine
 metadata:
@@ -26,42 +43,31 @@ spec:
         resources:
           requests:
             memory: 2048M
-      volumes:
-      - dataVolume:
-          name: debian2-dv
-        name: disk0
-      - cloudInitNoCloud:
-          userData: |
-            #cloud-config 
-            user: debian 
-            password: bananas
-            hostname: debian2.kubevirt-vms.svc.cluster.local
-            ssh_pwauth: True 
-            disable_root: false
-        name: cloudinitdisk
       networks:
         - name: default
           pod: {}
-      dnsPolicy: None
-      dnsConfig:
-        nameservers:
-          - "1.1.1.1"
-          - "8.8.8.8"
-          - "10.96.0.10"
-        searches:
-          - kubevirt-vms.svc.cluster.local
-          - svc.cluster.local
-          - cluster.local
-  dataVolumeTemplates:
-  - metadata:
-      name: debian2-dv
-    spec:
-      pvc:
-        accessModes:
-        - ReadWriteMany
-        resources:
-          requests:
-            storage: 4Gi
-      source:
-        http:
-          url: https://cloud.debian.org/images/cloud/bookworm/20231013-1532/debian-12-genericcloud-amd64-20231013-1532.qcow2
+      volumes:
+      - dataVolume:
+          name: debian-test-dv
+        name: disk0
+      - cloudInitNoCloud:
+          userData: |
+            #cloud-config
+            user: debian
+            password: bananas
+            ssh-authorized-keys:
+              - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCknK37QKXdA4PYpZMIuHMraGjqDOXaNtMmIZI4FBhd2Z0GmtVvIpYwwNm3lR/eEZ4/6mV1OcOgt/eV7wccCBXEFxQNA2j7amh5JBH11SpLxFRw2YOiRpPK9/w1ontGgI0MXrhuxxnkIhx7V8NvpcqX3FVP2wHhq5REXa6USuT8thgEuhC+aP26a5Upx7qR2k+WsOEmfW/XoMXEqac156eBP79EuR6xxBitKNfgQqI1VFq1uutg26zWdwbUBjTqg0mZ308suCbMfMDnJ0wzVuJrm7kzoEJWWcwUNBVXa/Kwc9yHPxGIszjZeLl16klxp5KBjmJsN4fTny++EDeYylDL ahinh_admin@ALEC-DSKTP
+            hostname: debian2.kubevirt-vms.svc.cluster.local
+            ssh_pwauth: False
+            disable_root: false
+            package_update: true
+            package_upgrade: true
+          networkData: |
+            networks:
+              version: 1
+              config:
+                - type: physical
+              name: enp1s0
+              subnets:
+                - type: dhcp
+        name: cloudinitdisk
