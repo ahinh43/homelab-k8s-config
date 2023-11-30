@@ -2,13 +2,6 @@
 apiVersion: kubevirt.io/v1
 kind: VirtualMachine
 metadata:
-  labels:
-    kubevirt.io/vm: debian-12-vm-template
-    k8s.labs.ahinh.me/app: debian-12-vm-template
-    k8s.labs.ahinh.me/component: vm
-    k8s.labs.ahinh.me/os: linux
-    k8s.labs.ahinh.me/distro: debian
-    k8s.labs.ahinh.me/version: "12"
   name: debian-12-vm-template
 spec:
   running: true
@@ -19,9 +12,17 @@ spec:
           disks:
           - disk:
               bus: virtio
+            name: disk0
+          - disk:
+              bus: virtio
             name: cloudinitdisk
       volumes:
+        - dataVolume:
+            name: test-1
+          name: disk0
         - name: cloudinitdisk
           cloudInitNoCloud:
             secretRef:
-              name: my-vmi-secret
+              name: test-1-cloudinit-userdata
+            networkDataSecretRef:
+              name: test-1-cloudinit-networkdata

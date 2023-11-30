@@ -10,25 +10,25 @@ patches:
       - op: replace
         path: /metadata/name
         value: test-1
+  - target:
+      kind: DataVolume
+      name: .*
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: test-1
+
 secretGenerator:
   - name: test-1-cloudinit-userdata
     files:
-      - userData.txt
+      - userData
+    options:
+      disableNameSuffixHash: true
   - name: test-1-cloudinit-networkdata
     files:
-      - networkData.txt
-
-vars:
-  - name: USERDATA
-    objref:
-      kind: Secret
-      name: test-1-cloudinit-userdata
-      apiVersion: v1
-  - name: NETWORKDATA
-    objref:
-      kind: Secret
-      name: test-1-cloudinit-networkdata
-      apiVersion: v1
+      - networkData
+    options:
+      disableNameSuffixHash: true
 
 transformers:
   - |-
@@ -37,15 +37,16 @@ transformers:
     metadata:
       name: commonLabelsTransformer
     labels:
-      k8s.labs.ahinh.me/app: test-1
       kubevirt.io/vm: test-1
+      k8s.labs.ahinh.me/app: test-1
+      k8s.labs.ahinh.me/component: vm
+      k8s.labs.ahinh.me/os: linux
+      k8s.labs.ahinh.me/distro: debian
+      k8s.labs.ahinh.me/version: "12"
 
     fieldSpecs:
     - path: metadata/labels
       create: true
     - path: spec/template/metadata/labels
       create: true
-      kind: Deployment
-    - path: spec/secretTemplate/labels
-      create: true
-      kind: Certificate
+      kind: VirtualMachine
