@@ -16,20 +16,12 @@ spec:
     spec:
       domain:
         devices:
-          interfaces:
-            - name: default
-              masquerade: {}
           disks:
           - disk:
               bus: virtio
-            name: disk0
-        resources:
-          requests:
-            memory: 2048M
-      networks:
-        - name: default
-          pod: {}
+            name: cloudinitdisk
       volumes:
-      - dataVolume:
-          name: debian-12-vm-template-dv
-        name: disk0
+        - name: cloudinitdisk
+          cloudInitNoCloud:
+            secretRef:
+              name: my-vmi-secret

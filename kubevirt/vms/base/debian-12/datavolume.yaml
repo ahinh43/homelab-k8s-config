@@ -1,7 +1,7 @@
 apiVersion: cdi.kubevirt.io/v1beta1
 kind: DataVolume
 metadata:
-  name: "debian-12-vm-dv"
+  name: "debian-12-vm-template-dv"
 spec:
   source:
       pvc:

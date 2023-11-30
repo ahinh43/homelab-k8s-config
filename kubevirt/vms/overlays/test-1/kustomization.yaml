@@ -1,0 +1,51 @@
+resources:
+- ../../base/debian-12
+patches:
+  - path: datavolume.yaml
+  - path: vm.yaml
+  - target:
+      kind: VirtualMachine
+      name: .*
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: test-1
+secretGenerator:
+  - name: test-1-cloudinit-userdata
+    files:
+      - userData.txt
+  - name: test-1-cloudinit-networkdata
+    files:
+      - networkData.txt
+
+vars:
+  - name: USERDATA
+    objref:
+      kind: Secret
+      name: test-1-cloudinit-userdata
+      apiVersion: v1
+  - name: NETWORKDATA
+    objref:
+      kind: Secret
+      name: test-1-cloudinit-networkdata
+      apiVersion: v1
+
+transformers:
+  - |-
+    apiVersion: builtin
+    kind: LabelTransformer
+    metadata:
+      name: commonLabelsTransformer
+    labels:
+      k8s.labs.ahinh.me/app: test-1
+      kubevirt.io/vm: test-1
+
+    fieldSpecs:
+    - path: metadata/labels
+      create: true
+    - path: spec/template/metadata/labels
+      create: true
+      kind: Deployment
+    - path: spec/secretTemplate/labels
+      create: true
+      kind: Certificate
