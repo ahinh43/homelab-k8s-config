@@ -16,6 +16,10 @@ spec:
           - disk:
               bus: virtio
             name: cloudinitdisk
+        resources:
+          requests:
+            cpu: 4000m
+            memory: 4096M
       volumes:
         - dataVolume:
             name: test-1
