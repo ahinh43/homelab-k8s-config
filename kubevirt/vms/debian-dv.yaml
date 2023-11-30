@@ -1,0 +1,16 @@
+apiVersion: cdi.kubevirt.io/v1beta1
+kind: DataVolume
+metadata:
+  name: "debian-test-dv"
+spec:
+  source:
+      pvc:
+        name: debian2
+        namespace: kubevirt-vms
+  pvc:
+    volumeMode: Block
+    accessModes:
+      - ReadWriteMany
+    resources:
+      requests:
+        storage: "10Gi"
