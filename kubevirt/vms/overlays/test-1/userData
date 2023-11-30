@@ -1,4 +1,11 @@
 #cloud-config
+packages:
+  - ssh-import-id
+hostname: test-1.kubevirt-vms.svc.cluster.local
+ssh_pwauth: False
+disable_root: false
+package_update: true
+package_upgrade: true
 users:
   - name: debian
     password: bananas
@@ -7,10 +14,3 @@ users:
     shell: /bin/bash
     ssh_import_id:
       - gh:ahinh43
-packages:
-  - ssh-import-id
-hostname: test-1.kubevirt-vms.svc.cluster.local
-ssh_pwauth: False
-disable_root: false
-package_update: true
-package_upgrade: true
