@@ -1,6 +1,7 @@
 #cloud-config
 users:
   - name: debian
+    password: bananas
     primary_group: sudo
     sudo: ALL=(ALL) NOPASSWD:ALL
     shell: /bin/bash
