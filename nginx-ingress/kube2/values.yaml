@@ -1,0 +1,11 @@
+ingress-nginx:
+  controller:
+    topologySpreadConstraints:
+      - labelSelector:
+          matchLabels:
+            app.kubernetes.io/name: '{{ include "ingress-nginx.name" . }}'
+            app.kubernetes.io/instance: '{{ .Release.Name }}'
+            app.kubernetes.io/component: controller
+        topologyKey: node-role.kubernetes.io/control-plane
+        maxSkew: 1
+        whenUnsatisfiable: ScheduleAnyway
