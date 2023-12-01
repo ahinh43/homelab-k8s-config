@@ -11,3 +11,7 @@ spec:
     port: 25565
     targetPort: 25565
     protocol: TCP
+  - name: minecraft-udp
+    port: 25565
+    targetPort: 25565
+    protocol: UDP
