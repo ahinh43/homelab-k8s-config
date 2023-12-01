@@ -1,4 +1,18 @@
 prometheus:
+  alertmanager:
+    ingress:
+      enabled: true
+      hosts:
+        - alertmanager.k8s.labs.ahinh.me
+      ingressClassName: nginx
+      annotations:
+        cert-manager.io/cluster-issuer: "letsencrypt"
+        nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+        external-dns.alpha.kubernetes.io/hostname: alertmanager.k8s.labs.ahinh.me
+      tls:
+        - hosts:
+          - alertmanager.k8s.labs.ahinh.me
+          secretName: alertmanager-cert-tls
   grafana:
     ingress:
       enabled: true
@@ -18,8 +32,6 @@ prometheus:
       enabled: true
       hosts:
         - thanos.k8s.labs.ahinh.me
-      paths:
-        - /
       ingressClassName: nginx
       annotations:
         cert-manager.io/cluster-issuer: "letsencrypt"
