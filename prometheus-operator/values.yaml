@@ -5,6 +5,7 @@ prometheus:
       hosts:
         - alertmanager.k8s.labs.ahinh.me
       ingressClassName: nginx
+      pathType: ImplementationSpecific
       annotations:
         cert-manager.io/cluster-issuer: "letsencrypt"
         nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
@@ -33,6 +34,7 @@ prometheus:
       hosts:
         - thanos.k8s.labs.ahinh.me
       ingressClassName: nginx
+      pathType: ImplementationSpecific
       annotations:
         cert-manager.io/cluster-issuer: "letsencrypt"
         nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
