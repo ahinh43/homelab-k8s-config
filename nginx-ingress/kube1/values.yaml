@@ -7,5 +7,5 @@ ingress-nginx:
             app.kubernetes.io/instance: '{{ .Release.Name }}'
             app.kubernetes.io/component: controller
         topologyKey: kubernetes.io/hostname
-        maxSkew: 2
+        maxSkew: 1
         whenUnsatisfiable: ScheduleAnyway
