@@ -20,6 +20,9 @@ spec:
           requests:
             cpu: '4'
             memory: 4096M
+          limits:
+            cpu: '4'
+            memory: 4096M
       volumes:
         - dataVolume:
             name: test-1
