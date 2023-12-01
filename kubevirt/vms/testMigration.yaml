@@ -3,4 +3,4 @@ kind: VirtualMachineInstanceMigration
 metadata:
   name: migration-job
 spec:
-  vmiName: debian2
+  vmiName: test-1
