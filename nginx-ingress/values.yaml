@@ -4,6 +4,7 @@ ingress-nginx:
       patch:
         podAnnotations:
           sidecar.istio.io/inject: "false"
+    replicaCount: 3
   annotations:
     traffic.sidecar.istio.io/includeInboundPorts: ""
     traffic.sidecar.istio.io/excludeInboundPorts: "80,443"
