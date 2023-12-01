@@ -1,5 +1,6 @@
 resources:
 - ../../base/debian-12
+- service.yaml
 patches:
   - path: datavolume.yaml
   - path: vm.yaml

@@ -1,10 +1,13 @@
-Kubernetes apiVersion: v1
+apiVersion: v1
 kind: Service
 metadata:
   name: test-1
 spec:
+  type: LoadBalancer
   selector:
     kubevirt.io/vm: test-1
   ports:
-  - port: 25565
+  - name: minecraft
+    port: 25565
     targetPort: 25565
+    protocol: TCP
