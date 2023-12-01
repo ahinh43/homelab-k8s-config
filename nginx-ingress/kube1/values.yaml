@@ -6,6 +6,14 @@ ingress-nginx:
             app.kubernetes.io/name: '{{ include "ingress-nginx.name" . }}'
             app.kubernetes.io/instance: '{{ .Release.Name }}'
             app.kubernetes.io/component: controller
-        topologyKey: node-role.kubernetes.io/worker
+        topologyKey: topology.kubernetes.io/zone
+        maxSkew: 1
+        whenUnsatisfiable: ScheduleAnyway
+      - labelSelector:
+          matchLabels:
+            app.kubernetes.io/name: '{{ include "ingress-nginx.name" . }}'
+            app.kubernetes.io/instance: '{{ .Release.Name }}'
+            app.kubernetes.io/component: controller
+        topologyKey: kubernetes.io/hostname
         maxSkew: 1
         whenUnsatisfiable: ScheduleAnyway
