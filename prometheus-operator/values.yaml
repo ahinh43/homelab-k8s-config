@@ -1,0 +1,31 @@
+prometheus:
+  grafana:
+    ingress:
+      enabled: true
+      hosts:
+        - grafana.k8s.labs.ahinh.me
+      ingressClassName: nginx
+      annotations:
+        cert-manager.io/cluster-issuer: "letsencrypt"
+        nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+        external-dns.alpha.kubernetes.io/hostname: grafana.k8s.labs.ahinh.me
+      tls:
+        - hosts:
+          - grafana.k8s.labs.ahinh.me
+          secretName: grafana-cert-tls
+  prometheus:
+    thanosIngress:
+      enabled: true
+      hosts:
+        - thanos.k8s.labs.ahinh.me
+      paths:
+        - /
+      ingressClassName: nginx
+      annotations:
+        cert-manager.io/cluster-issuer: "letsencrypt"
+        nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+        external-dns.alpha.kubernetes.io/hostname: thanos.k8s.labs.ahinh.me
+      tls:
+        - hosts:
+          - thanos.k8s.labs.ahinh.me
+          secretName: thanos-cert-tls

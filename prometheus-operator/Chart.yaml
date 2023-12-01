@@ -1,0 +1,13 @@
+apiVersion: v2
+name: kube-prometheus-stack
+version: 1.0.0
+description: The kube prometheus stack
+type: application
+home: https://grafana.k8s.labs.ahinh.me
+sources:
+  - https://github.com/ahinh43/homelab-k8s-config
+dependencies:
+  - name: kube-prometheus-stack
+    version: 54.2.2
+    repository: https://prometheus-community.github.io/helm-charts
+    alias: prometheus
