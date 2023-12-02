@@ -2,7 +2,7 @@
 apiVersion: snapshot.storage.k8s.io/v1
 kind: VolumeSnapshotClass
 metadata:
-  name: {{ .Release.name }}-snapclass
+  name: {{ .Release.Name }}-snapclass
 driver: rbd.csi.ceph.com
 parameters:
   # String representing a Ceph cluster to provision storage snapshot from.
@@ -19,6 +19,6 @@ parameters:
   # snapshotNamePrefix: "foo-bar-"
 
   csi.storage.k8s.io/snapshotter-secret-name: csi-rbd-secret
-  csi.storage.k8s.io/snapshotter-secret-namespace: {{ .Release.namespace }}
+  csi.storage.k8s.io/snapshotter-secret-namespace: {{ .Release.Namespace }}
 deletionPolicy: Delete
 {{- end }}
