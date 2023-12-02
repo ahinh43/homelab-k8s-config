@@ -19,7 +19,7 @@ spec:
         resources:
           requests:
             cpu: '4'
-            memory: 9216M
+            memory: 12288M
       volumes:
         - dataVolume:
             name: minecraft-1
