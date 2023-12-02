@@ -13,3 +13,6 @@ ceph-csi-rbd:
     pool: kubernetes
     mountOptions:
       - discard
+      
+custom:
+  enableSnapshotClass: true

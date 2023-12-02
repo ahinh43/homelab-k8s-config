@@ -6,6 +6,7 @@
 set -exo pipefail
 
 CERTMANAGERCRDVERSION="v1.13.2"
+VOLUMESNAPSHOTTERCRD="${VOLUMESNAPSHOTTERCRD}"
 
 echo "installing CRDs"
 
@@ -24,6 +25,9 @@ installedChartsKube2=$(helm list --kube-context kube2 --all-namespaces)
 
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/${CERTMANAGERCRDVERSION}/cert-manager.crds.yaml --context kube
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/${CERTMANAGERCRDVERSION}/cert-manager.crds.yaml --context kube2
+
+kubectl apply -k "github.com/kubernetes-csi/external-snapshotter/client/config/crd?ref=${VOLUMESNAPSHOTTERCRD}" --context kube
+kubectl apply -k "github.com/kubernetes-csi/external-snapshotter/client/config/crd?ref=${VOLUMESNAPSHOTTERCRD}" --context kube2
 
 # Set up BGP peering w/ Cilium
 kubectl apply -f cilium/bgp-peering.yaml --context kube
