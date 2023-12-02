@@ -15,4 +15,4 @@ ceph-csi-rbd:
       - discard
       
 custom:
-  enableSnapshotClass: false
+  enableSnapshotClass: true
