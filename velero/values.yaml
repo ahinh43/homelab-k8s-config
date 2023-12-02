@@ -21,6 +21,6 @@ velero:
         bucket: ahinh-velero-snapshots
         credential:
           name: velero-aws-secret
-          key: secret
+          key: cloud
         config:
           region: us-west-2
