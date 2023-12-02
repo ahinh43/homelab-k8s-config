@@ -1,4 +1,4 @@
-ceph:
+ceph-csi-rbd:
   csiConfig:
     - clusterID: "0a18b03d-b8a8-4f82-babd-7df7de66fb9b"
       monitors:
@@ -13,6 +13,6 @@ ceph:
     pool: kubernetes
     mountOptions:
       - discard
-
+      
 custom:
   enableSnapshotClass: true

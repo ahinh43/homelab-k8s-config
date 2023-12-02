@@ -10,4 +10,3 @@ dependencies:
   - name: ceph-csi-rbd
     version: 3.10.0
     repository: https://ceph.github.io/csi-charts
-    alias: ceph
