@@ -1,0 +1,26 @@
+velero:
+  metrics:
+    prometheusRule:
+      enabled: true
+  credentials:
+    useSecret: true
+    name: velero-aws-secret
+  configuration:
+    backupStorageLocation:
+      - name: aws
+        provider: aws
+        bucket: ahinh-velero-backups
+        credential:
+          name: velero-aws-secret
+          key: secret
+        config:
+          region: us-west-2
+    volumeSnapshotLocation:
+      - name: aws
+        provider: aws
+        bucket: ahinh-velero-snapshots
+        credential:
+          name: velero-aws-secret
+          key: secret
+        config:
+          region: us-west-2
