@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: test-vm-1
+  name: minecraft-1
   namespace: argocd
 spec:
   generators:
@@ -11,15 +11,15 @@ spec:
         url: https://kubernetes.default.svc
   template:
     metadata:
-      name: 'test-vm-1-{{cluster}}'
+      name: 'minecraft-1-{{cluster}}'
       labels:
-        app: test-vm-1
+        app: minecraft-1
     spec:
       project: default
       source:
         repoURL: git@github.com:ahinh43/homelab-k8s-config.git
         targetRevision: HEAD
-        path: kubevirt/vms/overlays/test-1
+        path: kubevirt/vms/overlays/minecraft-1
       destination:
         server: '{{url}}'
         namespace: kubevirt-vms

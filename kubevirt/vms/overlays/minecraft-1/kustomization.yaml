@@ -10,22 +10,22 @@ patches:
     patch: |-
       - op: replace
         path: /metadata/name
-        value: test-1
+        value: minecraft-1
   - target:
       kind: DataVolume
       name: .*
     patch: |-
       - op: replace
         path: /metadata/name
-        value: test-1
+        value: minecraft-1
 
 secretGenerator:
-  - name: test-1-cloudinit-userdata
+  - name: minecraft-1-cloudinit-userdata
     files:
       - userData
     options:
       disableNameSuffixHash: true
-  - name: test-1-cloudinit-networkdata
+  - name: minecraft-1-cloudinit-networkdata
     files:
       - networkData
     options:
@@ -38,8 +38,8 @@ transformers:
     metadata:
       name: commonLabelsTransformer
     labels:
-      kubevirt.io/vm: test-1
-      k8s.labs.ahinh.me/app: test-1
+      kubevirt.io/vm: minecraft-1
+      k8s.labs.ahinh.me/app: minecraft-1
       k8s.labs.ahinh.me/component: vm
       k8s.labs.ahinh.me/os: linux
       k8s.labs.ahinh.me/distro: debian

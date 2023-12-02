@@ -19,17 +19,17 @@ spec:
         resources:
           requests:
             cpu: '4'
-            memory: 4096M
+            memory: 9216M
           limits:
             cpu: '4'
-            memory: 4096M
+            memory: 9216M
       volumes:
         - dataVolume:
-            name: test-1
+            name: minecraft-1
           name: disk0
         - name: cloudinitdisk
           cloudInitNoCloud:
             secretRef:
-              name: test-1-cloudinit-userdata
+              name: minecraft-1-cloudinit-userdata
             networkDataSecretRef:
-              name: test-1-cloudinit-networkdata
+              name: minecraft-1-cloudinit-networkdata
