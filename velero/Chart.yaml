@@ -1,0 +1,12 @@
+apiVersion: v2
+name: velero
+version: 1.0.0
+description: Velero backup controller
+type: application
+home: https://velero.k8s.labs.ahinh.me
+sources:
+  - https://github.com/ahinh43/homelab-k8s-config
+dependencies:
+  - name: velero
+    version: 5.1.5
+    repository: https://vmware-tanzu.github.io/helm-charts
