@@ -22,7 +22,7 @@ velero:
     existingSecret: velero-aws-secret
   configuration:
     backupStorageLocation:
-      - name: aws
+      - name: default
         provider: "velero.io/aws"
         bucket: ahinh-velero-backups
         credential:
@@ -31,7 +31,7 @@ velero:
         config:
           region: us-west-2
     volumeSnapshotLocation:
-      - name: aws
+      - name: default
         provider: "velero.io/aws"
         bucket: ahinh-velero-snapshots
         credential:
