@@ -43,3 +43,5 @@ export VERSION=$(echo ${TAG##*/})
 kubectl create -f https://github.com/kubevirt/containerized-data-importer/releases/download/$VERSION/cdi-operator.yaml
 kubectl create -f https://github.com/kubevirt/containerized-data-importer/releases/download/$VERSION/cdi-cr.yaml
 kubectl apply -f cdi/
+# Disables smart cloning
+kubectl patch cdi cdi --type merge -p '{"spec":{"cloneStrategyOverride":"copy"}}'
