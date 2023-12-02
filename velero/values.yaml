@@ -29,7 +29,9 @@ velero:
           name: velero-aws-secret
           key: cloud
         config:
-          region: us-west-2
+          s3Url: "http://minio.labs.ahinh.me:9000"
+          s3ForcePathStyle: "true"
+          region: us-east-1
     volumeSnapshotLocation:
       - name: default
         provider: "velero.io/aws"
@@ -38,4 +40,6 @@ velero:
           name: velero-aws-secret
           key: cloud
         config:
-          region: us-west-2
+          s3Url: "http://minio.labs.ahinh.me:9000"
+          s3ForcePathStyle: "true"
+          region: us-east-1
