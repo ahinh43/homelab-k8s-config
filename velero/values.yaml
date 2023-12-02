@@ -8,14 +8,14 @@ velero:
       image: velero/velero-plugin-for-csi:v0.6.0
       imagePullPolicy: IfNotPresent
       volumeMounts:
-        - mountPath: /target/csi
+        - mountPath: /target
           name: plugins
-    - name: velero-plugin-for-aws
-      image: velero/velero-plugin-for-aws:v1.8.0
-      imagePullPolicy: IfNotPresent
-      volumeMounts:
-        - mountPath: /target/aws
-          name: plugins
+    # - name: velero-plugin-for-aws
+    #   image: velero/velero-plugin-for-aws:v1.8.0
+    #   imagePullPolicy: IfNotPresent
+    #   volumeMounts:
+    #     - mountPath: /target
+    #       name: plugins
 
   credentials:
     useSecret: false
