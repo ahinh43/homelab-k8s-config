@@ -30,7 +30,6 @@ velero:
           key: cloud
         config:
           region: us-west-2
-          s3Url: "s3://us-west-2@ahinh-velero-backups"
     volumeSnapshotLocation:
       - name: aws
         provider: "velero.io/aws"
