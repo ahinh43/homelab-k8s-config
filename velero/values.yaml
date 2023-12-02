@@ -3,8 +3,8 @@ velero:
     prometheusRule:
       enabled: true
   credentials:
-    useSecret: true
-    name: velero-aws-secret
+    useSecret: false
+    existingSecret: velero-aws-secret
   configuration:
     backupStorageLocation:
       - name: aws
