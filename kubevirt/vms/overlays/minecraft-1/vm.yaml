@@ -7,6 +7,7 @@ spec:
   running: true
   template:
     spec:
+      evictionStrategy: LiveMigrate
       domain:
         devices:
           disks:
