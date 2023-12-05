@@ -8,5 +8,5 @@ sources:
   - https://github.com/ahinh43/homelab-k8s-config
 dependencies:
   - name: keycloak
-    version: 17.3.4
+    version: 17.3.5
     repository: oci://registry-1.docker.io/bitnamicharts
