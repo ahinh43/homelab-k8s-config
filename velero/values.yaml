@@ -40,6 +40,4 @@ velero:
           name: velero-aws-secret
           key: cloud
         config:
-          s3Url: "http://minio.labs.ahinh.me:9000"
-          s3ForcePathStyle: "true"
           region: us-east-1
