@@ -1,0 +1,12 @@
+apiVersion: v2
+name: loki
+version: 1.0.0
+description: Loki helm chart
+type: application
+home: https://k8s.labs.ahinh.me
+sources:
+  - https://github.com/ahinh43/homelab-k8s-config
+dependencies:
+  - name: loki
+    version: 5.39.0
+    repository: https://grafana.github.io/helm-charts
