@@ -33,7 +33,7 @@ prometheus:
         type: 'loki'                                                                                                                                                                                                                
         access: 'proxy'
         org_id: 1                                                                                                                                                                                                                          
-        url: 'http://loki-backend.loki.svc.cluster.local:3100'
+        url: 'http://loki-backend-headless.loki.svc.cluster.local:3100'
         version: 1                                                                                                                                                                                                                         
         editable: false
   prometheus:
