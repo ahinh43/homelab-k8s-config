@@ -23,6 +23,7 @@ spec:
         targetRevision: HEAD
         path: loki
         helm:
+          skipCrds: true
           releaseName: loki
       destination:
         server: '{{url}}'
