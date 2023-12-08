@@ -12,7 +12,7 @@ parameters:
   # Ensure to create an entry in the configmap named ceph-csi-config, based on
   # csi-config-map-sample.yaml, to accompany the string chosen to
   # represent the Ceph cluster in clusterID below
-  clusterID: {{ index .Values "ceph-csi-rbd.storageClass.clusterID" }}
+  clusterID: {{ index .Values "ceph-csi-rbd" "storageClass" "clusterID" }}
 
   # Prefix to use for naming RBD snapshots.
   # If omitted, defaults to "csi-snap-".

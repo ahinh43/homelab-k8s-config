@@ -24,13 +24,13 @@ spec:
     - pvc
     - pv
     # Individual objects must match this label selector to be included in the scheduled backup. Optional.
-    labelSelector:
-      matchLabels:
-        k8s.labs.ahinh.me/backup-schedule: main
+    # labelSelector:
+    #   matchLabels:
+    #     k8s.labs.ahinh.me/backup-schedule: main
     # Whether or not to snapshot volumes. This only applies to PersistentVolumes for Azure, GCE, and
     # AWS. Valid values are true, false, and null/unset. If unset, Velero performs snapshots as long as
     # a persistent volume provider is configured for Velero.
-    snapshotVolumes: false
+    snapshotVolumes: true
     # Where to store the tarball and logs.
     storageLocation: default
     # The amount of time before backups created on this schedule are eligible for garbage collection. If not specified, 
