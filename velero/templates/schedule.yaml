@@ -38,4 +38,3 @@ spec:
     # a default value of 30 days will be used. The default can be configured on the velero server
     # by passing the flag --default-backup-ttl. 
     ttl: "330h0m0s"
-    defaultVolumesToFsBackup: true
