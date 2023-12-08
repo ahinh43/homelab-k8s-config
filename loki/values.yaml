@@ -1,4 +1,7 @@
 loki:
+  tableManager:
+    retention_period: "168h" # 1 week
+    retention_deletes_enabled: true
   loki:
     commonConfig:
       replication_factor: 1
