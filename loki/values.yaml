@@ -5,5 +5,5 @@ loki:
     storage:
       type: 'filesystem'
     auth_enabled: false
-singleBinary:
-  replicas: 1
+  singleBinary:
+    replicas: 1
