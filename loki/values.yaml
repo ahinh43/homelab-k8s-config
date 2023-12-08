@@ -6,4 +6,4 @@ loki:
       type: 'filesystem'
     auth_enabled: false
   singleBinary:
-    replicas: 3
+    replicas: 1
