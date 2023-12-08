@@ -1,4 +1,5 @@
 velero:
+  deployNodeAgent: true
   metrics:
     prometheusRule:
       enabled: true
