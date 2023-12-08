@@ -21,7 +21,8 @@ spec:
     # Array of resources to include in the scheduled backup. Resources may be shortcuts (e.g. 'po' for 'pods')
     # or fully-qualified. If unspecified, all resources are included. Optional.
     includedResources:
-    - '*'
+    - pvcs
+    - pvs
     # Individual objects must match this label selector to be included in the scheduled backup. Optional.
     labelSelector:
       matchLabels:
