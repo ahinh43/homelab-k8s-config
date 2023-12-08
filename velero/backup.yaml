@@ -1,0 +1,38 @@
+# Standard Kubernetes API Version declaration. Required.
+apiVersion: velero.io/v1
+# Standard Kubernetes Kind declaration. Required.
+kind: Schedule
+# Standard Kubernetes metadata. Required.
+metadata:
+  # Schedule name. May be any valid Kubernetes object name. Required.
+  name: main
+  # Schedule namespace. Must be the namespace of the Velero server. Required.
+  namespace: velero
+# Parameters about the scheduled backup. Required.
+spec:
+  # Schedule is a Cron expression defining when to run the Backup
+  schedule: 0 7 * * *
+  # Template is the spec that should be used for each backup triggered by this schedule.
+  template:
+    # Array of namespaces to include in the scheduled backup. If unspecified, all namespaces are included.
+    # Optional.
+    includedNamespaces:
+    - '*'
+    # Array of resources to include in the scheduled backup. Resources may be shortcuts (e.g. 'po' for 'pods')
+    # or fully-qualified. If unspecified, all resources are included. Optional.
+    includedResources:
+    - '*'
+    # Individual objects must match this label selector to be included in the scheduled backup. Optional.
+    labelSelector:
+      matchLabels:
+        k8s.labs.ahinh.me/backup-schedule: main
+    # Whether or not to snapshot volumes. This only applies to PersistentVolumes for Azure, GCE, and
+    # AWS. Valid values are true, false, and null/unset. If unset, Velero performs snapshots as long as
+    # a persistent volume provider is configured for Velero.
+    snapshotVolumes: false
+    # Where to store the tarball and logs.
+    storageLocation: default
+    # The amount of time before backups created on this schedule are eligible for garbage collection. If not specified, 
+    # a default value of 30 days will be used. The default can be configured on the velero server
+    # by passing the flag --default-backup-ttl. 
+    ttl: "330h0m0s"

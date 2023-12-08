@@ -44,6 +44,7 @@ transformers:
       k8s.labs.ahinh.me/os: linux
       k8s.labs.ahinh.me/distro: debian
       k8s.labs.ahinh.me/version: "12"
+      k8s.labs.ahinh.me/backup-schedule: main
 
     fieldSpecs:
     - path: metadata/labels
