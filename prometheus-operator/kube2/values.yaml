@@ -1,0 +1,11 @@
+prometheus:
+  prometheus:
+    agentMode: true
+  thanosIngress:
+    enabled: false
+  grafana:
+    ingress:
+      enabled: false
+  alertmanager:
+    ingress:
+      enabled: false
