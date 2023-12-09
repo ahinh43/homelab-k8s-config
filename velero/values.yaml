@@ -30,7 +30,7 @@ velero:
     useSecret: false
     existingSecret: velero-aws-secret
   configuration:
-    uploaderType: restic
+    uploaderType: kopia
     defaultVolumesToFsBackup: false
     backupStorageLocation:
       - name: default

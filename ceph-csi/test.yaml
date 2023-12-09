@@ -24,9 +24,9 @@ spec:
       image: alpine:latest
       command: ["/bin/sh", "-c"]
       args: ["tail -f /dev/null"]
-      volumeMounts:
+      volumeDevices:
         - name: data
-          mountPath: /data
+          devicePath: /mnt/xvda
   volumes:
     - name: data
       persistentVolumeClaim:
