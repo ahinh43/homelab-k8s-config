@@ -1,5 +1,6 @@
 velero:
   deployNodeAgent: true
+  features: EnableCSI
   resources:
     requests:
       cpu: 1000m
