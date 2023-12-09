@@ -1,5 +1,12 @@
 velero:
   deployNodeAgent: true
+  resources:
+    requests:
+      cpu: 1000m
+      memory: 512Mi
+    limits:
+      cpu: 2000m
+      memory: 1024Mi
   metrics:
     prometheusRule:
       enabled: true
@@ -22,7 +29,8 @@ velero:
     useSecret: false
     existingSecret: velero-aws-secret
   configuration:
-    defaultVolumesToFsBackup: true
+    uploaderType: kopia
+    defaultVolumesToFsBackup: false
     backupStorageLocation:
       - name: default
         provider: "velero.io/aws"
