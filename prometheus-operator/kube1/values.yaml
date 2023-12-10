@@ -5,6 +5,10 @@ prometheus:
       externalLabels:
         cluster: kube1
         ext_labels_cluster: kube1
+    serviceMonitor:
+      additionalLabels:
+        cluster: kube1
+        ext_labels_cluster: kube1
     service:
       annotations:
         service.cilium.io/affinity: local
