@@ -6,6 +6,7 @@ prometheus:
         - url: http://{{ .Release.Name }}-prometheus.{{ .Release.Namespace }}:9090/api/v1/write
       externalLabels:
         cluster: kube2
+        ext_labels_cluster: kube2
     service:
       annotations:
         service.cilium.io/affinity: remote
