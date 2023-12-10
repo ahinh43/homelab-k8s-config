@@ -51,9 +51,10 @@ prometheus:
         - hosts:
           - thanos.k8s.labs.ahinh.me
           secretName: thanos-cert-tls
-      service:
-        annotations:
-          service.cilium.io/global: "true"
+    service:
+      annotations:
+        service.cilium.io/global: "true"
+    
   prometheusOperator:
     service:
       annotations:
