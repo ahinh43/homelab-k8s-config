@@ -3,7 +3,7 @@ prometheus:
     prometheus:
       monitor:
         metricRelabelings:
-          - source_labels: [cluster]
+          - sourceLabels: [cluster]
             separator: ;
             regex: (.*)
             replacement: "kube1"
