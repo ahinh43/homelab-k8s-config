@@ -2,6 +2,8 @@ prometheus:
   prometheus:
     prometheusSpec:
       enableRemoteWriteReceiver: true
+      externalLabels:
+        cluster: kube1
     service:
       annotations:
         service.cilium.io/affinity: local
