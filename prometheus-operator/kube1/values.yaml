@@ -1,4 +1,14 @@
 prometheus:
+  kube-state-metrics:
+    prometheus:
+      monitor:
+        metricRelabelings:
+          - source_labels: [cluster]
+            separator: ;
+            regex: (.*)
+            replacement: "kube1"
+            action: keep
+
   defaultRules:
     labels:
       cluster: kube1
