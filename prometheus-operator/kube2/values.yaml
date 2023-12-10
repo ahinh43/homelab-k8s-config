@@ -7,8 +7,6 @@ prometheus:
   thanosIngress:
     enabled: false
   grafana:
-    ingress:
-      enabled: false
+    enabled: false
   alertmanager:
-    ingress:
-      enabled: false
+    enabled: false
