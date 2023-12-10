@@ -3,7 +3,7 @@ prometheus:
     agentMode: true
     prometheusSpec:
       remoteWrite:
-        - url: http://{{ .Release.Name }}-prometheus.{{ .Release.Namespace }}:9090
+        - url: http://{{ .Release.Name }}-prometheus.{{ .Release.Namespace }}:9090/write
       externalLabels:
         cluster: kube2
     service:
