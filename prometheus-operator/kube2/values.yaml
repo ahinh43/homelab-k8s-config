@@ -6,6 +6,9 @@ prometheus:
         - url: http://{{ .Release.Name }}-prometheus.{{ .Release.Namespace }}/push
       externalLabels:
         cluster: kube2
+    service:
+      annotations:
+        service.cilium.io/affinity: remote
   thanosIngress:
     enabled: false
   grafana:
