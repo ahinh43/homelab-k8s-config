@@ -1,6 +1,9 @@
 prometheus:
   prometheus:
     agentMode: true
+    prometheusSpec:
+      remoteWrite:
+        - url: http://{{ .Release.Name }}-prometheus.{{ .Release.Namespace }}:9100
   thanosIngress:
     enabled: false
   grafana:
