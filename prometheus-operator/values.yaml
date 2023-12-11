@@ -37,6 +37,10 @@ prometheus:
         version: 1                                                                                                                                                                                                                         
         editable: false
   prometheus:
+    thanosService:
+      enabled: true
+    thanosRuler:
+      enabled: true
     thanosIngress:
       enabled: true
       hosts:
