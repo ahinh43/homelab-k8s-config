@@ -12,10 +12,6 @@ prometheus:
         service.cilium.io/affinity: remote
   thanosIngress:
     enabled: false
-  thanosService:
-    enabled: false
-  thanosRuler:
-    enabled: false
   grafana:
     enabled: false
   alertmanager:
