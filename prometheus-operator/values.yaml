@@ -55,6 +55,13 @@ prometheus:
         - hosts:
           - thanos.k8s.labs.ahinh.me
           secretName: thanos-cert-tls
+    prometheusSpec:
+      thanos:
+        objectStorageConfig:
+          existingSecret:
+            name: prometheus-thanos-s3
+            key: cloud
+
     service:
       annotations:
         service.cilium.io/global: "true"
