@@ -8,5 +8,5 @@ sources:
   - https://github.com/ahinh43/homelab-k8s-config
 dependencies:
   - name: gateway
-    version: 1.20.0
+    version: 1.20.1
     repository: https://istio-release.storage.googleapis.com/charts
