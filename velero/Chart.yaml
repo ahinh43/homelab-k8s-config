@@ -8,5 +8,5 @@ sources:
   - https://github.com/ahinh43/homelab-k8s-config
 dependencies:
   - name: velero
-    version: 5.1.6
+    version: 5.2.0
     repository: https://vmware-tanzu.github.io/helm-charts
