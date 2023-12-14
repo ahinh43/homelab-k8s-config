@@ -90,7 +90,7 @@ vault:
       
     dataStorage:
       enabled: true
-      storageClass: ceph-csi-rbd
+      storageClass: csi-rbd-sc
   ui:
     enabled: true
     serviceType: LoadBalancer
