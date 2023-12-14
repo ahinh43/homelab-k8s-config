@@ -9,7 +9,7 @@ vault:
       - name: tls-server
         secret:
           secretName: tls-server
-      - name: gcp-kms-sa
+      - name: vault-gcp-kms-serviceaccount
         secret:
           secretName: vault-gcp-kms-serviceaccount
     volumeMounts:
