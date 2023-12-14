@@ -46,7 +46,7 @@ vault:
           }
           seal "gcpckms" {
             credentials = "/vault/userconfig/gcp/vault-project-user-creds.json"
-            project     = "vault-project"
+            project     = "ahinh-homelab"
             region      = "global"
             key_ring    = "vault-keyring"
             crypto_key  = "vault-key"
