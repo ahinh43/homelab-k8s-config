@@ -23,6 +23,7 @@ spec:
         helm:
           valueFiles:
             - values.yaml
+            - '{{cluster}}/values.yaml'
           releaseName: vault
       destination:
         server: '{{url}}'
