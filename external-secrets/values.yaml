@@ -6,3 +6,6 @@ externalsecrets:
       enabled: false
   serviceMonitor:
     enabled: true
+  serviceAccount:
+    create: true
+    name: "external-secrets"
