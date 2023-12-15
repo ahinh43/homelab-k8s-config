@@ -1,0 +1,6 @@
+externalSecrets:
+  webhook:
+    certManager:
+      enabled: true
+  serviceMonitor:
+    enabled: true
