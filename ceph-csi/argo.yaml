@@ -27,7 +27,7 @@ spec:
         namespace: ceph-csi-rbd
       syncPolicy:
         automated:
-          prune: false
+          prune: true
           selfHeal: true
           allowEmpty: false
         syncOptions:

@@ -25,6 +25,6 @@ spec:
         namespace: kubevirt-vms
       syncPolicy:
         automated:
-          prune: false
+          prune: true
           selfHeal: true
           allowEmpty: false
