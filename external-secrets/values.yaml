@@ -1,11 +1,8 @@
 externalsecrets:
+  certController:
+    enabled: false
   webhook:
     certManager:
-      enabled: true
-      cert:
-        issuerRef:
-          group: cert-manager.io
-          kind: ClusterIssuer
-          name: letsencrypt
+      enabled: false
   serviceMonitor:
     enabled: true
