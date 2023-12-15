@@ -1,6 +1,6 @@
 # Source: vault/charts/vault/templates/server-ha-active-service.yaml
 # Service for active Vault pod
-{{- if ne .Values.vault.global.externalVaultAddr "" }}
+{{ if .Values.ciliumService.enabled }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -27,4 +27,4 @@ spec:
     app.kubernetes.io/instance: {{ .Release.Name }}
     component: server
     vault-active: "true"
-{{- end }}
+{{ end }}

@@ -112,3 +112,7 @@ vault:
   ui:
     enabled: true
     serviceType: LoadBalancer
+
+
+ciliumService:
+  enabled: false
