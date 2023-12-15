@@ -11,7 +11,7 @@ vault:
         - host: vault.local.k8s.labs.ahinh.me
       annotations:
         cert-manager.io/cluster-issuer: "letsencrypt"
-        nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+        nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
         external-dns.alpha.kubernetes.io/hostname: vault.k8s.labs.ahinh.me
       tls:
         - hosts:
