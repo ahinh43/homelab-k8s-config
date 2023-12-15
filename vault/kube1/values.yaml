@@ -20,6 +20,8 @@ vault:
           - vault.k8s.labs.ahinh.me
           - vault.local.k8s.labs.ahinh.me
           secretName: vault-cert-tls
+    auditStorage:
+      enabled: true
     volumes:
       - name: rootca
         secret:
