@@ -1,5 +1,7 @@
 vault:
   global:
+    enable: true
+    externalVaultAddr: ""
     tlsDisable: false
   server:
     ingress:

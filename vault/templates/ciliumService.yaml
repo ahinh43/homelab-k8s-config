@@ -1,0 +1,30 @@
+# Source: vault/charts/vault/templates/server-ha-active-service.yaml
+# Service for active Vault pod
+{{- if ne .Values.vault.global.externalVaultAddr "" }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-active
+  namespace: external-secrets
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    vault-active: "true"
+  annotations:
+    service.cilium.io/global: "true"
+spec:
+  publishNotReadyAddresses: true
+  ports:
+    - name: https
+      port: 8200
+      targetPort: 8200
+    - name: https-internal
+      port: 8201
+      targetPort: 8201
+  selector:
+    app.kubernetes.io/name: vault
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    component: server
+    vault-active: "true"
+{{- end }}
