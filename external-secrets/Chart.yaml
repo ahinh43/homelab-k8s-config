@@ -1,0 +1,13 @@
+apiVersion: v2
+name: External Secrets
+version: 1.0.0
+description: External secrets management
+type: application
+home: https://k8s.labs.ahinh.me
+sources:
+  - https://github.com/ahinh43/homelab-k8s-config
+dependencies:
+  - name: external-secrets
+    version: 0.9.9
+    repository: https://charts.external-secrets.io
+    alias: externalSecrets
