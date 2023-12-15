@@ -2,5 +2,10 @@ externalsecrets:
   webhook:
     certManager:
       enabled: true
+      cert:
+        issuerRef:
+          group: cert-manager.io
+          kind: ClusterIssuer
+          name: letsencrypt
   serviceMonitor:
     enabled: true
