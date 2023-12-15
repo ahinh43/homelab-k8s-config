@@ -9,3 +9,7 @@ externalsecrets:
   serviceAccount:
     create: true
     name: "external-secrets"
+  secretStore:
+    enabled: true
+    mountPath: kubernetes-external
+    role: external-secrets
