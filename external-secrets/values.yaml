@@ -1,4 +1,4 @@
-externalSecrets:
+externalsecrets:
   webhook:
     certManager:
       enabled: true
