@@ -15,6 +15,11 @@ spec:
       labels:
         app: vault
     spec:
+      ignoreDifferences:
+        - group: admissionregistration.k8s.io
+          kind: MutatingWebhookConfiguration
+          jqPathExpressions:
+            - .webhooks[]?.clientConfig.caBundle
       project: default
       source:
         repoURL: git@github.com:ahinh43/homelab-k8s-config.git
