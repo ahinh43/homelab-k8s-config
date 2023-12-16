@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: registry
+  namespace: argocd
+spec:
+  generators:
+  - list:
+      elements:
+      - cluster: kube1
+        url: https://kubernetes.default.svc
+  template:
+    metadata:
+      name: 'registry-{{cluster}}'
+      labels:
+        app: registry
+    spec:
+      project: default
+      source:
+        repoURL: git@github.com:ahinh43/homelab-k8s-config.git
+        targetRevision: HEAD
+        path: registry
+      destination:
+        server: '{{url}}'
+        namespace: registry
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+          allowEmpty: false
+        syncOptions:
+          - ServerSideApply=true
+          - CreateNamespace=true
+        managedNamespaceMetadata:
+          labels:
+            app: registry
