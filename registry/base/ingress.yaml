@@ -9,6 +9,7 @@ metadata:
     external-dns.alpha.kubernetes.io/hostname: registry.k8s.labs.ahinh.me
     nginx.ingress.kubernetes.io/backend-protocol: HTTP
     nginx.ingress.kubernetes.io/service-upstream: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: 20480m
 spec:
   ingressClassName: nginx
   rules:
