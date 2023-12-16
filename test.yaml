@@ -1,0 +1,16 @@
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: postgres.keycloak-postgresql.credentials.postgresql.acid.zalan.do
+spec:
+  refreshInterval: "15s"
+  secretStoreRef:
+    name: external-secrets-vault-backend
+    kind: ClusterSecretStore
+  target:
+    name: postgres.keycloak-postgresql.credentials.postgresql.acid.zalan.do
+  data:
+  - secretKey: foobar
+    remoteRef:
+      key: secret/foo
+      property: my-value

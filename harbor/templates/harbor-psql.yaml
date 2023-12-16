@@ -9,7 +9,7 @@ metadata:
     app.kubernetes.io/component: harbor
     app.kubernetes.io/harbor-component: db
 spec:
-  teamId: "harbor"
+  teamId: {{ .Release.Name }}
   volume:
     size: {{ .Values.postgresOperator.size }}
   numberOfInstances: {{ .Values.postgresOperator.numberOfInstances }}
@@ -20,7 +20,7 @@ spec:
       - superuser
       - createdb
   databases:
-    harbor: postgres  # dbname: owner
+    postgres: postgres  # dbname: owner
   postgresql:
     version: "15"
 {{- end }}
