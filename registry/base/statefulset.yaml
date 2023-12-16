@@ -25,7 +25,9 @@ spec:
         - name: registry
           mountPath: /var/lib/registry
   volumeClaimTemplates:
-  - metadata:
+  - apiVersion: v1
+    kind: PersistentVolumeClaim
+    metadata:
       name: registry
     spec:
       accessModes: [ "ReadWriteOnce" ]
