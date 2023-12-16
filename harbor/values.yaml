@@ -1,4 +1,5 @@
 harbor:
+  exposureType: ingress
   externalURL: https://harbor.k8s.labs.ahinh.me
   externalDatabase:
     port: 5432
