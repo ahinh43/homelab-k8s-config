@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: registry
+  labels:
+    k8s.labs.ahinh.me/app: registry
+spec:
+  selector:
+    matchLabels:
+      k8s.labs.ahinh.me/app: registry
+  serviceName: registry-headless
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        k8s.labs.ahinh.me/app: registry
+    spec:
+      containers:
+      - name: registry
+        image: registry:2.8.3
+        ports:
+        - containerPort: 5000
+          name: https
+        volumeMounts:
+        - name: registry
+          mountPath: /var/lib/registry
+  volumeClaimTemplates:
+  - metadata:
+      name: registry
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 10Gi

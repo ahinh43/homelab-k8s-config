@@ -1,0 +1,39 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: registry
+  labels:
+    k8s.labs.ahinh.me/app: registry
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    external-dns.alpha.kubernetes.io/hostname: registry.k8s.labs.ahinh.me
+    nginx.ingress.kubernetes.io/backend-protocol: HTTP
+    nginx.ingress.kubernetes.io/service-upstream: "true"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: registry.k8s.labs.ahinh.me
+    http:
+      paths:
+      - backend:
+          service:
+            name: registry
+            port:
+              name: https
+        path: /
+        pathType: ImplementationSpecific
+  - host: registry.local.k8s.labs.ahinh.me
+    http:
+      paths:
+      - backend:
+          service:
+            name: registry
+            port:
+              name: https
+        path: /
+        pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - registry.k8s.labs.ahinh.me
+    - registry.local.k8s.labs.ahinh.me
+    secretName: registry.k8s.labs.ahinh.me-tls
