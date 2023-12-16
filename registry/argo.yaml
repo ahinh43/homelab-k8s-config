@@ -19,7 +19,7 @@ spec:
       source:
         repoURL: git@github.com:ahinh43/homelab-k8s-config.git
         targetRevision: HEAD
-        path: registry
+        path: registry/base
       destination:
         server: '{{url}}'
         namespace: registry
