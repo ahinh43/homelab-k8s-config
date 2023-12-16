@@ -1,0 +1,25 @@
+# harbor PostgresQL service
+{{- if .Values.postgresOperator.createService }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "common.names.fullname" .Subcharts.harbor }}-postgresql
+  namespace: {{ include "common.names.namespace" .Subcharts.harbor }}
+  labels: {{ include "common.labels.standard" .Subcharts.harbor | nindent 4 }}
+    app.kubernetes.io/component: harbor
+    application: spilo
+    cluster-name: harbor-postgresql
+    spilo-role: master
+    team: harbor
+  annotations:
+    service.cilium.io/global: "true"
+spec:
+  type: ClusterIP
+  ports:
+    - name: postgresql
+      port: 5432
+      protocol: TCP
+      targetPort: 5432
+  selector:
+    app.kubernetes.io/harbor-component: db
+{{- end }}

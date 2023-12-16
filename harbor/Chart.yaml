@@ -1,0 +1,12 @@
+apiVersion: v2
+name: harbor
+version: 1.0.0
+description: Harbor image registry
+type: application
+home: https://harbor.k8s.labs.ahinh.me
+sources:
+  - https://github.com/ahinh43/homelab-k8s-config
+dependencies:
+  - name: harbor
+    version: 19.2.1
+    repository: oci://registry-1.docker.io/bitnamicharts

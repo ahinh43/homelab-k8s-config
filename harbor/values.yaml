@@ -1,0 +1,36 @@
+harbor:
+  externalURL: https://harbor.k8s.labs.ahinh.me
+  externalDatabase:
+    port: 5432
+    database: postgres
+    existingSecretUserKey: username
+    existingSecretPasswordKey: password
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+  ingress:
+    core:
+      hostname: harbor.k8s.labs.ahinh.me
+      extraHosts:
+        - name: harbor.local.k8s.labs.ahinh.me
+          path: /
+      annotations:
+        cert-manager.io/cluster-issuer: "letsencrypt"
+        nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+        external-dns.alpha.kubernetes.io/hostname: harbor.k8s.labs.ahinh.me
+        nginx.ingress.kubernetes.io/service-upstream: "true"
+      tls: false
+      extraTls:
+        - hosts:
+            - harbor.k8s.labs.ahinh.me
+            - harbor.local.k8s.labs.ahinh.me
+          secretName: harbor.k8s.labs.ahinh.me-tls
+      ingressClassName: nginx
+      servicePort: https
+
+postgresOperator:
+  createDatabase: true
+  createService: false
+  size: "4Gi"
+  numberOfInstances: 2

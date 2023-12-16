@@ -1,0 +1,26 @@
+# harbor PostgresQL database
+{{- if .Values.postgresOperator.createDatabase }}
+apiVersion: "acid.zalan.do/v1"
+kind: postgresql
+metadata:
+  name: {{ include "common.names.fullname" .Subcharts.harbor }}-postgresql
+  namespace: {{ include "common.names.namespace" .Subcharts.harbor }}
+  labels: {{ include "common.labels.standard" .Subcharts.harbor | nindent 4 }}
+    app.kubernetes.io/component: harbor
+    app.kubernetes.io/harbor-component: db
+spec:
+  teamId: "harbor"
+  volume:
+    size: {{ .Values.postgresOperator.size }}
+  numberOfInstances: {{ .Values.postgresOperator.numberOfInstances }}
+  serviceAnnotations:
+    service.cilium.io/global: "true"
+  users:
+    postgres:  # database owner
+      - superuser
+      - createdb
+  databases:
+    harbor: postgres  # dbname: owner
+  postgresql:
+    version: "15"
+{{- end }}
