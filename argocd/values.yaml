@@ -23,6 +23,7 @@ argo-cd:
       server.insecure: true
     cm:
       create: true
+      url: https://argo.k8s.labs.ahinh.me
       oidc.config: |
         name: Keycloak
         issuer: https://keycloak.k8s.labs.ahinh.me/realms/labs
