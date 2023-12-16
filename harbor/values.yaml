@@ -10,6 +10,8 @@ harbor:
     enabled: true
     serviceMonitor:
       enabled: true
+  postgresql:
+    enabled: false
   ingress:
     core:
       hostname: harbor.k8s.labs.ahinh.me
