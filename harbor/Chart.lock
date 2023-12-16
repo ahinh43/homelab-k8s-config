@@ -1,6 +1,0 @@
-dependencies:
-- name: harbor
-  repository: oci://registry-1.docker.io/bitnamicharts
-  version: 19.2.1
-digest: sha256:baaf05f272c99d9639527ca6bce364fd81d4b26ef5dc9ad2761d08f297415fa8
-generated: "2023-12-15T18:41:47.012834535-06:00"

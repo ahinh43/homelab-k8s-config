@@ -1,4 +1,0 @@
-harbor:
-  externalDatabase:
-    host: harbor-postgresql.harbor.svc.cluster.local
-    existingSecret: postgres.harbor-postgresql.credentials.postgresql.acid.zalan.do
