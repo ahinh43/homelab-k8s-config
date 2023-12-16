@@ -1,6 +1,6 @@
 dependencies:
-- name: keycloak
+- name: harbor
   repository: oci://registry-1.docker.io/bitnamicharts
-  version: 17.3.5
-digest: sha256:4ef68f9800e913300e41636d047911cb5c4f142c325560c2b4ba0ee2a7a5f1c4
-generated: "2023-12-05T19:34:32.991504668Z"
+  version: 19.2.1
+digest: sha256:baaf05f272c99d9639527ca6bce364fd81d4b26ef5dc9ad2761d08f297415fa8
+generated: "2023-12-15T18:41:47.012834535-06:00"
