@@ -18,7 +18,7 @@ for secret in $(kubectl -n argocd get secrets -l 'argocd.argoproj.io/secret-type
   # TODO: Wrap into a function instead because this is rather repetitive
   if [[ ! -f "base/$secret.yaml" ]]; then
     cat <<EOF | tee "base/$secret.yaml"
-apiVersion: apps/v1
+apiVersion: v1
 kind: Secret
 metadata:
   name: $secret
@@ -30,7 +30,7 @@ EOF
 
   if [[ ! -f "overlays/$secret.yaml" ]]; then
     cat <<EOF | tee "overlays/$secret.yaml"
-apiVersion: apps/v1
+apiVersion: v1
 kind: Secret
 metadata:
   name: $secret
