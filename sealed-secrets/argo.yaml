@@ -9,6 +9,7 @@ spec:
         selector:
           matchLabels:
             argocd.argoproj.io/secret-type: cluster
+            k8s.labs.ahinh.me/cluster-os: linux
         values:
           name: "{{name}}"
           region: "{{metadata.labels.k8s.labs.ahinh.me/region}}"
@@ -29,7 +30,7 @@ spec:
             - "{{values.region}}/values.yaml"
           releaseName: sealed-secrets
       destination:
-        server: "{{values.name}}"
+        name: "{{values.name}}"
         namespace: sealed-secrets
       syncPolicy:
         automated:
