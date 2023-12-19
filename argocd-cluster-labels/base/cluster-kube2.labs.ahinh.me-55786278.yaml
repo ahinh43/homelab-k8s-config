@@ -1,0 +1,7 @@
+apiVersion: apps/v1
+kind: Secret
+metadata:
+  name: cluster-kube2.labs.ahinh.me-55786278
+  labels:
+    # Don't modify anything here! Modify it in overlays/cluster-kube2.labs.ahinh.me-55786278.yaml instead!
+    argocd.argoproj.io/secret-type: cluster

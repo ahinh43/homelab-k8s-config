@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: argocd-cluster-labels
+  namespace: argocd
+spec:
+  generators:
+    - list:
+        elements:
+          - cluster: localhost
+            url: https://kubernetes.default.svc
+  template:
+    metadata:
+      name: "argocd-cluster-labels"
+      labels:
+        app: argocd-cluster-labels
+    spec:
+      project: default
+      source:
+        repoURL: git@github.com:ahinh43/homelab-k8s-config.git
+        targetRevision: HEAD
+        path: argocd-cluster-labels/overlays
+      destination:
+        server: "{{url}}"
+        namespace: argocd
+      syncPolicy:
+        automated:
+          prune: false
+          selfHeal: true
+          allowEmpty: false
+        syncOptions:
+          - ServerSideApply=true
+          - Validate=false

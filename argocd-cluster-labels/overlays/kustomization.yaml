@@ -1,0 +1,11 @@
+resources:
+  - ../base
+
+# Components is where the common labels configuration lies
+components:
+  - ../components
+
+# Map to patch existing secrets. Avoid modifying by hand if possible! Use generate-cluster-manifest.sh to add/remove secrets as needed
+patchesStrategicMerge:
+  - cluster-kube2.labs.ahinh.me-55786278.yaml
+  - cluster-kubernetes.default.svc-3396314289.yaml

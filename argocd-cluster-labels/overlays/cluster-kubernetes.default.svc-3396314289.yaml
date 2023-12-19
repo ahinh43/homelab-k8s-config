@@ -1,0 +1,11 @@
+apiVersion: apps/v1
+kind: Secret
+metadata:
+  name: cluster-kubernetes.default.svc-3396314289
+  labels:
+    # Do not remove the argocd.argoproj label!
+    argocd.argoproj.io/secret-type: cluster
+    # Your cluster specific labels here...
+    k8s.labs.ahinh.me/cluster-name: kube1
+    k8s.labs.ahinh.me/region: us-central
+    vault.k8s.labs.ahinh.me/role: primary

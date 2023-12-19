@@ -1,0 +1,8 @@
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
+
+# Labels to apply to all cluster secrets
+# These will be overwritten by the cluster-specific files in overlays
+commonLabels:
+  k8s.labs.ahinh.me/cluster-os: linux
+  vault.k8s.labs.ahinh.me/role: listener

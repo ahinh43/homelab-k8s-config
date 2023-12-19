@@ -1,0 +1,3 @@
+resources:
+  - cluster-kube2.labs.ahinh.me-55786278.yaml
+  - cluster-kubernetes.default.svc-3396314289.yaml

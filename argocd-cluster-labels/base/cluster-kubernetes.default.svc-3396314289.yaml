@@ -1,0 +1,7 @@
+apiVersion: apps/v1
+kind: Secret
+metadata:
+  name: cluster-kubernetes.default.svc-3396314289
+  labels:
+    # Don't modify anything here! Modify it in overlays/cluster-kubernetes.default.svc-3396314289.yaml instead!
+    argocd.argoproj.io/secret-type: cluster
