@@ -12,7 +12,7 @@ spec:
             k8s.labs.ahinh.me/cluster-os: linux
   template:
     metadata:
-      name: "ingress-nginx-{{cluster}}"
+      name: "ingress-nginx-{{name}}"
       labels:
         app: ingress-nginx
     spec:
@@ -24,7 +24,6 @@ spec:
         helm:
           valueFiles:
             - values.yaml
-            - "{{cluster}}/values.yaml"
           releaseName: ingress-nginx
       destination:
         name: "{{name}}"
