@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: loki
+  name: artemis
   namespace: argocd
 spec:
   generators:
@@ -13,21 +13,18 @@ spec:
             k8s.labs.ahinh.me/region: us-central
   template:
     metadata:
-      name: "loki-{{name}}"
+      name: "artemis-{{name}}"
       labels:
-        app: loki
+        app: artemis
     spec:
       project: default
       source:
-        repoURL: git@github.com:ahinh43/homelab-k8s-config.git
+        repoURL: git@github.com:ahinh43/artemis.git
         targetRevision: HEAD
-        path: loki
-        helm:
-          skipCrds: true
-          releaseName: loki
+        path: manifests
       destination:
         name: "{{name}}"
-        namespace: loki
+        namespace: artemis
       syncPolicy:
         automated:
           prune: true
@@ -37,4 +34,4 @@ spec:
           - CreateNamespace=true
         managedNamespaceMetadata:
           labels:
-            app: loki
+            app: artemis
