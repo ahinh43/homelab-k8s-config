@@ -5,15 +5,14 @@ metadata:
   namespace: argocd
 spec:
   generators:
-  - list:
-      elements:
-      - cluster: kube1
-        url: https://kubernetes.default.svc
-      - cluster: kube2
-        url: https://kube2.labs.ahinh.me:6443
+    - clusters:
+        selector:
+          matchLabels:
+            argocd.argoproj.io/secret-type: cluster
+            k8s.labs.ahinh.me/cluster-os: linux
   template:
     metadata:
-      name: 'flatcar-updater-{{cluster}}'
+      name: "flatcar-updater-{{name}}"
       labels:
         app: flatcar-updater
     spec:
@@ -23,7 +22,7 @@ spec:
         targetRevision: HEAD
         path: flatcar-updater/deploy
       destination:
-        server: '{{url}}'
+        name: "{{name}}"
         namespace: flatcar-updater
       syncPolicy:
         automated:

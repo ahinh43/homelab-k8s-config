@@ -5,12 +5,11 @@ metadata:
   namespace: argocd
 spec:
   generators:
-  - list:
-      elements:
-      - cluster: kube1
-        url: https://kubernetes.default.svc
-      - cluster: kube2
-        url: https://kube2.labs.ahinh.me:6443
+    - clusters:
+        selector:
+          matchLabels:
+            argocd.argoproj.io/secret-type: cluster
+            k8s.labs.ahinh.me/cluster-os: linux
   template:
     metadata:
       name: velero-{{cluster}}
@@ -25,10 +24,10 @@ spec:
         helm:
           valueFiles:
             - values.yaml
-            - '{{cluster}}/values.yaml'
+            - "{{cluster}}/values.yaml"
           releaseName: velero
       destination:
-        server: '{{url}}'
+        name: "{{name}}"
         namespace: velero
       syncPolicy:
         automated:

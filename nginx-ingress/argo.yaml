@@ -5,15 +5,14 @@ metadata:
   namespace: argocd
 spec:
   generators:
-  - list:
-      elements:
-      - cluster: kube1
-        url: https://kubernetes.default.svc
-      - cluster: kube2
-        url: https://kube2.labs.ahinh.me:6443
+    - clusters:
+        selector:
+          matchLabels:
+            argocd.argoproj.io/secret-type: cluster
+            k8s.labs.ahinh.me/cluster-os: linux
   template:
     metadata:
-      name: 'ingress-nginx-{{cluster}}'
+      name: "ingress-nginx-{{cluster}}"
       labels:
         app: ingress-nginx
     spec:
@@ -25,10 +24,10 @@ spec:
         helm:
           valueFiles:
             - values.yaml
-            - '{{cluster}}/values.yaml'
+            - "{{cluster}}/values.yaml"
           releaseName: ingress-nginx
       destination:
-        server: '{{url}}'
+        name: "{{name}}"
         namespace: ingress-nginx
       syncPolicy:
         automated:
