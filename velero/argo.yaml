@@ -24,7 +24,6 @@ spec:
         helm:
           valueFiles:
             - values.yaml
-            - "{{cluster}}/values.yaml"
           releaseName: velero
       destination:
         name: "{{name}}"
