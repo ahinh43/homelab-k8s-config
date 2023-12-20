@@ -1,0 +1,43 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: external-dns
+  namespace: argocd
+spec:
+  generators:
+    - clusters:
+        selector:
+          matchLabels:
+            argocd.argoproj.io/secret-type: cluster
+            k8s.labs.ahinh.me/cluster-os: linux
+  template:
+    metadata:
+      name: "external-dns-{{name}}"
+      labels:
+        app: external-dns
+    spec:
+      project: default
+      source:
+        repoURL: git@github.com:ahinh43/homelab-k8s-config.git
+        targetRevision: HEAD
+        path: external-dns
+        helm:
+          valueFiles:
+            - values.yaml
+          valuesObject:
+            external-dns:
+              txtOwnerId: "{{name}}"
+          releaseName: external-dns
+      destination:
+        name: "{{name}}"
+        namespace: external-dns
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+          allowEmpty: false
+        syncOptions:
+          - CreateNamespace=true
+        managedNamespaceMetadata:
+          labels:
+            app: external-dns

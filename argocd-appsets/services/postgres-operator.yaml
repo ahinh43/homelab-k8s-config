@@ -1,0 +1,40 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: postgres-operator
+  namespace: argocd
+spec:
+  generators:
+    - clusters:
+        selector:
+          matchLabels:
+            argocd.argoproj.io/secret-type: cluster
+            k8s.labs.ahinh.me/cluster-os: linux
+  template:
+    metadata:
+      name: "postgres-operator-{{name}}"
+      labels:
+        app: postgres-operator
+    spec:
+      project: default
+      source:
+        repoURL: git@github.com:ahinh43/homelab-k8s-config.git
+        targetRevision: HEAD
+        path: postgres-operator
+        helm:
+          valueFiles:
+            - values.yaml
+          releaseName: postgres-operator
+      destination:
+        name: "{{name}}"
+        namespace: postgres-operator
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+          allowEmpty: false
+        syncOptions:
+          - CreateNamespace=true
+        managedNamespaceMetadata:
+          labels:
+            app: postgres-operator
