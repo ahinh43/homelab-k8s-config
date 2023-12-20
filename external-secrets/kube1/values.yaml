@@ -1,5 +1,0 @@
-externalsecrets:
-  secretStore:
-    enabled: true
-    mountPath: kubernetes
-    role: external-secrets

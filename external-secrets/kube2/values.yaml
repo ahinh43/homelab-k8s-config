@@ -1,5 +1,0 @@
-externalsecrets:
-  secretStore:
-    enabled: true
-    mountPath: kube2
-    role: external-secrets
