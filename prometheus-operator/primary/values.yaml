@@ -1,0 +1,7 @@
+prometheus:
+  prometheus:
+    prometheusSpec:
+      enableRemoteWriteReceiver: true
+    service:
+      annotations:
+        service.cilium.io/affinity: local

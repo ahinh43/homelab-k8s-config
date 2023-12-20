@@ -10,6 +10,8 @@ spec:
           matchLabels:
             argocd.argoproj.io/secret-type: cluster
             k8s.labs.ahinh.me/cluster-os: linux
+        values:
+          role: "{{metadata.labels.prometheus.k8s.labs.ahinh.me/role}}"
   template:
     metadata:
       name: "kube-prometheus-stack-{{name}}"
@@ -24,7 +26,22 @@ spec:
         helm:
           valueFiles:
             - values.yaml
-            - "{{cluster}}/values.yaml"
+            - "{{values.role}}/values.yaml"
+          valuesObject:
+            prometheus:
+              defaultRules:
+                labels:
+                  cluster: "{{name}}"
+                  ext_labels_cluster: "{{name}}"
+              prometheus:
+                prometheusSpec:
+                  externalLabels:
+                    cluster: "{{name}}"
+                    ext_labels_cluster: "{{name}}"
+                serviceMonitor:
+                  additionalLabels:
+                    cluster: "{{name}}"
+                    ext_labels_cluster: "{{name}}"
           releaseName: kube-prometheus-stack
       destination:
         name: "{{name}}"
