@@ -5,13 +5,15 @@ metadata:
   namespace: argocd
 spec:
   generators:
-  - list:
-      elements:
-      - cluster: kube1
-        url: https://kubernetes.default.svc
+    - clusters:
+        selector:
+          matchLabels:
+            argocd.argoproj.io/secret-type: cluster
+            k8s.labs.ahinh.me/cluster-os: linux
+            k8s.labs.ahinh.me/region: us-central
   template:
     metadata:
-      name: 'registry-{{cluster}}'
+      name: "registry-{{name}}"
       labels:
         app: registry
     spec:
@@ -21,7 +23,7 @@ spec:
         targetRevision: HEAD
         path: registry/base
       destination:
-        server: '{{url}}'
+        name: "{{name}}"
         namespace: registry
       syncPolicy:
         automated:

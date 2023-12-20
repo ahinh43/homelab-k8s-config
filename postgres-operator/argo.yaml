@@ -12,7 +12,7 @@ spec:
             k8s.labs.ahinh.me/cluster-os: linux
   template:
     metadata:
-      name: "postgres-operator-{{cluster}}"
+      name: "postgres-operator-{{name}}"
       labels:
         app: postgres-operator
     spec:

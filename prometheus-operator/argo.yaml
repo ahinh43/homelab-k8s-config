@@ -12,7 +12,7 @@ spec:
             k8s.labs.ahinh.me/cluster-os: linux
   template:
     metadata:
-      name: "kube-prometheus-stack-{{cluster}}"
+      name: "kube-prometheus-stack-{{name}}"
       labels:
         app: kube-prometheus-stack
     spec:
