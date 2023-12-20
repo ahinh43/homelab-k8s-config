@@ -16,3 +16,6 @@ metadata:
 
     # Designates the cluster as the Keycloak database host
     keycloak.k8s.labs.ahinh.me/db-role: primary
+
+    # Desginates the cluster as a prometheus server host
+    prometheus.k8s.labs.ahinh.me/role: primary

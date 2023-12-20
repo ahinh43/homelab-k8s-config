@@ -7,3 +7,6 @@ commonLabels:
   k8s.labs.ahinh.me/cluster-os: linux
   vault.k8s.labs.ahinh.me/role: listener
   keycloak.k8s.labs.ahinh.me/db-role: secondary
+
+  # Agents connect to an existing prometheus cluster to send metrics to
+  prometheus.k8s.labs.ahinh.me/role: agent
