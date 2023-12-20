@@ -1,4 +1,0 @@
-keycloak:
-  externalDatabase:
-    host: keycloak-postgresql.keycloak.svc.cluster.local
-    existingSecret: postgres.keycloak-postgresql.credentials.postgresql.acid.zalan.do

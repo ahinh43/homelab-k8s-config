@@ -1,0 +1,10 @@
+keycloak:
+  externalDatabase:
+    host: keycloak-postgresql.keycloak.svc.cluster.local
+    existingSecret: postgres.keycloak-postgresql.credentials.postgresql.acid.zalan.do
+
+postgresOperator:
+  createDatabase: true
+  createService: false
+  size: "4Gi"
+  numberOfInstances: 2
