@@ -5,7 +5,14 @@ metadata:
   labels:
     # Do not remove the argocd.argoproj label!
     argocd.argoproj.io/secret-type: cluster
-    # Your cluster specific labels here...
+    # Cluster metadata
     k8s.labs.ahinh.me/cluster-name: kube1
     k8s.labs.ahinh.me/region: us-central
+
+    # Designates the cluster as the primary vault server
+    # All vault requests are forwarded to this cluster
+    # and is the sole host for the server
     vault.k8s.labs.ahinh.me/role: primary
+
+    # Designates the cluster as the Keycloak database host
+    keycloak.k8s.labs.ahinh.me/db-role: primary

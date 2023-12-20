@@ -13,6 +13,7 @@ spec:
         values:
           name: "{{name}}"
           region: "{{metadata.labels.k8s.labs.ahinh.me/region}}"
+          role: "{{metadata.labels.keycloak.k8s.labs.ahinh.me/db-role}}"
   template:
     metadata:
       name: keycloak-{{values.name}}
@@ -27,7 +28,7 @@ spec:
         helm:
           valueFiles:
             - values.yaml
-            - "{{values.region}}/values.yaml"
+            - "{{values.role}}/values.yaml"
           releaseName: keycloak
       destination:
         name: "{{values.name}}"

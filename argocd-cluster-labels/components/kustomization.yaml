@@ -6,4 +6,4 @@ kind: Component
 commonLabels:
   k8s.labs.ahinh.me/cluster-os: linux
   vault.k8s.labs.ahinh.me/role: listener
-  test.ahinh.me/yes: "YES"
+  keycloak.k8s.labs.ahinh.me/db-role: secondary
