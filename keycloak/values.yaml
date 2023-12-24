@@ -29,9 +29,9 @@ keycloak:
     - name: JGROUPS_DISCOVERY_PROPERTIES
       value: "dns_query=keycloak-headless.keycloak.svc.cluster.local"
     - name: CACHE_OWNERS_COUNT
-      value: '2'
+      value: "2"
     - name: CACHE_OWNERS_AUTH_SESSIONS_COUNT
-      value: '2'
+      value: "2"
     # Allows use of a LoadBalancer
     - name: PROXY_ADDRESS_FORWARDING
       value: "true"
@@ -65,6 +65,8 @@ keycloak:
     servicePort: https
   auth:
     adminUser: admin
+  logging:
+    level: DEBUG
 
 postgresOperator:
   createDatabase: true
