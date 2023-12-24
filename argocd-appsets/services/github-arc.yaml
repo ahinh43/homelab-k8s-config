@@ -31,7 +31,7 @@ spec:
               labels:
                 k8s.labs.ahinh.me/cluster-name: "{{name}}"
                 k8s.labs.ahinh.me/cluster-os: linux
-                k8s.labs.ahinh.me/cluster-region: "{{region}}"
+                k8s.labs.ahinh.me/cluster-region: "{{values.region}}"
           releaseName: github-arc
       destination:
         name: "{{name}}"
