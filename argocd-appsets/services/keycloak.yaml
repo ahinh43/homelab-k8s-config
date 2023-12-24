@@ -10,6 +10,7 @@ spec:
           matchLabels:
             argocd.argoproj.io/secret-type: cluster
             k8s.labs.ahinh.me/cluster-os: linux
+            k8s.labs.ahinh.me/cluster-name: kube1
         values:
           name: "{{name}}"
           region: "{{metadata.labels.k8s.labs.ahinh.me/region}}"
