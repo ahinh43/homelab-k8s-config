@@ -6,6 +6,10 @@ keycloak:
     annotations:
       external-dns.alpha.kubernetes.io/hostname: keycloak.k8s.labs.ahinh.me
       external-dns.alpha.kubernetes.io/parent: keycloak/keycloak
+  # Only create the service w/ the Cilium clustermesh, do not create any replicas
+  # The data is sadly not 1:1 replicated from the primary cluster to secondaries
+  # so it causes session caching/cookie issues
+  replicaCount: 0
 
 postgresOperator:
   createDatabase: false
