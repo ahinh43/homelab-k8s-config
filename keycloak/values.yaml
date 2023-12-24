@@ -20,7 +20,7 @@ keycloak:
     database: postgres
     existingSecretUserKey: username
     existingSecretPasswordKey: password
-  replicaCount: 2
+  replicaCount: 3
   extraEnvVars:
     # Enable DNS_PING to find other Pods
     - name: JGROUPS_DISCOVERY_PROTOCOL
@@ -72,4 +72,4 @@ postgresOperator:
   createDatabase: true
   createService: false
   size: "4Gi"
-  numberOfInstances: 2
+  numberOfInstances: 3
