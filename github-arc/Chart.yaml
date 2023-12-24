@@ -1,0 +1,13 @@
+apiVersion: v2
+name: github-arc
+version: 1.0.0
+description: Github Actions Runner Controller
+type: application
+home: https://k8s.labs.ahinh.me
+sources:
+  - https://github.com/ahinh43/homelab-k8s-config
+dependencies:
+  - name: gha-runner-scale-set-controller
+    version: 0.8.1
+    repository: oci://ghcr.io/actions/actions-runner-controller-charts
+    alias: arc

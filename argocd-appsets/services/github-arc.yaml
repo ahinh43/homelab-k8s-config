@@ -1,0 +1,48 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: github-arc
+  namespace: argocd
+spec:
+  generators:
+    - clusters:
+        selector:
+          matchLabels:
+            argocd.argoproj.io/secret-type: cluster
+            k8s.labs.ahinh.me/cluster-os: linux
+        values:
+          region: "{{metadata.labels.k8s.labs.ahinh.me/region}}"
+  template:
+    metadata:
+      name: "github-arc-{{name}}"
+      labels:
+        app: github-arc
+    spec:
+      project: default
+      source:
+        repoURL: git@github.com:ahinh43/homelab-k8s-config.git
+        targetRevision: HEAD
+        path: github-arc
+        helm:
+          valueFiles:
+            - values.yaml
+          valuesObject:
+            arc:
+              labels:
+                k8s.labs.ahinh.me/cluster-name: "{{name}}"
+                k8s.labs.ahinh.me/cluster-os: linux
+                k8s.labs.ahinh.me/cluster-region: "{{region}}"
+          releaseName: github-arc
+      destination:
+        name: "{{name}}"
+        namespace: arc-systems
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+          allowEmpty: false
+        syncOptions:
+          - CreateNamespace=true
+        managedNamespaceMetadata:
+          labels:
+            app: github-arc
