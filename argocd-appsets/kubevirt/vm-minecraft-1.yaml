@@ -5,13 +5,13 @@ metadata:
   namespace: argocd
 spec:
   generators:
-  - list:
-      elements:
-      - cluster: kube1
-        url: https://kubernetes.default.svc
+    - list:
+        elements:
+          - cluster: kube1
+            url: https://kubernetes.default.svc
   template:
     metadata:
-      name: 'minecraft-1-{{cluster}}'
+      name: "minecraft-1-{{cluster}}"
       labels:
         app: minecraft-1
     spec:
@@ -21,10 +21,10 @@ spec:
         targetRevision: HEAD
         path: kubevirt/vms/overlays/minecraft-1
       destination:
-        server: '{{url}}'
+        server: "{{url}}"
         namespace: kubevirt-vms
       syncPolicy:
         automated:
-          prune: true
+          prune: false
           selfHeal: true
           allowEmpty: false
