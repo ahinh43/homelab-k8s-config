@@ -22,9 +22,8 @@ spec:
     spec:
       project: default
       source:
-        repoURL: git@github.com:ahinh43/homelab-k8s-config.git
+        repoURL: git@github.com:ahinh43/homelab-k8s-service-keycloak.git
         targetRevision: HEAD
-        path: keycloak
         helm:
           valueFiles:
             - values.yaml
