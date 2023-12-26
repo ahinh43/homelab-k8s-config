@@ -1,0 +1,32 @@
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  name: debian-12-vm-template
+spec:
+  running: true
+  template:
+    spec:
+      evictionStrategy: LiveMigrate
+      domain:
+        devices:
+          disks:
+            - disk:
+                bus: virtio
+              name: disk0
+            - disk:
+                bus: virtio
+              name: cloudinitdisk
+        resources:
+          requests:
+            cpu: "2"
+            memory: 5120M
+      volumes:
+        - dataVolume:
+            name: cap10mc
+          name: disk0
+        - name: cloudinitdisk
+          cloudInitNoCloud:
+            secretRef:
+              name: cap10mc-cloudinit-userdata
+            networkDataSecretRef:
+              name: cap10mc-cloudinit-networkdata
