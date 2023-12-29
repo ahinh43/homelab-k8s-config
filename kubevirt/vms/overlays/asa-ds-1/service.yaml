@@ -15,6 +15,14 @@ spec:
       port: 27015
       targetPort: 27015
       protocol: UDP
+    - name: ark-rcon
+      port: 27020
+      targetPort: 27020
+      protocol: TCP
+    - name: ark-rcon-udp
+      port: 27020
+      targetPort: 27020
+      protocol: UDP
     - name: ark-2
       port: 7777
       targetPort: 7777
