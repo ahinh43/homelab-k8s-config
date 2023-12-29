@@ -35,7 +35,7 @@ spec:
     # Where to store the tarball and logs.
     storageLocation: default
     # Currently doesn't work? Backups are made but never uploaded because Kopia fails to find /var/lib/kubelet
-    snapshotMoveData: false
+    snapshotMoveData: true
     # The amount of time before backups created on this schedule are eligible for garbage collection. If not specified, 
     # a default value of 30 days will be used. The default can be configured on the velero server
     # by passing the flag --default-backup-ttl. 
