@@ -7,3 +7,9 @@ aws --endpoint-url http://minio.labs.ahinh.me:9000 s3 cp --recursive "${basepath
 aws --endpoint-url http://minio.labs.ahinh.me:9000 s3 cp --recursive "${basepath}/SaveGames" s3://ark-sa/$dirname/SaveGames
 aws --endpoint-url http://minio.labs.ahinh.me:9000 s3 cp "${basepath}/SavedArks/TheIsland_WP/TheIsland_WP.ark" s3://ark-sa/$dirname/TheIsland_WP/TheIsland_WP.ark
 aws --endpoint-url http://minio.labs.ahinh.me:9000 s3 cp "${basepath}/SavedArks/TheIsland_WP/TheIsland_WP_AntiCorruptionBackup.bak" s3://ark-sa/$dirname/TheIsland_WP/TheIsland_WP_AntiCorruptionBackup.bak
+
+# Backup ark profiles
+
+for file in $(ls *.arkprofile *.profilebak *.arktribe *.tribebak); do 
+  aws --endpoint-url http://minio.labs.ahinh.me:9000 s3 cp "${basepath}/SavedArks/TheIsland_WP/$file" s3://ark-sa/$dirname/TheIsland_WP/$file; 
+done
