@@ -18,7 +18,7 @@ spec:
               name: cloudinitdisk
         resources:
           requests:
-            cpu: "2"
+            cpu: "4"
             memory: 24576M
       volumes:
         - dataVolume:
