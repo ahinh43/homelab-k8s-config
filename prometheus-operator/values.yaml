@@ -12,7 +12,7 @@ prometheus:
         external-dns.alpha.kubernetes.io/hostname: alertmanager.k8s.labs.ahinh.me
       tls:
         - hosts:
-          - alertmanager.k8s.labs.ahinh.me
+            - alertmanager.k8s.labs.ahinh.me
           secretName: alertmanager-cert-tls
   grafana:
     ingress:
@@ -26,16 +26,16 @@ prometheus:
         external-dns.alpha.kubernetes.io/hostname: grafana.k8s.labs.ahinh.me
       tls:
         - hosts:
-          - grafana.k8s.labs.ahinh.me
+            - grafana.k8s.labs.ahinh.me
           secretName: grafana-cert-tls
-    additionalDataSources:
-      - name: loki                                                                                                                                                                                                                      
-        type: 'loki'                                                                                                                                                                                                                
-        access: 'proxy'
-        org_id: 1                                                                                                                                                                                                                          
-        url: 'http://loki.loki:3100'
-        version: 1                                                                                                                                                                                                                         
-        editable: false
+    # additionalDataSources:
+    #   - name: loki
+    #     type: 'loki'
+    #     access: 'proxy'
+    #     org_id: 1
+    #     url: 'http://loki.loki:3100'
+    #     version: 1
+    #     editable: false
   prometheus:
     thanosService:
       enabled: true
@@ -53,7 +53,7 @@ prometheus:
         external-dns.alpha.kubernetes.io/hostname: thanos.k8s.labs.ahinh.me
       tls:
         - hosts:
-          - thanos.k8s.labs.ahinh.me
+            - thanos.k8s.labs.ahinh.me
           secretName: thanos-cert-tls
     prometheusSpec:
       thanos:
@@ -65,7 +65,7 @@ prometheus:
     service:
       annotations:
         service.cilium.io/global: "true"
-    
+
   prometheusOperator:
     service:
       annotations:
