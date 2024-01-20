@@ -1,0 +1,27 @@
+#cloud-config
+users:
+  - name: debian
+    primary_group: sudo
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/bash
+    ssh-authorized-keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCknK37QKXdA4PYpZMIuHMraGjqDOXaNtMmIZI4FBhd2Z0GmtVvIpYwwNm3lR/eEZ4/6mV1OcOgt/eV7wccCBXEFxQNA2j7amh5JBH11SpLxFRw2YOiRpPK9/w1ontGgI0MXrhuxxnkIhx7V8NvpcqX3FVP2wHhq5REXa6USuT8thgEuhC+aP26a5Upx7qR2k+WsOEmfW/XoMXEqac156eBP79EuR6xxBitKNfgQqI1VFq1uutg26zWdwbUBjTqg0mZ308suCbMfMDnJ0wzVuJrm7kzoEJWWcwUNBVXa/Kwc9yHPxGIszjZeLl16klxp5KBjmJsN4fTny++EDeYylDL ahinh43@github/33781835
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC2PhL297eW7+AEBekvgcXu0ikumqbu2eIr+TfOj++92hTNo7rFTX4hYjr9n31+j1vTkHYQxqg7XMFEdF3HNFB1Bg9dLJBOVgDHC/WDF94HbN4DuKwfmZN8YZ6Ev8XRidBZvfbfxbHk9gVbEFhl6vB3NlTLG8X6XPF+zycXOffQGNyf731Fh89eLl0yobusTD72F+4T0BUhgRrCrvy08EWaAovDuOcyHh2jfITK+jlPzn6QibSxFCy1JDztAtzZS5YcBhOhayxkWoQb4kw033wciI2KSP841ZCQM1uEFm1/9i2VgRGA4ry8gNdFwr7l6Z09NG6Q7wbg6DXhcjYPGWeJlkLkGa6txeM9dH9IbhlfIPAnNHxGCG+iwvavNjgPAv0q23qIb3K13zPhd8nzYWf1X/BIUtrGrn7LIxgxkw6B3kHn5mzaEBaZk2k3jAAGZkwM7/7ThQAEJ94lVyHyNzoS6kJqk6bW3pGxxpXTnQGhNWeCrFj+RmG93gKbW6a5Yr0= ahinh43@github/84668115
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBFZ6pd5qmAhRH0pJlSO5Bq0+r1D/PzsXyX4jNg12KRQ
+  - name: steam
+    shell: /bin/bash
+    ssh-authorized-keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCknK37QKXdA4PYpZMIuHMraGjqDOXaNtMmIZI4FBhd2Z0GmtVvIpYwwNm3lR/eEZ4/6mV1OcOgt/eV7wccCBXEFxQNA2j7amh5JBH11SpLxFRw2YOiRpPK9/w1ontGgI0MXrhuxxnkIhx7V8NvpcqX3FVP2wHhq5REXa6USuT8thgEuhC+aP26a5Upx7qR2k+WsOEmfW/XoMXEqac156eBP79EuR6xxBitKNfgQqI1VFq1uutg26zWdwbUBjTqg0mZ308suCbMfMDnJ0wzVuJrm7kzoEJWWcwUNBVXa/Kwc9yHPxGIszjZeLl16klxp5KBjmJsN4fTny++EDeYylDL ahinh43@github/33781835
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC2PhL297eW7+AEBekvgcXu0ikumqbu2eIr+TfOj++92hTNo7rFTX4hYjr9n31+j1vTkHYQxqg7XMFEdF3HNFB1Bg9dLJBOVgDHC/WDF94HbN4DuKwfmZN8YZ6Ev8XRidBZvfbfxbHk9gVbEFhl6vB3NlTLG8X6XPF+zycXOffQGNyf731Fh89eLl0yobusTD72F+4T0BUhgRrCrvy08EWaAovDuOcyHh2jfITK+jlPzn6QibSxFCy1JDztAtzZS5YcBhOhayxkWoQb4kw033wciI2KSP841ZCQM1uEFm1/9i2VgRGA4ry8gNdFwr7l6Z09NG6Q7wbg6DXhcjYPGWeJlkLkGa6txeM9dH9IbhlfIPAnNHxGCG+iwvavNjgPAv0q23qIb3K13zPhd8nzYWf1X/BIUtrGrn7LIxgxkw6B3kHn5mzaEBaZk2k3jAAGZkwM7/7ThQAEJ94lVyHyNzoS6kJqk6bW3pGxxpXTnQGhNWeCrFj+RmG93gKbW6a5Yr0= ahinh43@github/84668115
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBFZ6pd5qmAhRH0pJlSO5Bq0+r1D/PzsXyX4jNg12KRQ
+hostname: palworld-1.kubevirt-vms.svc.cluster.local
+ssh_pwauth: False
+disable_root: false
+package_update: true
+package_upgrade: true
+packages:
+  - dnsutils
+  - htop
+  - jq
+  - tmux
+  - unattended-upgrades
