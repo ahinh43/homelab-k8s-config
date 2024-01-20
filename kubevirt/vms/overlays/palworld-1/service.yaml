@@ -11,6 +11,14 @@ spec:
       port: 8211
       targetPort: 8211
       protocol: UDP
+    - name: rcon
+      port: 27020
+      targetPort: 27020
+      protocol: TCP
+    - name: rcon-udp
+      port: 27020
+      targetPort: 27020
+      protocol: UDP
 ---
 apiVersion: v1
 kind: Service
