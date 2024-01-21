@@ -23,4 +23,4 @@ spec:
   selector:
     matchLabels:
       k8s.labs.ahinh.me/app: palworld-1
-      k8s.labs.ahinh.me/component: app
+      k8s.labs.ahinh.me/prometheus-component: app
