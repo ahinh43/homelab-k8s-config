@@ -18,6 +18,12 @@ spec:
       labels:
         app: kube-prometheus-stack
     spec:
+      ignoreDifferences:
+        - group: apps
+          kind: StatefulSet
+          jqPathExpressions:
+            - .spec.volumeClaimTemplates[]?.apiVersion
+            - .spec.volumeClaimTemplates[]?.kind
       project: default
       source:
         repoURL: git@github.com:ahinh43/homelab-k8s-config.git
