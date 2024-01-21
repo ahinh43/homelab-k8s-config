@@ -7,7 +7,6 @@ metadata:
 spec:
   type: LoadBalancer
   selector:
-    k8s.labs.ahinh.me/component: app
     kubevirt.io/vm: palworld-2
   ports:
     - name: palworld
