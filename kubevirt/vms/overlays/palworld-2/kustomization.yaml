@@ -1,7 +1,6 @@
 resources:
   - ../../base/debian-12
   - service.yaml
-  - prometheus.yaml
 patches:
   - path: datavolume.yaml
   - path: vm.yaml
