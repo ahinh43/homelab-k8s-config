@@ -15,6 +15,7 @@ prometheus:
             - alertmanager.k8s.labs.ahinh.me
           secretName: alertmanager-cert-tls
   grafana:
+    useStatefulSet: true
     persistence:
       enabled: true
       storageClassName: csi-rbd-sc
