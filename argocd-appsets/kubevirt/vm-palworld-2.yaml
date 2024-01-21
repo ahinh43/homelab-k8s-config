@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: palworld-2
+  namespace: argocd
+spec:
+  generators:
+    - list:
+        elements:
+          - cluster: kube1
+            url: https://kubernetes.default.svc
+  template:
+    metadata:
+      name: "palworld-2-{{cluster}}"
+      labels:
+        app: palworld-2
+    spec:
+      project: default
+      source:
+        repoURL: git@github.com:ahinh43/homelab-k8s-config.git
+        targetRevision: HEAD
+        path: kubevirt/vms/overlays/palworld-2
+      destination:
+        server: "{{url}}"
+        namespace: kubevirt-vms
+      syncPolicy:
+        automated:
+          prune: false
+          selfHeal: true
+          allowEmpty: false
