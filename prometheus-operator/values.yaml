@@ -24,6 +24,8 @@ prometheus:
         cert-manager.io/cluster-issuer: "letsencrypt"
         nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
         external-dns.alpha.kubernetes.io/hostname: grafana.k8s.labs.ahinh.me
+      persistence:
+        enabled: true
       tls:
         - hosts:
             - grafana.k8s.labs.ahinh.me
