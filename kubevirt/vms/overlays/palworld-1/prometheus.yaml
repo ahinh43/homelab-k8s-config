@@ -3,7 +3,7 @@ apiVersion: monitoring.coreos.com/v1alpha1
 kind: ScrapeConfig
 metadata:
   name: palworld-1
-  namespace: kubevirt-vms
+  namespace: kube-prometheus-stack
   labels:
     prometheus: system-monitoring-prometheus
     kubevirt.io/vm: palworld-1
