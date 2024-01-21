@@ -16,6 +16,6 @@ metadata:
 spec:
   staticConfigs:
     - labels:
-        job: prometheus
+        host: palworld-1
       targets:
         - palworld-1.kubevirt-vms.svc.cluster.local:9100
