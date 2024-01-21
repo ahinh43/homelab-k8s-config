@@ -19,7 +19,7 @@ spec:
         resources:
           requests:
             cpu: "4"
-            memory: 11264M
+            memory: 17408M
       volumes:
         - dataVolume:
             name: palworld-1
