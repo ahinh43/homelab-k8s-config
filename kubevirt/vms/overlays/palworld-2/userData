@@ -34,6 +34,7 @@ packages:
   - awscli
   - cron
   - prometheus-node-exporter
+  - net-tools
 
 # This happens before the user creation
 # so the files are owned by root first to prevent username not found errors
