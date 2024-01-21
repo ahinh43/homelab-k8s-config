@@ -56,6 +56,10 @@ prometheus:
             - thanos.k8s.labs.ahinh.me
           secretName: thanos-cert-tls
     prometheusSpec:
+      ruleSelectorNilUsesHelmValues: false
+      serviceMonitorSelectorNilUsesHelmValues: false
+      podMonitorSelectorNilUsesHelmValues: false
+      probeSelectorNilUsesHelmValues: false
       thanos:
         objectStorageConfig:
           existingSecret:
