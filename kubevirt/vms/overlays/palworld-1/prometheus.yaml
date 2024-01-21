@@ -20,7 +20,7 @@ spec:
     - port: prometheus
       interval: 30s
       scheme: http
-  jobLabel: jobLabel
+  jobLabel: palworld-1
   selector:
     matchLabels:
       k8s.labs.ahinh.me/app: palworld-1
