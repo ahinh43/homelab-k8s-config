@@ -113,7 +113,7 @@ data:
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
-              "legendFormat": "{{name}}",
+              "legendFormat": "\{\{name\}\}",
               "range": true,
               "refId": "A",
               "step": 10
@@ -354,7 +354,7 @@ data:
               "instant": false,
               "interval": "",
               "intervalFactor": 1,
-              "legendFormat": "{{drive}}-{{type}}",
+              "legendFormat": "\{\{drive\}\}-\{\{type\}\}",
               "refId": "A"
             }
           ],
@@ -449,7 +449,7 @@ data:
               "instant": false,
               "interval": "",
               "intervalFactor": 1,
-              "legendFormat": "{{drive}}-{{type}}",
+              "legendFormat": "\{\{drive\}\}-\{\{type\}\}",
               "refId": "A"
             }
           ],
@@ -543,7 +543,7 @@ data:
               "format": "time_series",
               "interval": "",
               "intervalFactor": 1,
-              "legendFormat": "read-{{drive}}-{{type}}",
+              "legendFormat": "read-\{\{drive\}\}-\{\{type\}\}",
               "range": true,
               "refId": "A"
             },
@@ -556,7 +556,7 @@ data:
               "expr": "irate(kubevirt_vmi_storage_write_times_seconds_total{namespace=\"$namespace\", name=\"$vm\"}[1m])",
               "hide": false,
               "instant": false,
-              "legendFormat": "write-{{drive}}-{{type}}",
+              "legendFormat": "write-\{\{drive\}\}-\{\{type\}\}",
               "range": true,
               "refId": "B"
             },
@@ -569,7 +569,7 @@ data:
               "expr": "irate(kubevirt_vmi_storage_flush_times_seconds_total{namespace=\"$namespace\", name=\"$vm\"}[1m])",
               "hide": false,
               "instant": false,
-              "legendFormat": "flush-{{drive}}-{{type}}",
+              "legendFormat": "flush-\{\{drive\}\}-\{\{type\}\}",
               "range": true,
               "refId": "C"
             }
@@ -664,7 +664,7 @@ data:
               "format": "time_series",
               "interval": "",
               "intervalFactor": 1,
-              "legendFormat": "read-{{drive}}-{{type}}",
+              "legendFormat": "read-\{\{drive\}\}-\{\{type\}\}",
               "range": true,
               "refId": "A"
             },
@@ -679,7 +679,7 @@ data:
               "hide": false,
               "interval": "",
               "intervalFactor": 1,
-              "legendFormat": "write-{{drive}}-{{type}}",
+              "legendFormat": "write-\{\{drive\}\}-\{\{type\}\}",
               "range": true,
               "refId": "B"
             }
@@ -800,7 +800,7 @@ data:
               "format": "time_series",
               "interval": "",
               "intervalFactor": 1,
-              "legendFormat": "{{interface}}-{{type}}",
+              "legendFormat": "\{\{interface\}\}-\{\{type\}\}",
               "range": true,
               "refId": "A"
             }
