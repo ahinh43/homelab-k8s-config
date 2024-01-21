@@ -1,6 +1,5 @@
-# Prometheus scrape config
 apiVersion: monitoring.coreos.com/v1alpha1
-kind: ScrapeConfig
+kind: ServiceMonitor
 metadata:
   name: palworld-1
   namespace: kubevirt-vms
@@ -14,8 +13,10 @@ metadata:
     k8s.labs.ahinh.me/version: "12"
     k8s.labs.ahinh.me/backup-schedule: main
 spec:
-  staticConfigs:
-    - labels:
-        host: palworld-1
-      targets:
-        - palworld-1.kubevirt-vms.svc.cluster.local:9100
+  endpoints:
+    - port: prometheus
+      path: /metrics
+  selector:
+    matchLabels:
+      k8s.labs.ahinh.me/app: palworld-1
+      k8s.labs.ahinh.me/component: app
