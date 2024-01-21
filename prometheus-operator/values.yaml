@@ -17,6 +17,8 @@ prometheus:
   grafana:
     persistence:
       enabled: true
+      storageClassName: csi-rbd-sc
+      type: pvc
     ingress:
       enabled: true
       hosts:
