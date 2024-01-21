@@ -16,6 +16,10 @@ spec:
   endpoints:
     - port: prometheus
       path: /metrics
+      interval: 30s
+  namespaceSelector:
+    matchNames:
+      - kubevirt-vms
   selector:
     matchLabels:
       k8s.labs.ahinh.me/app: palworld-1
