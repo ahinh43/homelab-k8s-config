@@ -14,14 +14,18 @@ metadata:
     k8s.labs.ahinh.me/backup-schedule: main
     release: kube-prometheus-stack
 spec:
-  attachMetadata:
-    node: false
   endpoints:
-    - port: prometheus
-      interval: 30s
+    - bearerTokenSecret:
+        key: ""
+      port: prometheus
       scheme: http
-  jobLabel: palworld-1
+      tlsConfig:
+        ca: {}
+        cert: {}
+        insecureSkipVerify: true
+  namespaceSelector:
+    matchNames:
+      - kubevirt-vms
   selector:
     matchLabels:
-      k8s.labs.ahinh.me/app: palworld-1
-      k8s.labs.ahinh.me/prometheus-component: app
+      k8s.labs.ahinh.me/prometheus-component: "app"
