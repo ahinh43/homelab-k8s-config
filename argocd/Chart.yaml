@@ -8,5 +8,5 @@ sources:
   - https://github.com/ahinh43/homelab-k8s-config
 dependencies:
   - name: argo-cd
-    version: 5.53.6
+    version: 5.53.7
     repository: https://argoproj.github.io/argo-helm
