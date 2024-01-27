@@ -46,3 +46,6 @@ spec:
     - name: ssh
       port: 22
       targetPort: 22
+    - name: palwatch
+      port: 8080
+      targetPort: 8080
