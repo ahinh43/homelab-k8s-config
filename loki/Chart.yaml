@@ -8,5 +8,5 @@ sources:
   - https://github.com/ahinh43/homelab-k8s-config
 dependencies:
   - name: loki
-    version: 5.45.0
+    version: 5.46.0
     repository: https://grafana.github.io/helm-charts
