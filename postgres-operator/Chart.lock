@@ -1,6 +1,0 @@
-dependencies:
-- name: postgres-operator
-  repository: https://opensource.zalando.com/postgres-operator/charts/postgres-operator
-  version: 1.11.0
-digest: sha256:85b134779c93534a3b938341d8fa3a3a713c6beb8d06fd7d5f52ae4a38d47a68
-generated: "2024-03-15T17:35:17.377195213Z"
