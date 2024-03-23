@@ -8,6 +8,6 @@ sources:
   - https://github.com/ahinh43/homelab-k8s-config
 dependencies:
   - name: gha-runner-scale-set-controller
-    version: 0.8.2
+    version: 0.8.3
     repository: oci://ghcr.io/actions/actions-runner-controller-charts
     alias: arc
