@@ -1,4 +1,7 @@
 argo-cd:
+  global:
+    image:
+      tag: "v2.10.5"
   server:
     replicas: 3
     autoscaling:
