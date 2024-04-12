@@ -3,7 +3,7 @@ kind: VirtualMachine
 metadata:
   name: debian-12-vm-template
 spec:
-  running: false
+  running: true
   template:
     spec:
       evictionStrategy: LiveMigrate
