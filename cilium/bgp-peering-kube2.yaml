@@ -26,12 +26,12 @@ spec: # CiliumBGPPeeringPolicySpec
                   cluster: kube2
               communities:
                 standard:
-                  - 65001:100
+                  - 65001:100 # Must be unique within the network!
             - selectorType: PodCIDR
               localPreference: 150
               communities:
                 standard:
-                  - 65001:150
+                  - 65001:150 # Must be unique within the network!
       serviceSelector:
         matchExpressions:
           - { key: somekey, operator: NotIn, values: ["never-used-value"] }
