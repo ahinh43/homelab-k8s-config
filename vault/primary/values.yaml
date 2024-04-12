@@ -17,8 +17,8 @@ vault:
         external-dns.alpha.kubernetes.io/hostname: vault.k8s.labs.ahinh.me
       tls:
         - hosts:
-          - vault.k8s.labs.ahinh.me
-          - vault.local.k8s.labs.ahinh.me
+            - vault.k8s.labs.ahinh.me
+            - vault.local.k8s.labs.ahinh.me
           secretName: vault-cert-tls
     volumes:
       - name: rootca
@@ -58,9 +58,6 @@ vault:
           listener "tcp" {
             address = "[::]:8200"
             cluster_address = "[::]:8201"
-            tls_cert_file = "/vault/userconfig/tls-server/tls.crt"
-            tls_key_file = "/vault/userconfig/tls-server/tls.key"
-            tls_ca_cert_file = "/vault/userconfig/rootCA/rootCACert.pem"
           }
           seal "gcpckms" {
             credentials = "/vault/userconfig/gcp/vault-project-user-creds.json"
@@ -102,17 +99,15 @@ vault:
               server_stabilization_time = "10s"
             }
           }
-          
+
           service_registration "kubernetes" {}
 
-      
     dataStorage:
       enabled: true
       storageClass: csi-rbd-sc
   ui:
     enabled: true
     serviceType: LoadBalancer
-
 
 ciliumService:
   enabled: false
