@@ -58,6 +58,8 @@ vault:
           listener "tcp" {
             address = "[::]:8200"
             cluster_address = "[::]:8201"
+            tls_cert_file = "/vault/userconfig/tls-server/tls.crt"
+            tls_key_file = "/vault/userconfig/tls-server/tls.key"
           }
           seal "gcpckms" {
             credentials = "/vault/userconfig/gcp/vault-project-user-creds.json"
