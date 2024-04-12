@@ -28,7 +28,7 @@ spec: # CiliumBGPPeeringPolicySpec
                 standard:
                   - 65001:125 # Must be unique within the network!
             - selectorType: PodCIDR
-              localPreference: 150
+              localPreference: 125
               communities:
                 standard:
                   - 65001:175 # Must be unique within the network!
