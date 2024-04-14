@@ -1,0 +1,12 @@
+apiVersion: v2
+name: Cilium
+version: 1.0.0
+description: Cilium CNI
+type: application
+home: https://k8s.labs.ahinh.me
+sources:
+  - https://github.com/ahinh43/homelab-k8s-config
+dependencies:
+  - name: cilium
+    version: 1.15.3
+    repository: https://helm.cilium.io/

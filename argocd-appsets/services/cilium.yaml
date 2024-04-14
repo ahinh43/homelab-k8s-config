@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: cilium
+  namespace: argocd
+spec:
+  generators:
+    - clusters:
+        selector:
+          matchLabels:
+            argocd.argoproj.io/secret-type: cluster
+            k8s.labs.ahinh.me/cluster-os: linux
+  template:
+    metadata:
+      name: "cilium-{{name}}"
+      labels:
+        app: cilium
+    spec:
+      project: default
+      source:
+        repoURL: git@github.com:ahinh43/homelab-k8s-config.git
+        targetRevision: HEAD
+        path: "cilium/{{name}}"
+        helm:
+          valueFiles:
+            - values.yaml
+          releaseName: cilium
+      destination:
+        name: "{{name}}"
+        namespace: kube-system
