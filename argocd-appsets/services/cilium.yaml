@@ -17,7 +17,7 @@ spec:
         app: cilium
     spec:
       ignoreDifferences:
-        - group: "*"
+        - group: ""
           kind: Secret
           jqPathExpressions:
             - .data
