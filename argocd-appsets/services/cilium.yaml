@@ -16,6 +16,11 @@ spec:
       labels:
         app: cilium
     spec:
+      ignoreDifferences:
+        - group: "*"
+          kind: Secret
+          jqPathExpressions:
+            - .data
       project: default
       source:
         repoURL: git@github.com:ahinh43/homelab-k8s-config.git
