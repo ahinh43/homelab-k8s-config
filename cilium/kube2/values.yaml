@@ -1,48 +1,49 @@
-cluster:
-  name: kube2
-  id: 200
-hubble:
-  enabled: true
-  relay:
+cilium:
+  cluster:
+    name: kube2
+    id: 200
+  hubble:
     enabled: true
-    rollOutPods: true
-  ui:
+    relay:
+      enabled: true
+      rollOutPods: true
+    ui:
+      enabled: true
+  ipv4NativeRoutingCIDR: 10.0.0.0/8
+  ipam:
+    # -- Configure IP Address Management mode.
+    # ref: https://docs.cilium.io/en/stable/network/concepts/ipam/
+    mode: "cluster-pool"
+    # -- Maximum rate at which the CiliumNode custom resource is updated.
+    ciliumNodeUpdateRate: "15s"
+    operator:
+      # -- IPv4 CIDR list range to delegate to individual nodes for IPAM.
+      clusterPoolIPv4PodCIDRList: ["10.245.0.0/16"]
+      # -- IPv4 CIDR mask size to delegate to individual nodes for IPAM.
+      clusterPoolIPv4MaskSize: 24
+
+  kubeProxyReplacement: true
+  k8sServiceHost: kube2.labs.ahinh.me
+  k8sServicePort: 6443
+
+  # bgp:
+  #   enabled: true
+  #   announce:
+  #     podCIDR: true
+  #     # Controlled by MetalLB (for now?)
+  #     loadbalancerIP: false
+
+  bgpControlPlane:
     enabled: true
-ipv4NativeRoutingCIDR: 10.0.0.0/8
-ipam:
-  # -- Configure IP Address Management mode.
-  # ref: https://docs.cilium.io/en/stable/network/concepts/ipam/
-  mode: "cluster-pool"
-  # -- Maximum rate at which the CiliumNode custom resource is updated.
-  ciliumNodeUpdateRate: "15s"
-  operator:
-    # -- IPv4 CIDR list range to delegate to individual nodes for IPAM.
-    clusterPoolIPv4PodCIDRList: ["10.245.0.0/16"]
-    # -- IPv4 CIDR mask size to delegate to individual nodes for IPAM.
-    clusterPoolIPv4MaskSize: 24
 
-kubeProxyReplacement: true
-k8sServiceHost: kube2.labs.ahinh.me
-k8sServicePort: 6443
+  nodeinit:
+    enabled: true
 
-# bgp:
-#   enabled: true
-#   announce:
-#     podCIDR: true
-#     # Controlled by MetalLB (for now?)
-#     loadbalancerIP: false
+  externalIPs:
+    enabled: true
 
-bgpControlPlane:
-  enabled: true
+  nodePort:
+    enabled: true
 
-nodeinit:
-  enabled: true
-
-externalIPs:
-  enabled: true
-
-nodePort:
-  enabled: true
-
-hostPort:
-  enabled: true
+  hostPort:
+    enabled: true
