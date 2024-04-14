@@ -23,7 +23,7 @@ spec:
         path: "cilium/{{name}}"
         helm:
           valueFiles:
-            - values.yaml
+            - "{{name}}/values.yaml"
           releaseName: cilium
       destination:
         name: "{{name}}"
