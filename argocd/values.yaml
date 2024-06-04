@@ -1,8 +1,6 @@
 argo-cd:
   global:
     domain: argo.k8s.labs.ahinh.me
-    image:
-      tag: "v2.10.5"
   server:
     replicas: 3
     autoscaling:
