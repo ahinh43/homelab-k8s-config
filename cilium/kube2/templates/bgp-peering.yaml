@@ -18,7 +18,7 @@ spec: # CiliumBGPPeeringPolicySpec
           keepAliveTimeSeconds: 30
           gracefulRestart:
             enabled: true
-            restartTimeSeconds: 120
+            restartTimeSeconds: 20
           advertisedPathAttributes:
             - selectorType: CiliumLoadBalancerIPPool
               selector:
