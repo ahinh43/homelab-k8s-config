@@ -8,5 +8,5 @@ sources:
   - https://github.com/ahinh43/homelab-k8s-config
 dependencies:
   - name: vault
-    version: 0.28.0
+    version: 0.28.1
     repository: https://helm.releases.hashicorp.com
