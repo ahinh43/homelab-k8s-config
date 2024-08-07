@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: teslamate
+  namespace: argocd
+spec:
+  generators:
+    - clusters:
+        selector:
+          matchLabels:
+            argocd.argoproj.io/secret-type: cluster
+            k8s.labs.ahinh.me/cluster-os: linux
+            k8s.labs.ahinh.me/region: us-central
+  template:
+    metadata:
+      name: "teslamate-{{name}}"
+      labels:
+        app: teslamate
+    spec:
+      project: default
+      source:
+        repoURL: git@github.com:ahinh43/service-teslamate.git
+        targetRevision: HEAD
+        path: manifests
+      destination:
+        name: "{{name}}"
+        namespace: teslamate
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+          allowEmpty: false
+        syncOptions:
+          - CreateNamespace=true
+        managedNamespaceMetadata:
+          labels:
+            app: teslamate
