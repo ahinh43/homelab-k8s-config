@@ -8,6 +8,6 @@ sources:
   - https://github.com/ahinh43/homelab-k8s-config
 dependencies:
   - name: kube-prometheus-stack
-    version: 62.6.0
+    version: 62.7.0
     repository: https://prometheus-community.github.io/helm-charts
     alias: prometheus
