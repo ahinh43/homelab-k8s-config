@@ -8,5 +8,5 @@ sources:
   - https://github.com/ahinh43/homelab-k8s-config
 dependencies:
   - name: external-dns
-    version: 8.3.10
+    version: 8.3.11
     repository: oci://registry-1.docker.io/bitnamicharts
