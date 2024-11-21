@@ -6,4 +6,4 @@ spec:
   pvc:
     resources:
       requests:
-        storage: "45Gi"
+        storage: "30Gi"
