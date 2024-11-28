@@ -19,7 +19,7 @@ spec:
         resources:
           requests:
             cpu: "4"
-            memory: 24576M
+            memory: 19456M
       volumes:
         - dataVolume:
             name: asa-ds-1
