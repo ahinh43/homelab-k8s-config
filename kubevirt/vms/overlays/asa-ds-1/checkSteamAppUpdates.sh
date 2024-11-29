@@ -23,7 +23,7 @@ if [ ! -n "$manuallyRun" ]; then
   fi
   localAppVersion="$(cat $appIdVersionFile)"
   localAppUpdatedDate="$(cat $appIdVersionFileLastUpdated)"
-  latestAppVersion=$(curl "https://api.steamcmd.net/v1/info/$steamappid" | jq -r ".data.\"$steamappid\".depots[][] | select(.buildid? != null) | .buildid"  | sort | tail -n1)
+  latestAppVersion=$(curl --fail "https://api.steamcmd.net/v1/info/$steamappid" | jq -r ".data.\"$steamappid\".depots[][] | select(.buildid? != null) | .buildid"  | sort | tail -n1)
   echo "Local app version: $localAppVersion"
   echo "Latest app version: $latestAppVersion"
   if [[ "$localAppVersion" != "$latestAppVersion" ]]; then
