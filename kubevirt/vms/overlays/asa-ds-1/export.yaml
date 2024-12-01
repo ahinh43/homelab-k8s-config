@@ -1,4 +1,4 @@
-apiVersion: export.kubevirt.io/v1beta1
+apiVersion: export.kubevirt.io/v1alpha1
 kind: VirtualMachineExport
 metadata:
   name: asa-ds-1-export
