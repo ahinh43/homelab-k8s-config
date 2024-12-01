@@ -1,0 +1,10 @@
+apiVersion: export.kubevirt.io/v1beta1
+kind: VirtualMachineExport
+metadata:
+  name: asa-ds-1-export
+spec:
+  tokenSecretRef: export-token
+  source:
+    apiGroup: "kubevirt.io"
+    kind: VirtualMachine
+    name: asa-ds-1
