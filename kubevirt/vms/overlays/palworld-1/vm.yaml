@@ -18,8 +18,8 @@ spec:
               name: cloudinitdisk
         resources:
           requests:
-            cpu: "4"
-            memory: 19456M
+            cpu: "2"
+            memory: 4096M
       volumes:
         - dataVolume:
             name: palworld-1
