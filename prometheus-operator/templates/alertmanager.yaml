@@ -18,20 +18,3 @@ spec:
           key: DISCORD_WEBHOOK_URL
           name: alertmanager-ext-secret
           optional: false
-          title: >-
-            [{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ if ne .CommonAnnotations.summary ""}}{{ .CommonAnnotations.summary }}{{ else }}{{ .CommonLabels.alertname }}{{ end }}
-          message: >-
-            {{ range .Alerts -}}
-            ```{{ if .Labels.severity }}Severity: {{ .Labels.severity }}{{ end }}```
-            ```Alert: {{ .Annotations.summary }}```
-            ```Description: {{ if ne .Annotations.description ""}}{{ .Annotations.description }}{{else}}N/A{{ end }}```
-            ```Details:```
-            {{ range .Labels.SortedPairs }}
-            ```- {{ .Name }}: {{ .Value }}```
-            {{ end }}
-            **Graph**: [Link]({{ .GeneratorURL }}) :chart_with_upwards_trend:
-            **Runbook**: [Link]({{ .Annotations.runbook }}) :spiral_note_pad:
-            ``` 
-            - - - - - - - - - - - - - - - - - - - -
-              ```
-            {{ end }}
