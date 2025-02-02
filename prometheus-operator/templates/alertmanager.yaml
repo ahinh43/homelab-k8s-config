@@ -14,5 +14,7 @@ spec:
   receivers:
   - name: 'discord'
     discordConfigs:
-      - webhook_url_file: "/etc/alertmanager/secrets/alertmanager-ext-secret/DISCORD_WEBHOOK_URL"
-    
+      - apiURL:
+          key: DISCORD_WEBHOOK_URL
+          name: alertmanager-ext-secret
+          optional: false
