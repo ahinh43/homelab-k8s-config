@@ -100,7 +100,6 @@ prometheus:
       serviceMonitorSelectorNilUsesHelmValues: false
       podMonitorSelectorNilUsesHelmValues: false
       probeSelectorNilUsesHelmValues: false
-      externalUrl: prometheus.k8s.labs.ahinh.me
       thanos:
         objectStorageConfig:
           existingSecret:
