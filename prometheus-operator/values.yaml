@@ -49,7 +49,7 @@ prometheus:
       annotations:
         cert-manager.io/cluster-issuer: "letsencrypt"
         nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
-        external-dns.alpha.kubernetes.io/hostname: grafana.k8s.labs.ahinh.me\
+        external-dns.alpha.kubernetes.io/hostname: grafana.k8s.labs.ahinh.me
       tls:
         - hosts:
             - grafana.k8s.labs.ahinh.me
@@ -63,6 +63,20 @@ prometheus:
     #     version: 1
     #     editable: false
   prometheus:
+    ingress:
+      enabled: true
+      hosts:
+        - prometheus.k8s.labs.ahinh.me
+      ingressClassName: nginx
+      annotations:
+        cert-manager.io/cluster-issuer: "letsencrypt"
+        nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+        external-dns.alpha.kubernetes.io/hostname: prometheus.k8s.labs.ahinh.me
+      tls:
+        - hosts:
+            - prometheus.k8s.labs.ahinh.me
+          secretName: prometheus-cert-tls
+          
     thanosService:
       enabled: true
     thanosRuler:
