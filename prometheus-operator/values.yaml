@@ -17,6 +17,15 @@ prometheus:
     alertmanagerSpec:
       secrets:
         - alertmanager-ext-secret
+      storage:
+        volumeClaimTemplate:
+          spec:
+            storageClassName: csi-rbd-sc
+            accessModes: ["ReadWriteOnce"]
+            resources:
+              requests:
+                storage: 10Gi
+
   grafana:
     useStatefulSet: true
     persistence:
