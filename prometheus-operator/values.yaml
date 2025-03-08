@@ -8,6 +8,9 @@ prometheus:
         receiver: 'null'
         routes:
           - receiver: "discord"
+          - receiver: "null"
+            matchers:
+            - alertname =~ "Watchdog|InfoInhibitor"
       recievers:
         - name: "null"
     ingress:
