@@ -11,8 +11,6 @@ prometheus:
           - receiver: "null"
             matchers:
             - alertname =~ "Watchdog|InfoInhibitor"
-      recievers:
-        - name: "null"
     ingress:
       enabled: true
       hosts:
