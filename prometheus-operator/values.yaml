@@ -7,18 +7,13 @@ prometheus:
         group_interval: 5m
         receiver: 'null'
         routes:
-          - receiver: "discord"
           - receiver: "null"
             matchers:
             - alertname =~ "Watchdog|InfoInhibitor"
+          - receiver: "discord"
+            continue: true
       receivers:
       - name: "null"
-      - name: 'discord'
-        discord_configs:
-          - api_url:
-              key: DISCORD_WEBHOOK_URL
-              name: alertmanager-ext-secret
-              optional: false
     ingress:
       enabled: true
       hosts:
