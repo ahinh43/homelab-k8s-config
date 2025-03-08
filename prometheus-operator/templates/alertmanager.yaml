@@ -6,7 +6,7 @@ metadata:
     alertmanagerConfig: discord
 spec:
   route:
-    groupBy: ['job']
+    groupBy: ['namespace']
     groupWait: 30s
     groupInterval: 5m
     repeatInterval: 12h
