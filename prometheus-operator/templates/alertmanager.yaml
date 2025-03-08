@@ -12,8 +12,10 @@ spec:
     repeatInterval: 12h
     receiver: 'discord'
     routes:
-      - match:
-          severity: "critical"
+      - matchers:
+          - name: severity
+            value: "critical"
+            regex: false
         receiver: discord
   receivers:
   - name: 'discord'
