@@ -1,19 +1,5 @@
 prometheus:
   alertmanager:
-    config:
-      route:
-        group_by: ['alertname']
-        group_wait: 30s
-        group_interval: 5m
-        receiver: 'null'
-        routes:
-          - receiver: "null"
-            matchers:
-            - alertname =~ "Watchdog|InfoInhibitor"
-          - receiver: "discord"
-            continue: true
-      receivers:
-      - name: "null"
     ingress:
       enabled: true
       hosts:
