@@ -1,5 +1,10 @@
 prometheus:
   alertmanager:
+    config:
+      route:
+        receiver: "discord"
+      recievers:
+        - name: discord
     ingress:
       enabled: true
       hosts:
