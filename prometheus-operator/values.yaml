@@ -11,6 +11,14 @@ prometheus:
           - receiver: "null"
             matchers:
             - alertname =~ "Watchdog|InfoInhibitor"
+      recievers:
+      - name: "null"
+      - name: 'discord'
+        discord_configs:
+          - apiURL:
+              key: DISCORD_WEBHOOK_URL
+              name: alertmanager-ext-secret
+              optional: false
     ingress:
       enabled: true
       hosts:
