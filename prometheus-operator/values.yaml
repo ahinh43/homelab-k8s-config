@@ -11,7 +11,7 @@ prometheus:
           - receiver: "null"
             matchers:
             - alertname =~ "Watchdog|InfoInhibitor"
-      recievers:
+      receivers:
       - name: "null"
       - name: 'discord'
         discord_configs:
