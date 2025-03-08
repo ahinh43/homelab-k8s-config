@@ -16,6 +16,7 @@ spec:
           - name: severity
             value: "critical"
             regex: false
+            matchType: "="
         receiver: discord
   receivers:
   - name: 'discord'
