@@ -135,3 +135,22 @@ prometheus:
     service:
       annotations:
         service.cilium.io/global: "true"
+    admissionWebhooks:
+      enabled: true
+
+      annotations:
+        argocd.argoproj.io/hook: PreSync
+        argocd.argoproj.io/hook-delete-policy: HookSucceeded
+
+      patch:
+        annotations:
+          argocd.argoproj.io/hook: PreSync
+          argocd.argoproj.io/hook-delete-policy: HookSucceeded
+
+      mutatingWebhookConfiguration:
+        annotations:
+          argocd.argoproj.io/hook: PreSync
+
+      validatingWebhookConfiguration:
+        annotations:
+          argocd.argoproj.io/hook: PreSync
