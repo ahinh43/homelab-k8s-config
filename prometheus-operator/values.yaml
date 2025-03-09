@@ -1,4 +1,12 @@
 prometheus:
+  defaultRules:
+    disabled:
+      KubeControllerManagerDown: true
+      KubeProxyDown: true
+      KubeSchedulerDown: true
+      KubeVirtNoAvailableNodesToRunVMs: true
+      KubeJobFailed: true
+      etcdInsufficientMembers: true
   alertmanager:
     config:
       route:
