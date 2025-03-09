@@ -1,14 +1,15 @@
 prometheus:
-  defaultRules:
-    rules:
-      kubeProxy: false
-    disabled:
-      KubeControllerManagerDown: true
-      KubeProxyDown: true
-      KubeSchedulerDown: true
-      KubeVirtNoAvailableNodesToRunVMs: true
-      KubeJobFailed: true
-      etcdInsufficientMembers: true
+  kubeScheduler: false
+  kubeProxy: false
+  kubeEtcd: false
+  # defaultRules:
+  #   disabled:
+  #     KubeControllerManagerDown: true
+  #     KubeProxyDown: true
+  #     KubeSchedulerDown: true
+  #     KubeVirtNoAvailableNodesToRunVMs: true
+  #     KubeJobFailed: true
+  #     etcdInsufficientMembers: true
   alertmanager:
     config:
       route:
