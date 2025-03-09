@@ -13,7 +13,7 @@ spec:
     receiver: 'discord'
     matchers:
       - name: severity
-        value: "critical"
+        value: "warning"
         regex: false
         matchType: "="
       - name: namespace
