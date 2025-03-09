@@ -1,7 +1,10 @@
 prometheus:
-  kubeScheduler: false
-  kubeProxy: false
-  kubeEtcd: false
+  kubeScheduler:
+    enabled: false
+  kubeProxy:
+    enabled: false
+  kubeEtcd:
+    enabled: false
   # defaultRules:
   #   disabled:
   #     KubeControllerManagerDown: true
