@@ -1,22 +1,22 @@
 apiVersion: monitoring.coreos.com/v1alpha1
 kind: AlertmanagerConfig
 metadata:
-  name: discord
+  name: discord-default
   labels:
-    alertmanagerConfig: discord
+    alertmanagerConfig: discord-default
 spec:
   route:
     groupBy: ['alertname', 'namespace', 'job', 'severity']
     groupWait: 30s
     groupInterval: 5m
     repeatInterval: 12h
-    receiver: 'discord'
+    receiver: 'discord-default'
     matchers:
       - name: severity
         value: "critical"
         matchType: "="
   receivers:
-  - name: 'discord'
+  - name: 'discord-default'
     discordConfigs:
       - apiURL:
           key: DISCORD_WEBHOOK_URL
