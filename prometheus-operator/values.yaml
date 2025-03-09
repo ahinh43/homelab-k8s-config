@@ -1,5 +1,7 @@
 prometheus:
   defaultRules:
+    rules:
+      kubeProxy: false
     disabled:
       KubeControllerManagerDown: true
       KubeProxyDown: true
