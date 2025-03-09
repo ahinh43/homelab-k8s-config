@@ -11,13 +11,11 @@ spec:
     groupInterval: 5m
     repeatInterval: 12h
     receiver: 'discord'
-    routes:
-      - matchers:
-          - name: severity
-            value: "critical"
-            regex: false
-            matchType: "="
-        receiver: discord
+    matchers:
+      - name: severity
+        value: "critical"
+        regex: false
+        matchType: "="
   receivers:
   - name: 'discord'
     discordConfigs:
