@@ -16,6 +16,9 @@ spec:
         value: "critical"
         regex: false
         matchType: "="
+      - name: namespace
+        value: ".*"
+        regex: true
   receivers:
   - name: 'discord'
     discordConfigs:
