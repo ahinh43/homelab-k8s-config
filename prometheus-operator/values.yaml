@@ -1,12 +1,5 @@
 prometheus:
   alertmanager:
-    config:
-      route:
-        group_by:
-          - alertname
-          - job
-          - namespace
-          - severity
     ingress:
       enabled: true
       hosts:
