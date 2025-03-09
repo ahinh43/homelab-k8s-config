@@ -5,10 +5,6 @@ prometheus:
     enabled: false
   kubeEtcd:
     enabled: false
-  defaultRules:
-    disabled:
-      KubeProxyDown: true
-      KubeSchedulerDown: true
   alertmanager:
     config:
       route:
