@@ -1,5 +1,8 @@
 prometheus:
   alertmanager:
+    config:
+      route:
+        receiver: "default"
     ingress:
       enabled: true
       hosts:
