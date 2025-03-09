@@ -19,6 +19,8 @@ prometheus:
             - alertmanager.k8s.labs.ahinh.me
           secretName: alertmanager-cert-tls
     alertmanagerSpec:
+      alertmanagerConfigMatcherStrategy:
+        type: None
       secrets:
         - alertmanager-ext-secret
       storage:
