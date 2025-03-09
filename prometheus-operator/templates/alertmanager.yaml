@@ -13,12 +13,9 @@ spec:
     receiver: 'discord'
     matchers:
       - name: severity
-        value: "warning"
+        value: "warning|critical"
         regex: false
-        matchType: "="
-      - name: namespace
-        value: ".*"
-        regex: true
+        matchType: "=~"
   receivers:
   - name: 'discord'
     discordConfigs:
