@@ -22,6 +22,13 @@ spec:
           jqPathExpressions:
             - .data
       project: default
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+          allowEmpty: false
+        syncOptions:
+          - CreateNamespace=true
       source:
         repoURL: git@github.com:ahinh43/homelab-k8s-config.git
         targetRevision: HEAD
