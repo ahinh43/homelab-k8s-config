@@ -46,7 +46,7 @@ argo-cd:
       url: https://argo.k8s.labs.ahinh.me
       oidc.config: |
         name: Keycloak
-        issuer: http://keycloak.k8s.labs.ahinh.me/realms/labs
+        issuer: https://keycloak.k8s.labs.ahinh.me/realms/labs
         clientID: $argocd-ext-secret:keycloak.oidc.clientID
         clientSecret: $argocd-ext-secret:keycloak.oidc.clientSecret
         requestedScopes:
