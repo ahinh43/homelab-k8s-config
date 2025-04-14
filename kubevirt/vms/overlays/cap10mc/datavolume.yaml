@@ -1,9 +1,0 @@
-apiVersion: cdi.kubevirt.io/v1beta1
-kind: DataVolume
-metadata:
-  name: "debian-12-vm-template-dv"
-spec:
-  pvc:
-    resources:
-      requests:
-        storage: "8Gi"
