@@ -8,5 +8,5 @@ sources:
   - https://github.com/ahinh43/homelab-k8s-config
 dependencies:
   - name: cert-manager
-    version: v1.17.2
+    version: v1.18.0
     repository: https://charts.jetstack.io
