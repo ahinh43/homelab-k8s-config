@@ -6,7 +6,7 @@ metadata:
     k8s.labs.ahinh.me/app: rustmon
     k8s.labs.ahinh.me/component: app
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   selector:
     k8s.labs.ahinh.me/app: rustmon
     k8s.labs.ahinh.me/component: app
