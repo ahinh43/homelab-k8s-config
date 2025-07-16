@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: rustmon
+  labels:
+    k8s.labs.ahinh.me/app: rustmon
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    external-dns.alpha.kubernetes.io/hostname: rustmon.k8s.labs.ahinh.me
+    nginx.ingress.kubernetes.io/backend-protocol: HTTP
+    nginx.ingress.kubernetes.io/service-upstream: "true"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: rustmon.k8s.labs.ahinh.me
+    http:
+      paths:
+      - backend:
+          service:
+            name: rustmon
+            port:
+              number: 80
+        path: /
+        pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - rustmon.k8s.labs.ahinh.me
+    secretName: rustmon.k8s.labs.ahinh.me-tls
