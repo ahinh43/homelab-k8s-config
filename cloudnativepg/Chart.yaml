@@ -1,0 +1,11 @@
+apiVersion: v2
+name: CloudNativePG
+version: 1.0.0
+description: CloudNativePG
+type: application
+sources:
+  - https://github.com/ahinh43/homelab-k8s-config
+dependencies:
+  - name: cloudnative-pg
+    version: 0.26.0
+    repository: https://cloudnative-pg.io/charts
