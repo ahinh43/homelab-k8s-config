@@ -35,6 +35,7 @@ spec:
           allowEmpty: false
         syncOptions:
           - CreateNamespace=true
+          - ServerSideApply=true
         managedNamespaceMetadata:
           labels:
             app: cloudnativepg
