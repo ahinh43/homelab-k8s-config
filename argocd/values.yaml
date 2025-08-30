@@ -51,8 +51,8 @@ argo-cd:
             id: github
             name: GitHub
             config:
-              clientID: $dex.github.clientID
-              clientSecret: $dex.github.clientSecret
+              clientID: $argocd-ext-secret:dex.github.clientID
+              clientSecret: $argocd-ext-secret:dex.github.clientSecret
     rbac:
       create: true
       policy.default: ""
