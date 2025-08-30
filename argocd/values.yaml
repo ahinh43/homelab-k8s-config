@@ -44,6 +44,15 @@ argo-cd:
     cm:
       create: true
       url: https://argo.k8s.labs.ahinh.me
+      dex.config: |
+        connectors:
+          # GitHub example
+          - type: github
+            id: github
+            name: GitHub
+            config:
+              clientID: $dex.github.clientID
+              clientSecret: $dex.github.clientSecret
       oidc.config: |
         name: Keycloak
         issuer: https://keycloak.k8s.labs.ahinh.me/realms/labs
