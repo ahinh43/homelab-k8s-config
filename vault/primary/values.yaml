@@ -120,7 +120,7 @@ dex:
     - secretRef:
         name: vault-ext-secret
   config:
-    issuer: https://vault.k8s.labs.ahinh.me
+    issuer: https://vault.k8s.labs.ahinh.me/dex/
     storage:
       type: memory
     connectors:
