@@ -143,6 +143,8 @@ dex:
         # Flag which will switch from using the internal GitHub id to the users handle (@mention) as the user id.
         # It is possible for a user to change their own username, but it is very rare for them to do so
         useLoginAsID: false
+        orgs:
+          - name: ahinh-labs
     staticClients:
       - id: vault
         name: vault
