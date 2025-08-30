@@ -53,16 +53,6 @@ argo-cd:
             config:
               clientID: $dex.github.clientID
               clientSecret: $dex.github.clientSecret
-      oidc.config: |
-        name: Keycloak
-        issuer: https://keycloak.k8s.labs.ahinh.me/realms/labs
-        clientID: $argocd-ext-secret:keycloak.oidc.clientID
-        clientSecret: $argocd-ext-secret:keycloak.oidc.clientSecret
-        requestedScopes:
-          - openid
-          - profile
-          - email
-          - groups
     rbac:
       create: true
       policy.default: ""
