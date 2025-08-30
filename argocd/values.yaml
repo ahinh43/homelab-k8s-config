@@ -57,4 +57,5 @@ argo-cd:
       create: true
       policy.default: ""
       policy.csv: |
+        g, alec4555@gmail.com, role:admin
         g, argocd-admin, role:admin
