@@ -4,7 +4,7 @@ vault:
     externalVaultAddr: ""
     tlsDisable: false
   server:
-    logLevel: debug
+    logLevel: info
     ingress:
       https: true
       enabled: true
@@ -125,7 +125,7 @@ dex:
       skipApprovalScreen: true
     logger:
       format: json
-      level: debug
+      level: info
     issuer: https://vault.k8s.labs.ahinh.me/dex/
     storage:
       type: memory
