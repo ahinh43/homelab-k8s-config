@@ -121,6 +121,9 @@ dex:
     - secretRef:
         name: vault-ext-secret
   config:
+    logger:
+      format: json
+      level: debug
     issuer: https://vault.k8s.labs.ahinh.me/dex/
     storage:
       type: memory
