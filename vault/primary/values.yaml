@@ -117,8 +117,8 @@ ciliumService:
 
 dex:
   envFrom:
-    secretRef:
-      name: vault-ext-secret
+    - secretRef:
+        name: vault-ext-secret
   config:
     issuer: https://vault.k8s.labs.ahinh.me
     storage:
