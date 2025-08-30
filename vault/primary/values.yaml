@@ -121,6 +121,8 @@ dex:
     - secretRef:
         name: vault-ext-secret
   config:
+    oauth2:
+      skipApprovalScreen: true
     logger:
       format: json
       level: debug
