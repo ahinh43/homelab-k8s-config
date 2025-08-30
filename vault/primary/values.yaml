@@ -4,6 +4,7 @@ vault:
     externalVaultAddr: ""
     tlsDisable: false
   server:
+    logLevel: debug
     ingress:
       https: true
       enabled: true
