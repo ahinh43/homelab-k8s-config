@@ -55,6 +55,7 @@ argo-cd:
               clientSecret: $argocd-ext-secret:dex.github.clientSecret
     rbac:
       create: true
+      scopes: '[groups, email]'
       policy.default: ""
       policy.csv: |
         g, alec4555@gmail.com, role:admin
