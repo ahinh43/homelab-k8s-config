@@ -23,6 +23,7 @@ spec:
     # or fully-qualified. If unspecified, all resources are included. Optional.
     includedResources:
     - pv
+    - pvc
     # Individual objects must match this label selector to be included in the scheduled backup. Optional.
     # labelSelector:
     #   matchLabels:
