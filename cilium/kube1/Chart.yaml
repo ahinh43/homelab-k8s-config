@@ -8,5 +8,5 @@ sources:
   - https://github.com/ahinh43/homelab-k8s-config
 dependencies:
   - name: cilium
-    version: 1.18.2
+    version: 1.18.3
     repository: https://helm.cilium.io/
