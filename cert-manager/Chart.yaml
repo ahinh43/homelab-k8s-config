@@ -9,4 +9,4 @@ sources:
 dependencies:
   - name: cert-manager
     version: v1.19.1
-    repository: https://charts.jetstack.io
+    repository: oci://quay.io/jetstack/charts
