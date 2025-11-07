@@ -12,6 +12,12 @@ velero:
     prometheusRule:
       enabled: true
 
+  # https://github.com/vmware-tanzu/helm-charts/issues/698
+  kubectl:
+    image:
+      repository: public.ecr.aws/bitnami/kubectl
+      tag: latest
+
   initContainers:
     - name: velero-plugin-for-aws
       image: velero/velero-plugin-for-aws:v1.13.0
