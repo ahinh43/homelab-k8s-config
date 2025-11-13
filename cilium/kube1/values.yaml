@@ -36,6 +36,7 @@ cilium:
         keepCapNetBindService: true
         envoy:
         # Add NET_BIND_SERVICE to the list (keep the others!)
+        - NET_ADMIN
         - NET_BIND_SERVICE
 
   # bgp:
