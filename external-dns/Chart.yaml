@@ -9,4 +9,4 @@ sources:
 dependencies:
   - name: external-dns
     version: 1.19.0
-    repository: https://kubernetes-sigs.github.io
+    repository: https://kubernetes-sigs.github.io/external-dns
