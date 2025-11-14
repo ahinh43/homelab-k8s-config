@@ -6,7 +6,7 @@ external-dns:
     - gateway-tlsroute
     - gateway-tcproute
     - gateway-udproute
-  domainFiltes: 
+  domainFilters: 
     - labs.ahinh.me
   provider: 
     name: cloudflare
