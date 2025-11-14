@@ -2,8 +2,13 @@ external-dns:
   sources:
     - service
     - ingress
-  domainFilter: labs.ahinh.me
-  provider: cloudflare
-  cloudflare:
-    secretName: cloudflare-api-token
-    proxied: false # using internal IPs with little to no intention on making them public, so no need to proxy them behind CF
+  domainFiltes: 
+    - labs.ahinh.me
+  provider: 
+    name: cloudflare
+  env:
+  - name: CF_API_TOKEN
+    valueFrom:
+      secretKeyRef:
+        name: cloudflare-api-key
+        key: apiKey
