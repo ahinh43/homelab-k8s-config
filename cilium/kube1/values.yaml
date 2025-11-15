@@ -26,7 +26,7 @@ cilium:
   k8sServiceHost: kube.labs.ahinh.me
   k8sServicePort: 6443
   gatewayAPI:
-    enabled: true
+    enabled: false
     externalTrafficPolicy: Cluster
   envoy:
     enabled: true
