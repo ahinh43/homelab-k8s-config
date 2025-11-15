@@ -28,8 +28,6 @@ cilium:
   gatewayAPI:
     enabled: true
     externalTrafficPolicy: Local
-    hostNetwork:
-      enabled: false
   envoy:
     enabled: true
     securityContext:
