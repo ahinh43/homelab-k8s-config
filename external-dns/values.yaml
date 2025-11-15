@@ -3,9 +3,7 @@ external-dns:
     - service
     - ingress
     - gateway-httproute
-    - gateway-tlsroute
-    - gateway-tcproute
-    - gateway-udproute
+    - gateway-grpcroute
   domainFilters: 
     - labs.ahinh.me
   provider: 
