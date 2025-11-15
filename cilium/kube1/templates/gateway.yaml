@@ -4,9 +4,6 @@ metadata:
   name: {{ .Release.Name }}
 spec:
   gatewayClassName: cilium
-  infrastructure:
-    annotations:
-      io.cilium/lb-ipam-ips: 10.246.0.11
   listeners:
   - protocol: HTTP
     port: 80
