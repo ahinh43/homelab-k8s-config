@@ -27,9 +27,8 @@ cilium:
   k8sServicePort: 6443
   gatewayAPI:
     enabled: true
-    externalTrafficPolicy: Cluster
     hostNetwork:
-      enabled: false
+      enabled: true
   envoy:
     enabled: true
     securityContext:
