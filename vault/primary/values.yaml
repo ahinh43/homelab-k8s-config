@@ -2,7 +2,7 @@ vault:
   global:
     enable: true
     externalVaultAddr: ""
-    tlsDisable: false
+    tlsDisable: true
   server:
     logLevel: info
     ingress:
