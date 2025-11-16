@@ -7,7 +7,7 @@ spec:
   - kind: Service
     name: vault-active
     group: ""
-    sectionName: "https-internal"
+    sectionName: "https"
   validation:
     wellKnownCACertificates: "System"
     hostname: vault.k8s.labs.ahinh.me
