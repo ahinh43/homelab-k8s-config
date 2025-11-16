@@ -9,6 +9,22 @@ argo-cd:
       maxReplicas: 5
     extraArgs:
       - --insecure
+    httproute:
+      enabled: true
+      annotations:
+        external-dns.alpha.kubernetes.io/hostname: argo.k8s.labs.ahinh.me
+      parentRefs:
+        - name: cilium
+          namespace: kube-system
+      hostnames:
+        - argo.k8s.labs.ahinh.me
+    grpcroute:
+      enabled: true
+      parentRefs:
+        - name: cilium
+          namespace: kube-system
+      hostnames:
+        - argo.k8s.labs.ahinh.me
     ingress:
       enabled: true
       ingressClassName: nginx
