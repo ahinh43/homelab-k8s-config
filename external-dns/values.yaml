@@ -4,6 +4,7 @@ external-dns:
     - ingress
     - gateway-httproute
     - gateway-grpcroute
+    - gateway-tlsroute
   domainFilters: 
     - ahinh.me
   provider:

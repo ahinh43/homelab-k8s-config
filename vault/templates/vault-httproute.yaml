@@ -1,8 +1,7 @@
 # apiVersion: gateway.networking.k8s.io/v1
-# kind: HTTPRoute
+# kind: TLSRoute
 # metadata:
 #   annotations:
-#     cert-manager.io/cluster-issuer: letsencrypt
 #     external-dns.alpha.kubernetes.io/hostname: vault.k8s.labs.ahinh.me
 #   labels:
 #     k8s.labs.ahinh.me/app: vault
