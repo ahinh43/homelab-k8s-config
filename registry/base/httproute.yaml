@@ -1,0 +1,24 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    external-dns.alpha.kubernetes.io/hostname: registry.k8s.labs.ahinh.me
+  labels:
+    k8s.labs.ahinh.me/app: registry
+    k8s.labs.ahinh.me/component: app
+  name: registry
+spec:
+  hostnames:
+    - registry.k8s.labs.ahinh.me
+  parentRefs:
+  - name: cilium
+    namespace: kube-system
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /
+    backendRefs:
+    - name: registry
+      port: 443
