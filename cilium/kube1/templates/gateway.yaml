@@ -16,7 +16,7 @@ spec:
   - protocol: HTTPS
     port: 443
     name: https
-    hostname: ahinh.me
+    hostname: "*.k8s.labs.ahinh.me"
     allowedRoutes:
       namespaces:
         from: All
