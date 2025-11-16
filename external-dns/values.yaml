@@ -3,7 +3,7 @@ external-dns:
     - service
     - ingress
   domainFilters: 
-    - labs.ahinh.me
+    - ahinh.me
   provider:
     name: cloudflare
   logLevel: debug
