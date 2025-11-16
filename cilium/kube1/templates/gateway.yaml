@@ -2,6 +2,8 @@ apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
   name: {{ .Release.Name }}
+  annotations:
+    cert-manager.io/cluster-issuer: selfsigned
 spec:
   gatewayClassName: cilium
   listeners:
@@ -11,3 +13,15 @@ spec:
     allowedRoutes:
       namespaces:
         from: All
+  - protocol: HTTPS
+    port: 443
+    name: https
+    hostname: ahinh.me
+    allowedRoutes:
+      namespaces:
+        from: All
+    tls:
+      mode: Terminate
+      certificateRefs:
+      - kind: Secret
+        name: cilium
