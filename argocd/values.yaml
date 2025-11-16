@@ -13,6 +13,7 @@ argo-cd:
       enabled: true
       annotations:
         external-dns.alpha.kubernetes.io/hostname: argo.k8s.labs.ahinh.me
+        external-dns.alpha.kubernetes.io/identifier: argo.k8s.labs.ahinh.me
       parentRefs:
         - name: cilium
           namespace: kube-system
@@ -26,22 +27,7 @@ argo-cd:
       hostnames:
         - argo.k8s.labs.ahinh.me
     ingress:
-      enabled: true
-      ingressClassName: nginx
-      annotations:
-        cert-manager.io/cluster-issuer: "letsencrypt"
-        nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
-        external-dns.alpha.kubernetes.io/ingress-hostname-source: annotation-only
-      extraHosts:
-        - name: argo.k8s.labs.ahinh.me
-          path: /
-        - name: argo.local.k8s.labs.ahinh.me
-          path: /
-      extraTls:
-        - hosts:
-            - argo.k8s.labs.ahinh.me
-            - argo.local.k8s.labs.ahinh.me
-          secretName: argocd-cert-tls
+      enabled: false
   repoServer:
     replicas: 3
     autoscaling:
