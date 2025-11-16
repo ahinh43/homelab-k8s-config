@@ -1,20 +1,20 @@
-# apiVersion: gateway.networking.k8s.io/v1alpha3
-# kind: TLSRoute
-# metadata:
-#   annotations:
-#     external-dns.alpha.kubernetes.io/hostname: vault.k8s.labs.ahinh.me
-#   labels:
-#     k8s.labs.ahinh.me/app: vault
-#     k8s.labs.ahinh.me/component: app
-#   name: vault
-# spec:
-#   hostnames:
-#     - vault.k8s.labs.ahinh.me
-#   parentRefs:
-#   - name: cilium
-#     namespace: kube-system
-#   rules:
-#   - backendRefs:
-#     - name: vault-active
-#       kind: Service
-#       port: 8200
+apiVersion: gateway.networking.k8s.io/v1alpha3
+kind: TLSRoute
+metadata:
+  # annotations:
+  #   external-dns.alpha.kubernetes.io/hostname: vault.k8s.labs.ahinh.me
+  labels:
+    k8s.labs.ahinh.me/app: vault
+    k8s.labs.ahinh.me/component: app
+  name: vault
+spec:
+  hostnames:
+    - vault.k8s.labs.ahinh.me
+  parentRefs:
+  - name: cilium
+    namespace: kube-system
+  rules:
+  - backendRefs:
+    - name: vault-active
+      kind: Service
+      port: 8200
