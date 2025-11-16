@@ -6,7 +6,7 @@ external-dns:
     - labs.ahinh.me
   provider:
     name: cloudflare
-  logLeve: debug
+  logLevel: debug
   env:
   - name: CF_API_TOKEN
     valueFrom:
