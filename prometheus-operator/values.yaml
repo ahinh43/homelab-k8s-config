@@ -18,7 +18,7 @@ prometheus:
         hostnames:
           - alertmanager.k8s.labs.ahinh.me
         parentRefs:
-          - group: gateway.networking.k8s.io/v1
+          - group: gateway.networking.k8s.io
             kind: Gateway
             name: cilium
             namespace: kube-system
@@ -67,7 +67,7 @@ prometheus:
         hostnames:
           - grafana.k8s.labs.ahinh.me
         parentRefs:
-          - group: gateway.networking.k8s.io/v1
+          - group: gateway.networking.k8s.io
             kind: Gateway
             name: cilium
             namespace: kube-system
@@ -80,7 +80,7 @@ prometheus:
         hostnames:
           - prometheus.k8s.labs.ahinh.me
         parentRefs:
-          - group: gateway.networking.k8s.io/v1
+          - group: gateway.networking.k8s.io
             kind: Gateway
             name: cilium
             namespace: kube-system
@@ -136,7 +136,7 @@ prometheus:
         hostnames:
           - thanos.k8s.labs.ahinh.me
         parentRefs:
-          - group: gateway.networking.k8s.io/v1
+          - group: gateway.networking.k8s.io
             kind: Gateway
             name: cilium
             namespace: kube-system
