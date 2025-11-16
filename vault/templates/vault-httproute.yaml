@@ -16,4 +16,5 @@ spec:
   rules:
   - backendRefs:
     - name: vault-active
+      kind: Service
       port: 8200
