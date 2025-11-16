@@ -1,30 +1,30 @@
-# apiVersion: gateway.networking.k8s.io/v1
-# kind: TLSRoute
-# metadata:
-#   annotations:
-#     external-dns.alpha.kubernetes.io/hostname: vault.k8s.labs.ahinh.me
-#   labels:
-#     k8s.labs.ahinh.me/app: vault
-#     k8s.labs.ahinh.me/component: app
-#   name: vault
-# spec:
-#   hostnames:
-#     - vault.k8s.labs.ahinh.me
-#   parentRefs:
-#   - name: cilium
-#     namespace: kube-system
-#   rules:
-#   - matches:
-#     - path:
-#         type: PathPrefix
-#         value: /
-#     backendRefs:
-#     - name: vault-active
-#       port: 8200
-#   - matches:
-#     - path:
-#         type: PathPrefix
-#         value: /dex
-#     backendRefs:
-#     - name: vault-dex
-#       port: 5556
+apiVersion: gateway.networking.k8s.io/v1
+kind: TLSRoute
+metadata:
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: vault.k8s.labs.ahinh.me
+  labels:
+    k8s.labs.ahinh.me/app: vault
+    k8s.labs.ahinh.me/component: app
+  name: vault
+spec:
+  hostnames:
+    - vault.k8s.labs.ahinh.me
+  parentRefs:
+  - name: cilium
+    namespace: kube-system
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /
+    backendRefs:
+    - name: vault-active
+      port: 8200
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /dex
+    backendRefs:
+    - name: vault-dex
+      port: 5556
