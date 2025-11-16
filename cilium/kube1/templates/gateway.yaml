@@ -31,6 +31,6 @@ spec:
     hostname: "vault.k8s.labs.ahinh.me"
     allowedRoutes:
       namespaces:
-        from: vault
+        from: All
     tls:
       mode: Passthrough
