@@ -1,0 +1,13 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: BackendTLSPolicy
+metadata:
+  name: vault-upstream
+spec:
+  targetRefs:
+  - kind: Service
+    name: vault-active
+    group: ""
+    sectionName: "https-internal"
+  validation:
+    wellKnownCACertificates: "System"
+    hostname: vault.k8s.labs.ahinh.me
