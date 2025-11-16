@@ -6,7 +6,6 @@ metadata:
     k8s.labs.ahinh.me/app: registry
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
-    external-dns.alpha.kubernetes.io/hostname: registry.k8s.labs.ahinh.me
     nginx.ingress.kubernetes.io/backend-protocol: HTTP
     nginx.ingress.kubernetes.io/service-upstream: "true"
     nginx.ingress.kubernetes.io/proxy-body-size: 20480m
