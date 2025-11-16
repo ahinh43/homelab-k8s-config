@@ -2,6 +2,8 @@ external-dns:
   sources:
     - service
     - ingress
+    - gateway-httproute
+    - gateway-grpcroute
   domainFilters: 
     - ahinh.me
   provider:
