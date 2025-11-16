@@ -7,7 +7,7 @@ vault:
     logLevel: info
     ingress:
       https: true
-      enabled: true
+      enabled: false
       ingressClassName: nginx
       hosts:
         - host: vault.k8s.labs.ahinh.me
@@ -153,7 +153,7 @@ dex:
           - https://vault.k8s.labs.ahinh.me/auth/callback
           - https://vault.k8s.labs.ahinh.me/ui/vault/auth/oidc/oidc/callback
   ingress:
-    enabled: true
+    enabled: false
     className: nginx
     hosts:
       - host: vault.k8s.labs.ahinh.me
