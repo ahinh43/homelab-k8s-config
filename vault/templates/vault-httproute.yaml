@@ -1,5 +1,5 @@
-# apiVersion: gateway.networking.k8s.io/v1alpha3
-# kind: TLSRoute
+# apiVersion: gateway.networking.k8s.io/v1
+# kind: HTTPRoute
 # metadata:
 #   annotations:
 #     external-dns.alpha.kubernetes.io/hostname: vault.k8s.labs.ahinh.me
@@ -14,7 +14,17 @@
 #   - name: cilium
 #     namespace: kube-system
 #   rules:
-#   - backendRefs:
+#   - matches:
+#     - path:
+#         type: PathPrefix
+#         value: /
+#     backendRefs:
 #     - name: vault-active
-#       kind: Service
 #       port: 8200
+#   - matches:
+#     - path:
+#         type: PathPrefix
+#         value: /dex
+#     backendRefs:
+#     - name: vault-dex
+#       port: 5556
