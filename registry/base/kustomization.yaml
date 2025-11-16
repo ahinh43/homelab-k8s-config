@@ -2,3 +2,4 @@ resources:
 - service.yaml
 - statefulset.yaml
 - ingress.yaml
+- httproute.yaml
