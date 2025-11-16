@@ -18,7 +18,9 @@ prometheus:
         hostnames:
           - alertmanager.k8s.labs.ahinh.me
         parentRefs:
-          - name: cilium
+          - group: gateway.networking.k8s.io/v1
+            kind: Gateway
+            name: cilium
             namespace: kube-system
     alertmanagerSpec:
       alertmanagerConfigMatcherStrategy:
@@ -65,7 +67,9 @@ prometheus:
         hostnames:
           - grafana.k8s.labs.ahinh.me
         parentRefs:
-          - name: cilium
+          - group: gateway.networking.k8s.io/v1
+            kind: Gateway
+            name: cilium
             namespace: kube-system
   prometheus:
     route:
@@ -76,7 +80,9 @@ prometheus:
         hostnames:
           - prometheus.k8s.labs.ahinh.me
         parentRefs:
-          - name: cilium
+          - group: gateway.networking.k8s.io/v1
+            kind: Gateway
+            name: cilium
             namespace: kube-system
           
     thanosService:
@@ -130,5 +136,7 @@ prometheus:
         hostnames:
           - thanos.k8s.labs.ahinh.me
         parentRefs:
-          - name: cilium
+          - group: gateway.networking.k8s.io/v1
+            kind: Gateway
+            name: cilium
             namespace: kube-system
