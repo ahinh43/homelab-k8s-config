@@ -19,7 +19,7 @@ argo-cd:
       hostnames:
         - argo.k8s.labs.ahinh.me
     grpcroute:
-      enabled: true
+      enabled: false
       parentRefs:
         - name: cilium
           namespace: kube-system
