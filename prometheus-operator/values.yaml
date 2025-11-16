@@ -57,20 +57,16 @@ prometheus:
         api_url: https://api.github.com/user
     envFromSecrets:
       - name: grafana-ext-secret
-
-    ingress:
-      enabled: true
-      hosts:
-        - grafana.k8s.labs.ahinh.me
-      ingressClassName: nginx
-      annotations:
-        cert-manager.io/cluster-issuer: "letsencrypt"
-        nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
-        external-dns.alpha.kubernetes.io/hostname: grafana.k8s.labs.ahinh.me
-      tls:
-        - hosts:
-            - grafana.k8s.labs.ahinh.me
-          secretName: grafana-cert-tls
+    route:
+      main:
+        enabled: true
+        annotations:
+          external-dns.alpha.kubernetes.io/hostname: grafana.k8s.labs.ahinh.me
+        hostnames:
+          - grafana.k8s.labs.ahinh.me
+        parentRefs:
+          - name: cilium
+            namespace: kube-system
   prometheus:
     route:
       main:
