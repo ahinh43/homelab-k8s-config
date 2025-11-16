@@ -4,8 +4,9 @@ external-dns:
     - ingress
   domainFilters: 
     - labs.ahinh.me
-  provider: 
+  provider:
     name: cloudflare
+  logLeve: debug
   env:
   - name: CF_API_TOKEN
     valueFrom:
