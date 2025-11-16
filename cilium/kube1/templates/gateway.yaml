@@ -25,3 +25,12 @@ spec:
       certificateRefs:
       - kind: Secret
         name: cilium
+  - protocol: HTTPS
+    port: 443
+    name: https-vault
+    hostname: "vault.k8s.labs.ahinh.me"
+    allowedRoutes:
+      namespaces:
+        from: vault
+    tls:
+      mode: Passthrough
