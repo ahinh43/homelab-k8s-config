@@ -10,20 +10,16 @@ prometheus:
       route:
         receiver: "null"
         group_by: ['alertname', 'namespace', 'job', 'severity']
-    ingress:
-      enabled: true
-      hosts:
-        - alertmanager.k8s.labs.ahinh.me
-      ingressClassName: nginx
-      pathType: ImplementationSpecific
-      annotations:
-        cert-manager.io/cluster-issuer: "letsencrypt"
-        nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
-        external-dns.alpha.kubernetes.io/hostname: alertmanager.k8s.labs.ahinh.me
-      tls:
-        - hosts:
-            - alertmanager.k8s.labs.ahinh.me
-          secretName: alertmanager-cert-tls
+    route:
+      main:
+        enabled: true
+        annotations:
+          external-dns.alpha.kubernetes.io/hostname: alertmanager.k8s.labs.ahinh.me
+        hostnames:
+          - alertmanager.k8s.labs.ahinh.me
+        parentRefs:
+          - name: cilium
+            namespace: kube-system
     alertmanagerSpec:
       alertmanagerConfigMatcherStrategy:
         type: None
@@ -75,47 +71,20 @@ prometheus:
         - hosts:
             - grafana.k8s.labs.ahinh.me
           secretName: grafana-cert-tls
-    # additionalDataSources:
-    #   - name: loki
-    #     type: 'loki'
-    #     access: 'proxy'
-    #     org_id: 1
-    #     url: 'http://loki.loki:3100'
-    #     version: 1
-    #     editable: false
   prometheus:
-    ingress:
-      enabled: true
-      hosts:
-        - prometheus.k8s.labs.ahinh.me
-      ingressClassName: nginx
-      annotations:
-        cert-manager.io/cluster-issuer: "letsencrypt"
-        nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
-        external-dns.alpha.kubernetes.io/hostname: prometheus.k8s.labs.ahinh.me
-      tls:
-        - hosts:
-            - prometheus.k8s.labs.ahinh.me
-          secretName: prometheus-cert-tls
+    route:
+      main:
+        enabled: true
+        annotations:
+          external-dns.alpha.kubernetes.io/hostname: prometheus.k8s.labs.ahinh.me
+        hostnames:
+          - prometheus.k8s.labs.ahinh.me
+        parentRefs:
+          - name: cilium
+            namespace: kube-system
           
     thanosService:
       enabled: true
-    thanosRuler:
-      enabled: true
-    thanosIngress:
-      enabled: true
-      hosts:
-        - thanos.k8s.labs.ahinh.me
-      ingressClassName: nginx
-      pathType: ImplementationSpecific
-      annotations:
-        cert-manager.io/cluster-issuer: "letsencrypt"
-        nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
-        external-dns.alpha.kubernetes.io/hostname: thanos.k8s.labs.ahinh.me
-      tls:
-        - hosts:
-            - thanos.k8s.labs.ahinh.me
-          secretName: thanos-cert-tls
     prometheusSpec:
       ruleSelectorNilUsesHelmValues: false
       serviceMonitorSelectorNilUsesHelmValues: false
@@ -154,3 +123,16 @@ prometheus:
       validatingWebhookConfiguration:
         annotations:
           argocd.argoproj.io/hook: PreSync
+
+  thanosRuler:
+    enabled: true
+    route:
+      main:
+        enabled: true
+        annotations:
+          external-dns.alpha.kubernetes.io/hostname: thanos.k8s.labs.ahinh.me
+        hostnames:
+          - thanos.k8s.labs.ahinh.me
+        parentRefs:
+          - name: cilium
+            namespace: kube-system
