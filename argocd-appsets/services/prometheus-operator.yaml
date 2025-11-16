@@ -17,6 +17,8 @@ spec:
       name: "kube-prometheus-stack-{{name}}"
       labels:
         app: kube-prometheus-stack
+      annotations:
+        argocd.argoproj.io/compare-options: ServerSideDiff=true
     spec:
       ignoreDifferences:
         - group: apps
