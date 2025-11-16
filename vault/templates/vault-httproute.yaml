@@ -14,17 +14,6 @@ spec:
   - name: cilium
     namespace: kube-system
   rules:
-  - matches:
-    - path:
-        type: PathPrefix
-        value: /
-    backendRefs:
+  - backendRefs:
     - name: vault-active
       port: 8200
-  - matches:
-    - path:
-        type: PathPrefix
-        value: /dex
-    backendRefs:
-    - name: vault-dex
-      port: 5556
