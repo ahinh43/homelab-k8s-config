@@ -13,3 +13,9 @@ externalsecrets:
     enabled: true
     mountPath: kubernetes-external
     role: external-secrets
+  onepassword:
+    vault: homelab-k8s
+    serviceAccountSecretRef:
+      name: onepassword-token
+      key: token
+      namespace: kube-system
