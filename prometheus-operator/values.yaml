@@ -85,18 +85,11 @@ prometheus:
             name: cilium
             namespace: kube-system
           
-    thanosService:
-      enabled: true
     prometheusSpec:
       ruleSelectorNilUsesHelmValues: false
       serviceMonitorSelectorNilUsesHelmValues: false
       podMonitorSelectorNilUsesHelmValues: false
       probeSelectorNilUsesHelmValues: false
-      thanos:
-        objectStorageConfig:
-          existingSecret:
-            name: prometheus-thanos-s3
-            key: cloud
 
     service:
       annotations:
@@ -125,18 +118,3 @@ prometheus:
       validatingWebhookConfiguration:
         annotations:
           argocd.argoproj.io/hook: PreSync
-
-  thanosRuler:
-    enabled: true
-    route:
-      main:
-        enabled: true
-        annotations:
-          external-dns.alpha.kubernetes.io/hostname: thanos.k8s.labs.ahinh.me
-        hostnames:
-          - thanos.k8s.labs.ahinh.me
-        parentRefs:
-          - group: gateway.networking.k8s.io
-            kind: Gateway
-            name: cilium
-            namespace: kube-system
