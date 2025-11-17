@@ -5,12 +5,12 @@ metadata:
 spec:
   refreshInterval: "15s"
   secretStoreRef:
-    name: external-secrets-vault-backend
+    name: external-secrets-opassword
     kind: ClusterSecretStore
   target:
     name: postgres.keycloak-postgresql.credentials.postgresql.acid.zalan.do
   data:
   - secretKey: foobar
     remoteRef:
-      key: secret/foo
+      key: foo
       property: my-value
