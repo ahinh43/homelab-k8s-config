@@ -1,7 +1,0 @@
-vault:
-  global:
-    enabled: true
-    externalVaultAddr: "https://vault.local.k8s.labs.ahinh.me"
-
-ciliumService:
-  enabled: true
