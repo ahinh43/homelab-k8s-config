@@ -1,5 +1,0 @@
-sealedsecrets:
-  createController: true
-  service:
-    annotations:
-      service.cilium.io/global: "true"
