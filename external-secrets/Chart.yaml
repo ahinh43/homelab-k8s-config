@@ -8,6 +8,6 @@ sources:
   - https://github.com/ahinh43/homelab-k8s-config
 dependencies:
   - name: external-secrets
-    version: 1.3.2
+    version: 2.0.1
     repository: https://charts.external-secrets.io
     alias: externalsecrets
