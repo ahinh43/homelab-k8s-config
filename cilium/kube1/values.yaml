@@ -40,7 +40,44 @@ cilium:
         - NET_ADMIN
         - SYS_ADMIN
         - SYS_RESOURCE
-
+securityContext:
+  capabilities:
+    ciliumAgent:
+      # Use to set socket permission
+      - CHOWN
+      # Used to terminate envoy child process
+      - KILL
+      # Used since cilium modifies routing tables, etc...
+      - NET_ADMIN
+      # Used since cilium creates raw sockets, etc...
+      - NET_RAW
+      # Used since cilium monitor uses mmap
+      - IPC_LOCK
+      # Used in iptables. Consider removing once we are iptables-free
+      - SYS_MODULE
+      # Needed to switch network namespaces (used for health endpoint, socket-LB).
+      # We need it for now but might not need it for >= 5.11 specially
+      # for the 'SYS_RESOURCE'.
+      # In >= 5.8 there's already BPF and PERMON capabilities
+      - SYS_ADMIN
+      - NET_BIND_SERVICE
+      # Could be an alternative for the SYS_ADMIN for the RLIMIT_NPROC
+      - SYS_RESOURCE
+      # Both PERFMON and BPF requires kernel 5.8, container runtime
+      # cri-o >= v1.22.0 or containerd >= v1.5.0.
+      # If available, SYS_ADMIN can be removed.
+      #- PERFMON
+      #- BPF
+      # Allow discretionary access control (e.g. required for package installation)
+      - DAC_OVERRIDE
+      # Allow to set Access Control Lists (ACLs) on arbitrary files (e.g. required for package installation)
+      - FOWNER
+      # Allow to execute program that changes GID (e.g. required for package installation)
+      - SETGID
+      # Allow to execute program that changes UID (e.g. required for package installation)
+      - SETUID
+      # Allow to read dmesg and get kernel pointers when kptr_restrict=1
+      - SYSLOG
   # bgp:
   #   enabled: true
   #   announce:
