@@ -8,3 +8,6 @@ spec:
   disabled: false
   blocks:
     - cidr: "10.246.0.0/16"
+  serviceSelector:
+    matchExpressions:
+      - {key: useverything, operator: NotIn, values: [useitall]}
