@@ -18,3 +18,6 @@ spec:
           - ClusterIP
           - ExternalIP
           - LoadBalancerIP
+      selector:
+        matchExpressions:
+          - { key: useemall, operator: NotIn, values: [ asdasd ] }
